@@ -1,4 +1,4 @@
-CREATE SCHEMA `goldenroses` DEFAULT CHARACTER SET utf8 ;
-USE `goldenroses`;
+CREATE SCHEMA `globalroses` DEFAULT CHARACTER SET utf8 ;
+USE `globalroses`;
 
-GRANT ALL ON goldenroses.* TO goldenroses_user@localhost IDENTIFIED BY 'G0ld#nR0s3s-Us3r@';
+GRANT ALL ON globalroses.* TO globalroses_user@localhost IDENTIFIED BY 'G10b@lR0s3s-Us3r@';
