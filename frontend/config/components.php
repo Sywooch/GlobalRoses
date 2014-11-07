@@ -1,14 +1,7 @@
 <?php
 return [
-    'view' => [
-        'theme' => [
-            'pathMap' => [
-                '@app/views' => '@webroot/themes/adminlte/views'
-            ]
-        ]
-    ],
     'request' => [
-        'baseUrl' => '/admin',
+        'baseUrl' => '',
     ],
     'user' => [
         'identityClass' => 'common\models\User',
@@ -35,7 +28,7 @@ return [
             ),
             '*'=>array(
                 'class' => 'yii\i18n\PhpMessageSource',
-                'basePath' => "@backend/messages",
+                'basePath' => "@frontend/messages",
                 'sourceLanguage'=>''
             ),
         ]

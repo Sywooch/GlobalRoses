@@ -6,33 +6,15 @@ $params = array_merge(
     require(__DIR__ . '/params-local.php')
 );
 
+$components = require(__DIR__ . '/components.php');
+
 return [
     'id' => 'app-frontend',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'controllerNamespace' => 'frontend\controllers',
     'homeUrl' => '/',
-    'components' => [
-        'request' => [
-            'baseUrl' => '',
-        ],
-        'user' => [
-            'identityClass' => 'common\models\User',
-            'enableAutoLogin' => true,
-        ],
-        'log' => [
-            'traceLevel' => YII_DEBUG ? 3 : 0,
-            'targets' => [
-                [
-                    'class' => 'yii\log\FileTarget',
-                    'levels' => ['error', 'warning'],
-                ],
-            ],
-        ],
-        'errorHandler' => [
-            'errorAction' => 'site/error',
-        ],
-    ],
+    'components' => $components,
     'params' => $params,
     'modules' => []
 ];
