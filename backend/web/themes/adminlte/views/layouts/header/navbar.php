@@ -1,5 +1,6 @@
 <?php
 use yii\helpers\Html;
+use yii\helpers\Url;
 
 /* @var $this \yii\web\View */
 /* @var $content string */
@@ -119,40 +120,44 @@ use yii\helpers\Html;
             <li class="dropdown user user-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                     <i class="glyphicon glyphicon-user"></i>
-                    <span>Jane Doe <i class="caret"></i></span>
+                    <span><?= Yii::t('application', 'username', ['username' => Yii::$app->user->identity->username]) ?>
+                        <i class="caret"></i></span>
                 </a>
                 <ul class="dropdown-menu">
                     <!-- User image -->
                     <li class="user-header bg-light-blue">
-                        <img src="../../img/avatar3.png" class="img-circle"
-                             alt="User Image"/>
-
+                        <?php echo Html::beginTag('img', [
+                            'class' => 'img-circle',
+                            'src' => Yii::$app->request->baseUrl . '/themes/adminlte/img/avatar5.png',
+                            'alt' => Yii::t('application', 'Admin Image Alt')]);
+                        echo Html::endTag('img')
+                        ?>
                         <p>
-                            Jane Doe - Web Developer
-                            <small>Member since Nov. 2012</small>
+                            <?= Yii::t('application', 'username - position', [
+                                'username' => Yii::$app->user->identity->username,
+                                'position' => Yii::t('user', 'administrator_position')
+                            ]) ?>
+                            <small></small>
                         </p>
-                    </li>
-                    <!-- Menu Body -->
-                    <li class="user-body">
-                        <div class="col-xs-4 text-center">
-                            <a href="#">Followers</a>
-                        </div>
-                        <div class="col-xs-4 text-center">
-                            <a href="#">Sales</a>
-                        </div>
-                        <div class="col-xs-4 text-center">
-                            <a href="#">Friends</a>
-                        </div>
                     </li>
                     <!-- Menu Footer-->
                     <li class="user-footer">
                         <div class="pull-left">
-                            <a href="#"
-                               class="btn btn-default btn-flat">Profile</a>
+                            <?= Html::a(
+                                Yii::t('application', 'view your profile'),
+                                Url::toRoute(['user/view', 'id' => Yii::$app->user->identity->id]),
+                                [
+                                    'class' => 'btn btn-default btn-flat',
+                                ]) ?>
                         </div>
                         <div class="pull-right">
-                            <a href="#" class="btn btn-default btn-flat">Sign
-                                out</a>
+                            <?= Html::a(
+                                Yii::t('application', 'sign out'),
+                                Url::to(['/site/logout']),
+                                [
+                                    'class' => 'btn btn-default btn-flat',
+                                    'data-method' => 'post'
+                                ]) ?>
                         </div>
                     </li>
                 </ul>

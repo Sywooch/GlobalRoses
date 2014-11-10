@@ -13,7 +13,7 @@ use yii\helpers\Url;
         <div class="pull-left image">
             <?php echo Html::beginTag('img', [
                 'class' => 'img-circle',
-                'src' => Yii::$app->request->baseUrl . '/themes/adminlte/img/avatar3.png',
+                'src' => Yii::$app->request->baseUrl . '/themes/adminlte/img/avatar5.png',
                 'alt' => Yii::t('application', 'Admin Image Alt')]);
             echo Html::endTag('img')
             ?>
@@ -77,5 +77,4 @@ use yii\helpers\Url;
             </a>
         </li>
     </ul>
-</section>
-<!-- /.sidebar -->
+</section><!-- /.sidebar -->

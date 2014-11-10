@@ -26,9 +26,9 @@ IE9Asset::register($this);
     <?php $this->head() ?>
 </head>
 <body class="bg-black">
-<?php $this->beginBody() ?>
-<?= $content ?>
-<?php $this->endBody() ?>
+<?php $this->beginBody();
+echo $content;
+$this->endBody() ?>
 </body>
 </html>
 <?php $this->endPage() ?>

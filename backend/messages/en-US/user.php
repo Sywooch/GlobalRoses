@@ -5,4 +5,5 @@ return [
     'password' => 'Password',
     'title' => 'Customers',
     'menu-title' => 'Customer List',
+    'administrator_position' => 'Administrator',
 ];

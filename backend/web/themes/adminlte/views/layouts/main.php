@@ -3,10 +3,6 @@ use backend\assets\AppAsset;
 use backend\assets\IE9Asset;
 use yii\helpers\Html;
 
-//use yii\bootstrap\Nav;
-//use yii\bootstrap\NavBar;
-//use yii\widgets\Breadcrumbs;
-
 /* @var $this \yii\web\View */
 /* @var $content string */
 
@@ -18,7 +14,9 @@ IE9Asset::register($this);
 <html lang="<?= Yii::$app->language ?>">
 <head>
     <meta charset="<?= Yii::$app->charset ?>"/>
-    <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
+    <meta
+        content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no'
+        name='viewport'>
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->registerCssFile('//code.ionicframework.com/ionicons/1.5.2/css/ionicons.min.css'); ?>
@@ -34,7 +32,7 @@ IE9Asset::register($this);
     <aside class="left-side sidebar-offcanvas">
         <?php include('sidebar/left.php') ?>
     </aside>
-
+    <!-- /.left-side -->
     <!-- Right side column. Contains the navbar and content of the page -->
     <aside class="right-side">
         <!-- Content Header (Page header) -->
@@ -50,7 +48,7 @@ IE9Asset::register($this);
     <!-- /.right-side -->
 </div>
 <!-- ./wrapper -->
-    <?php $this->endBody() ?>
+<?php $this->endBody() ?>
 </body>
 </html>
 <?php $this->endPage() ?>
