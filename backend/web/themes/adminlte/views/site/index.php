@@ -1,7 +1,8 @@
 <?php
 /* @var $this yii\web\View */
 
-$this->title = 'My Yii Application';
+$this->title = Yii::t('common/application', 'PROJECT NAME');
+$this->params['breadcrumbs'][] = Yii::t('application', 'dashboard');
 ?>
 <div class="site-index">
 

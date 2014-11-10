@@ -28,15 +28,19 @@ return [
     ],
     'i18n' => [
         'translations' => [
-            'common*'=>array(
+            'common/*' => array(
                 'class' => 'yii\i18n\PhpMessageSource',
                 'basePath' => "@common/messages",
-                'sourceLanguage'=>''
+                'sourceLanguage' => '',
+                'fileMap' => [
+                    'common/application' => 'application.php'
+                ]
             ),
             '*'=>array(
                 'class' => 'yii\i18n\PhpMessageSource',
                 'basePath' => "@backend/messages",
-                'sourceLanguage'=>''
+                'sourceLanguage' => '',
+
             ),
         ]
     ]
