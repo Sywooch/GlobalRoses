@@ -12,7 +12,7 @@ use yii\filters\VerbFilter;
 /**
  * ItemController implements the CRUD actions for Item model.
  */
-class ItemController extends Controller
+class ItemController extends Backend
 {
     public function behaviors()
     {

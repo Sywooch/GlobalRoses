@@ -12,7 +12,7 @@ use yii\filters\VerbFilter;
 /**
  * CategoryController implements the CRUD actions for Category model.
  */
-class CategoryController extends Controller
+class CategoryController extends Backend
 {
     public function behaviors()
     {
@@ -20,6 +20,10 @@ class CategoryController extends Controller
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
+                    'index' => ['get'],
+                    'view' => ['get'],
+                    'create' => ['post'],
+                    'update' => ['post'],
                     'delete' => ['post'],
                 ],
             ],
@@ -35,9 +39,11 @@ class CategoryController extends Controller
         $searchModel = new CategorySearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
+        $this->content_header = Yii::t('items/category', 'content_header_' . __FUNCTION__);
         return $this->render('/items/category/index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'content_header_title' => 'cccc'
         ]);
     }
 
@@ -48,6 +54,7 @@ class CategoryController extends Controller
      */
     public function actionView($id)
     {
+        $this->content_header = Yii::t('items/category', 'content_header_' . __FUNCTION__);
         return $this->render('/items/category/view', [
             'model' => $this->findModel($id),
         ]);
@@ -61,14 +68,20 @@ class CategoryController extends Controller
     public function actionCreate()
     {
         $model = new Category();
+        Yii::$app->response->format = 'json';
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('/items/category/create', [
-                'model' => $model,
-            ]);
+            $model->refresh();
+            return [
+                'message' => 'Success!!!',
+            ];
         }
+
+        return [
+            'html' => $this->renderAjax('/items/category/create', [
+                'model' => $model,
+            ])
+        ];
     }
 
     /**

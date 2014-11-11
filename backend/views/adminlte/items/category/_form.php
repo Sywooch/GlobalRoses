@@ -10,7 +10,9 @@ use yii\widgets\ActiveForm;
 
 <div class="category-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin([
+        'id' => $form_id,
+    ]); ?>
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => 255]) ?>
 

@@ -18,12 +18,13 @@ class AppAsset extends AssetBundle
     public $basePath = '@webroot';
     public $baseUrl = '@web';
     public $css = [
-        'css/site.css',
         'themes/adminlte/css/AdminLTE.css',
+        'css/site.css',
         '//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css'
     ];
     public $js = [
         'themes/adminlte/js/AdminLTE/app.js',
+        'scripts/app.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',

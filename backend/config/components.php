@@ -3,7 +3,7 @@ return [
     'view' => [
         'theme' => [
             'pathMap' => [
-                '@app/views' => '@webroot/themes/adminlte/views'
+                '@app/views' => '@backend/views/adminlte'
             ]
         ]
     ],
