@@ -2,24 +2,28 @@
 
 namespace common\models\items;
 
-use Yii;
+use \Yii;
+use \yii\db\ActiveRecord;
+use \common\models\Item;
+use \common\models\items\categories\Relation;
+use \common\models\orders\Item as OrderItem;
 
 /**
  * This is the model class for table "category".
  *
  * @property string $id
  * @property string $name
- * @property string $id_parent
  * @property string $reference
  * @property integer $deleted
  * @property string $created_at
  *
- * @property Category $idParent
- * @property Category[] $categories
+ * @property Category $parent_category
+ * @property Category[] $children
+ * @property Relation[] $categoryRelations
  * @property Item[] $items
  * @property OrderItem[] $orderItems
  */
-class Category extends \yii\db\ActiveRecord
+class Category extends ActiveRecord
 {
     /**
      * @inheritdoc
@@ -35,8 +39,8 @@ class Category extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'id_parent', 'reference', 'created_at'], 'required'],
-            [['id_parent', 'deleted', 'created_at'], 'integer'],
+            [['name', 'reference', 'created_at'], 'required'],
+            [['deleted', 'created_at'], 'integer'],
             [['name'], 'string', 'max' => 255],
             [['reference'], 'string', 'max' => 50],
             [['reference'], 'unique']
@@ -51,7 +55,6 @@ class Category extends \yii\db\ActiveRecord
         return [
             'id' => Yii::t('items/category', 'ID'),
             'name' => Yii::t('items/category', 'Name'),
-            'id_parent' => Yii::t('items/category', 'Id Parent'),
             'reference' => Yii::t('items/category', 'Reference'),
             'deleted' => Yii::t('items/category', 'Deleted'),
             'created_at' => Yii::t('items/category', 'Created At'),
@@ -61,7 +64,15 @@ class Category extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getIdParent()
+    public function getCategoryRelations()
+    {
+        return $this->hasMany(Relation::className(), ['id_parent' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getParentCategory()
     {
         return $this->hasOne(Category::className(), ['id' => 'id_parent']);
     }
@@ -69,7 +80,7 @@ class Category extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getCategories()
+    public function getChildren()
     {
         return $this->hasMany(Category::className(), ['id_parent' => 'id']);
     }

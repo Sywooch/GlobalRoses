@@ -5,7 +5,9 @@ use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\items\Category */
+/* @var $model_relation common\models\items\categories\Relation */
 /* @var $form yii\widgets\ActiveForm */
+/* @var $form_id string */
 ?>
 
 <div class="category-form">
@@ -16,13 +18,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => 255]) ?>
 
-    <?= $form->field($model, 'id_parent')->textInput(['maxlength' => 20]) ?>
-
-    <?= $form->field($model, 'reference')->textInput(['maxlength' => 50]) ?>
-
-    <?= $form->field($model, 'deleted')->textInput() ?>
-
-    <?= $form->field($model, 'created_at')->textInput(['maxlength' => 11]) ?>
+    <?= $form->field($model_relation, 'id_parent')->dropDownList([]) ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? Yii::t('items/category', 'Create') : Yii::t('items/category', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
