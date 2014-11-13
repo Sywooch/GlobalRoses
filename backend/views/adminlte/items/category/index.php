@@ -31,7 +31,6 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
             'id',
             'name',
-            'parent',
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
@@ -55,6 +54,12 @@ Modal::begin([
     'id' => 'category-update-modal',
     'closeButton' => ['tag' => 'button', 'label' => '&times;'],
     'header' => Yii::t('items/category', 'update_title'),
+    'options' => [
+        'data-modal-type' => 'app-modal',
+        'data-modal-options' => Json::encode([
+            'request' => Url::to('category/update'),
+        ]),
+    ]
 ]);
 Modal::end();
 ?>

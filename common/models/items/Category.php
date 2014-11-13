@@ -7,6 +7,9 @@ use \yii\db\ActiveRecord;
 use \common\models\Item;
 use \common\models\items\categories\Relation;
 use \common\models\orders\Item as OrderItem;
+use \yii\behaviors\TimestampBehavior;
+use \common\components\ReferenceBehavior;
+use common\components\DeletedBehavior;
 
 /**
  * This is the model class for table "category".
@@ -15,7 +18,7 @@ use \common\models\orders\Item as OrderItem;
  * @property string $name
  * @property string $reference
  * @property integer $deleted
- * @property string $created_at
+ * @property integer $created_at
  *
  * @property Category $parent_category
  * @property Category[] $children
@@ -39,13 +42,41 @@ class Category extends ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'reference', 'created_at'], 'required'],
+            [['name'], 'required'],
             [['deleted', 'created_at'], 'integer'],
             [['name'], 'string', 'max' => 255],
             [['reference'], 'string', 'max' => 50],
             [['reference'], 'unique']
         ];
     }
+
+    /**
+     * @inheritdoc
+     */
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => TimestampBehavior::className(),
+                'attributes' => [
+                    ActiveRecord::EVENT_BEFORE_INSERT => ['created_at'],
+                ],
+            ],
+            [
+                'class' => ReferenceBehavior::className(),
+                'attributes' => [
+                    ActiveRecord::EVENT_BEFORE_INSERT => ['reference'],
+                ],
+            ],
+            [
+                'class' => DeletedBehavior::className(),
+                'attributes' => [
+                    ActiveRecord::EVENT_BEFORE_INSERT => ['deleted'],
+                ],
+            ],
+        ];
+    }
+
 
     /**
      * @inheritdoc
@@ -80,14 +111,6 @@ class Category extends ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getChildren()
-    {
-        return $this->hasMany(Category::className(), ['id_parent' => 'id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
     public function getItems()
     {
         return $this->hasMany(Item::className(), ['id_category' => 'id']);
@@ -99,5 +122,25 @@ class Category extends ActiveRecord
     public function getOrderItems()
     {
         return $this->hasMany(OrderItem::className(), ['id_item_category' => 'id']);
+    }
+
+    public static function getCategoryGrouped()
+    {
+        $list = [];
+        $categories = static::find()->indexBy('id')->all();
+        if (count($categories) > 0) {
+            foreach ($categories as $category) {
+                $children = $category->getCategoryRelations()->all();
+                if (count($children) > 0) {
+                    $list[$category->name] = [];
+                    foreach ($children as $child) {
+                        $list[$category->name][$child->category->id] = $child->category->name;
+                    }
+                } else {
+                    $list[$category->id] = $category->name;
+                }
+            }
+        }
+        return $list;
     }
 }

@@ -2,6 +2,7 @@
 
 namespace backend\controllers;
 
+use common\models\items\categories\Relation;
 use Yii;
 use common\models\items\Category;
 use common\models\items\CategorySearch;
@@ -43,7 +44,6 @@ class CategoryController extends Backend
         return $this->render('/items/category/index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
-            'content_header_title' => 'cccc'
         ]);
     }
 
@@ -80,6 +80,7 @@ class CategoryController extends Backend
         return [
             'html' => $this->renderAjax('/items/category/create', [
                 'model' => $model,
+                'model_relation' => new Relation()
             ])
         ];
     }

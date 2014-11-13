@@ -10,4 +10,5 @@ use yii\helpers\Html;
         'model' => $model,
         'form_id' => 'create-category-form',
     ]) ?>
+
 </div>

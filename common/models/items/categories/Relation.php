@@ -62,6 +62,6 @@ class Relation extends ActiveRecord
      */
     public function getParent()
     {
-        return $this->hasOne(Category::className(), ['id' => 'id_parent']);
+        return $this->hasMany(Category::className(), ['id' => 'id_parent']);
     }
 }

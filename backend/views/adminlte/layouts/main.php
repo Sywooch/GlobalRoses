@@ -48,7 +48,25 @@ IE9Asset::register($this);
     <!-- /.right-side -->
 </div>
 <!-- ./wrapper -->
-<?php $this->endBody() ?>
+<?php $this->endBody();
+
+$languages = [];
+$languages['select2'] = [
+    substr(Yii::$app->language, 0, 2) => [
+        'formatMatches' => Yii::t('commons/select2', 'formatNoMatches'),
+        'formatNoMatches' => Yii::t('commons/select2', 'formatNoMatches'),
+        'formatInputTooShort' => Yii::t('commons/select2', 'formatInputTooShort'),
+        'formatInputTooLong' => Yii::t('commons/select2', 'formatInputTooLong'),
+        'formatSelectionTooBig' => Yii::t('commons/select2', 'formatSelectionTooBig'),
+        'formatLoadMore' => Yii::t('commons/select2', 'formatLoadMore'),
+        'formatSearching' => Yii::t('commons/select2', 'formatSearching'),
+    ]];
+$this->registerJs('(function () {
+    "use strict";
+    $.fn.select2.locales["' . key($languages['select2']) . '"] = JSON.parse(\'' . \yii\helpers\Json::encode($languages['select2']) . '\');
+    $.extend($.fn.select2.defaults, $.fn.select2.locales["' . key($languages['select2']) . '"]);
+})(jQuery);')
+?>
 </body>
 </html>
 <?php $this->endPage() ?>
