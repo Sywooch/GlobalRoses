@@ -21,6 +21,10 @@ use yii\behaviors\AttributeBehavior;
 class DeletedBehavior extends AttributeBehavior
 {
 
+    const DELETED_YES = '1';
+
+    const DELETED_NO = '0';
+
     public $deletedAttribute = 'deleted';
 
     public $value;
@@ -47,7 +51,7 @@ class DeletedBehavior extends AttributeBehavior
         if ($this->value instanceof Expression) {
             return $this->value;
         } else {
-            return $this->value !== null ? call_user_func($this->value, $event) : '0';
+            return $this->value !== null ? call_user_func($this->value, $event) : static::DELETED_NO;
         }
     }
 

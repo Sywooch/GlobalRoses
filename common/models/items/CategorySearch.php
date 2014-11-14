@@ -18,7 +18,7 @@ class CategorySearch extends Category
     public function rules()
     {
         return [
-            [['id', 'id_parent', 'deleted', 'created_at'], 'integer'],
+            [['id', 'deleted', 'created_at'], 'integer'],
             [['name', 'reference'], 'safe'],
         ];
     }
@@ -45,6 +45,9 @@ class CategorySearch extends Category
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'pagination' => [
+                'pageSize' => 10,
+            ],
         ]);
 
         if (!($this->load($params) && $this->validate())) {
@@ -53,7 +56,6 @@ class CategorySearch extends Category
 
         $query->andFilterWhere([
             'id' => $this->id,
-            'id_parent' => $this->id_parent,
             'deleted' => $this->deleted,
             'created_at' => $this->created_at,
         ]);

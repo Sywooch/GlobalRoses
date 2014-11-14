@@ -8,6 +8,47 @@
 (function () {
     "use strict";
 
+    if (!('app' in window)) {
+        window.app = {};
+    }
+    if (!('form' in window.app)) {
+        window.app.form = {};
+    }
+    if (!('beforeSubmit' in window.app.form)) {
+        window.app.form['beforeSubmit'] = {
+            'ajax': {
+                'modal': function (form) {
+                    var $form = $(this);
+                    $.post(
+                        $form.attr("action"), // serialize Yii2 form
+                        $form.serialize()
+                    )
+                        .done(function (result) {
+                            $form.parent().html(result.message);
+                            $form.closest('.modal').modal('hide');
+                        })
+                        .fail(function () {
+
+                        });
+                    return false;
+                },
+                'normal': function () {
+                }
+            },
+            'normal': {
+                'modal': function () {
+                },
+                'normal': function () {
+                }
+            }
+        };
+    }
+
+})(jQuery);
+
+(function () {
+    "use strict";
+
     $.fn.modalSetBehaviors = function (/*options*/) {
         var $this = $(this);
         var options = arguments[0] || $this.data('modalOptions');
@@ -73,5 +114,11 @@
 })(jQuery);
 
 $(window).load(function () {
-    $('.modal[data-modal-type="app-modal"]').modalSetBehaviors();
+    var $modals = $('.modal[data-modal-type="app-modal"]');
+
+    $.each($modals, function () {
+        var $modal = $(this);
+        $modal.modalSetBehaviors();
+        $modal.on('beforeSubmit', 'form', window.app.form.beforeSubmit.ajax.modal)
+    });
 });

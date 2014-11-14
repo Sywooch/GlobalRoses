@@ -29,8 +29,17 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-            'id',
             'name',
+            [
+                'label' => 'parent',
+                'value' => function ($data) {
+                    $a = $data->getParent();
+                    if (is_null($a)) {
+                        return '-';
+                    }
+                    return $a->name;
+                }
+            ],
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>

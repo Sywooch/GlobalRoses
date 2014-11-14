@@ -7,7 +7,6 @@ use \common\models\items\Category;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\items\Category */
-/* @var $model_relation common\models\items\categories\Relation */
 /* @var $form yii\widgets\ActiveForm */
 /* @var $form_id string */
 ?>
@@ -22,10 +21,8 @@ use \common\models\items\Category;
         <?php
         echo $form->field($model, 'name')->textInput(['maxlength' => 255]);
 
-        echo '<label class="control-label">' . Yii::t('items/category', 'Parent Category') . '</label>';
-        echo Select2::widget([
-            'data' => Category::getCategoryGrouped(),
-            'name' => 'parent_category',
+        echo $form->field($model, 'id_parent')->widget(Select2::classname(), [
+            'data' => array_merge(["" => ""], Category::getCategoryGrouped()),
             'language' => Yii::$app->language,
             'options' => [
                 'id' => 'category-parent-id',

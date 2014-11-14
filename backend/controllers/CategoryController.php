@@ -2,11 +2,9 @@
 
 namespace backend\controllers;
 
-use common\models\items\categories\Relation;
 use Yii;
 use common\models\items\Category;
 use common\models\items\CategorySearch;
-use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
@@ -80,7 +78,6 @@ class CategoryController extends Backend
         return [
             'html' => $this->renderAjax('/items/category/create', [
                 'model' => $model,
-                'model_relation' => new Relation()
             ])
         ];
     }
