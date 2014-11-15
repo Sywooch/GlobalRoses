@@ -98,6 +98,12 @@ class Category extends ActiveRecord
         ];
     }
 
+    public static function find()
+    {
+        $query = new CategoryQuery(get_called_class());
+        return $query->active();
+    }
+
     /**
      * @return \common\models\items\Category[]
      */
@@ -182,12 +188,6 @@ class Category extends ActiveRecord
             }
         }
         return $list;
-    }
-
-    public static function find()
-    {
-        $query = new CategoryQuery(get_called_class());
-        return $query->active();
     }
 
     public function getPrevious()

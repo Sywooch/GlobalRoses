@@ -7,6 +7,7 @@ use \yii\db\ActiveRecord;
 use \common\models\Item;
 use \common\models\orders\Item as OrderItem;
 use \yii\behaviors\TimestampBehavior;
+use yii\helpers\ArrayHelper;
 
 /*TODO add a color picker attribute*/
 /**
@@ -120,5 +121,10 @@ class Color extends ActiveRecord
             return null;
         }
         return $search->id;
+    }
+
+    public static function getAllAsArray()
+    {
+        return ArrayHelper::map(self::find()->all(), 'id', 'name');
     }
 }

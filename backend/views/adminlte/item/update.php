@@ -5,19 +5,23 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model common\models\Item */
 
-$this->title = Yii::t('item', 'Update {modelClass}: ', [
-    'modelClass' => 'Item',
-]) . ' ' . $model->name;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('item', 'Items'), 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = Yii::t('item', 'Update');
+$this->title = Yii::t('item', 'Items');
+$this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="item-update">
+<div class="box">
+    <div class="box-header">
+        <i class="fa fa-ellipsis-v"></i>
 
-    <h1><?= Html::encode($this->title) ?></h1>
+        <h3 class="box-title"><?= Yii::t('item',
+                'Edit item {item}',
+                ['item' => $model->name]) ?></h3>
+    </div>
+    <!-- /.box-header -->
+    <div class="box-body">
+        <?= $this->render('_form', [
+            'model' => $model,
+            'form_id' => 'update-item-form',
+        ]) ?>
+    </div>
+</div><!-- /.box -->
 
-    <?= $this->render('_form', [
-        'model' => $model,
-    ]) ?>
-
-</div>

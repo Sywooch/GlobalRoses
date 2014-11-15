@@ -3,6 +3,13 @@
 namespace common\models;
 
 use Yii;
+use \yii\db\ActiveRecord;
+use \common\models\items\Category;
+use \common\models\items\Color;
+use \common\models\orders\Item as OrderItem;
+use \yii\behaviors\TimestampBehavior;
+use \common\components\ReferenceBehavior;
+use common\components\DeletedBehavior;
 
 /**
  * This is the model class for table "item".
@@ -29,7 +36,7 @@ use Yii;
  * @property Color $idColor
  * @property OrderItem[] $orderItems
  */
-class Item extends \yii\db\ActiveRecord
+class Item extends ActiveRecord
 {
     /**
      * @inheritdoc
@@ -45,7 +52,7 @@ class Item extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'reference', 'image', 'description', 'created_at', 'updated_at'], 'required'],
+            [['name', 'description'], 'required'],
             [['image', 'description', 'status'], 'string'],
             [['id_category', 'quantity', 'id_color', 'available', 'deleted', 'created_at', 'updated_at'], 'integer'],
             [['height', 'weight', 'unit_price'], 'number'],
@@ -59,27 +66,51 @@ class Item extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => TimestampBehavior::className(),
+                'attributes' => [
+                    ActiveRecord::EVENT_BEFORE_INSERT => ['created_at', 'updated_at'],
+                    ActiveRecord::EVENT_BEFORE_UPDATE => ['updated_at'],
+                ],
+            ],
+            'reference' => ReferenceBehavior::className(),
+            'deleted' => DeletedBehavior::className(),
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('item', 'ID'),
-            'name' => Yii::t('item', 'Name'),
-            'reference' => Yii::t('item', 'Reference'),
+            'id' => Yii::t('common/application', 'ID'),
+            'name' => Yii::t('common/application', 'Name'),
+            'reference' => Yii::t('common/application', 'Reference'),
+            'deleted' => Yii::t('common/application', 'Deleted'),
+            'created_at' => Yii::t('common/application', 'Created At'),
+            'updated_at' => Yii::t('common/application', 'Updated At'),
             'image' => Yii::t('item', 'Image'),
             'description' => Yii::t('item', 'Description'),
             'description_short' => Yii::t('item', 'Description Short'),
-            'id_category' => Yii::t('item', 'Id Category'),
+            'id_category' => Yii::t('item', 'Category'),
             'quantity' => Yii::t('item', 'Quantity'),
             'height' => Yii::t('item', 'Height'),
             'weight' => Yii::t('item', 'Weight'),
-            'id_color' => Yii::t('item', 'Id Color'),
+            'id_color' => Yii::t('item', 'Color'),
             'available' => Yii::t('item', 'Available'),
             'status' => Yii::t('item', 'Status'),
             'unit_price' => Yii::t('item', 'Unit Price'),
-            'deleted' => Yii::t('item', 'Deleted'),
-            'created_at' => Yii::t('item', 'Created At'),
-            'updated_at' => Yii::t('item', 'Updated At'),
         ];
+    }
+
+    public static function find()
+    {
+        $query = new ItemQuery(get_called_class());
+        return $query->active();
     }
 
     /**
@@ -104,5 +135,41 @@ class Item extends \yii\db\ActiveRecord
     public function getOrderItems()
     {
         return $this->hasMany(OrderItem::className(), ['id_item' => 'id']);
+    }
+
+    public function getPrevious()
+    {
+        $current_id = $this->id;
+
+        $search = self::find()->andWhere('id<:id')->
+        addParams([':id' => $current_id])->
+        orderBy(['id' => SORT_DESC])->limit(1)->one();
+        if (is_null($search)) {
+            $search = self::find()->orderBy(['id' => SORT_DESC])->
+            limit(1)->one();
+        }
+
+        if (is_null($search)) {
+            return null;
+        }
+        return $search->id;
+    }
+
+    public function getNext()
+    {
+        $current_id = $this->id;
+
+        $search = self::find()->andWhere('id>:id')->
+        addParams([':id' => $current_id])->orderBy(['id' => SORT_ASC])->
+        limit(1)->one();
+        if (is_null($search)) {
+            $search = self::find()->orderBy(['id' => SORT_ASC])->
+            limit(1)->one();
+        }
+
+        if (is_null($search)) {
+            return null;
+        }
+        return $search->id;
     }
 }

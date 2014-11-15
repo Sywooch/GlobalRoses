@@ -1,6 +1,7 @@
 <?php
 
 use yii\helpers\Html;
+use yii\helpers\Url;
 use yii\grid\GridView;
 
 /* @var $this yii\web\View */
@@ -10,41 +11,32 @@ use yii\grid\GridView;
 $this->title = Yii::t('item', 'Items');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="item-index">
-
-    <h1><?= Html::encode($this->title) ?></h1>
+<div class="index">
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
-    <p>
-        <?= Html::a(Yii::t('item', 'Create {modelClass}', [
-    'modelClass' => 'Item',
-]), ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
+    <p><?= Html::a(
+            Yii::t('common/application', 'Create new'),
+            Url::to('item/create'),
+            [
+                'class' => 'btn btn-primary btn-sm'
+            ]) ?></p>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-
-            'id',
             'name',
-            'reference',
             'image:ntext',
             'description:ntext',
-            // 'description_short',
-            // 'id_category',
-            // 'quantity',
-            // 'height',
-            // 'weight',
-            // 'id_color',
-            // 'available',
-            // 'status',
-            // 'unit_price',
-            // 'deleted',
-            // 'created_at',
-            // 'updated_at',
-
+            'description_short',
+            'id_category',
+            'quantity',
+            'height',
+            'weight',
+            'id_color',
+            'available',
+            'status',
+            'unit_price',
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>

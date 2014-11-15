@@ -2,52 +2,113 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use \kartik\select2\Select2;
+use \common\models\items\Category;
+use \common\models\items\Color;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Item */
 /* @var $form yii\widgets\ActiveForm */
+/* @var $form_id string */
 ?>
 
-<div class="item-form">
+<div class="form">
+    <?php $form = ActiveForm::begin([
+        'id' => $form_id,
+    ]); ?>
 
-    <?php $form = ActiveForm::begin(); ?>
+    <div class="box-body">
+        <div class="row">
+            <div class="col-md-6">
+                <?= $form->field($model, 'name')->textInput(['maxlength' => 255]); ?>
+            </div>
+            <div class="col-md-6">
+                <?= $form->field($model, 'image')->textInput(['maxlength' => 255]); ?>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
+            </div>
+            <div class="col-md-6">
+                <?= $form->field($model, 'description_short')->textarea(['rows' => 6]) ?>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <?= $form->field($model, 'id_category')->widget(Select2::classname(), [
+                    'data' => array_merge(["" => ""], Category::getCategoryGrouped()),
+                    'language' => Yii::$app->language,
+                    'options' => [
+                        'id' => 'id_category',
+                        'placeholder' => Yii::t('item', 'Select Category')
+                    ]
+                ]); ?>
+            </div>
+            <div class="col-md-4">
+                <?= $form->field($model, 'id_color')->widget(Select2::classname(), [
+                    'data' => array_merge(["" => ""], Color::getAllAsArray()),
+                    'language' => Yii::$app->language,
+                    'options' => [
+                        'id' => 'id_color',
+                        'placeholder' => Yii::t('item', 'Select Color')
+                    ],
+                    'pluginOptions' => [
+                        'allowClear' => true
+                    ]
+                ]); ?>
+            </div>
+            <div class="col-md-4">
+                <?= $form->field($model, 'status')->dropDownList(['active' => 'Active', 'disable' => 'Disable',], ['prompt' => '']) ?>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <?= $form->field($model, 'quantity')->textInput() ?>
+            </div>
+            <div class="col-md-3">
+                <?= $form->field($model, 'height')->textInput(['maxlength' => 5]) ?>
+            </div>
+            <div class="col-md-3">
+                <?= $form->field($model, 'weight')->textInput(['maxlength' => 5]) ?>
+            </div>
+            <div class="col-md-3">
+                <?= $form->field($model, 'unit_price')->textInput(['maxlength' => 10]) ?>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <?= $form->field($model, 'available')->textInput() ?>
+            </div>
 
-    <?= $form->field($model, 'name')->textInput(['maxlength' => 255]) ?>
 
-    <?= $form->field($model, 'reference')->textInput(['maxlength' => 50]) ?>
-
-    <?= $form->field($model, 'image')->textarea(['rows' => 6]) ?>
-
-    <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
-
-    <?= $form->field($model, 'description_short')->textInput(['maxlength' => 100]) ?>
-
-    <?= $form->field($model, 'id_category')->textInput(['maxlength' => 20]) ?>
-
-    <?= $form->field($model, 'quantity')->textInput() ?>
-
-    <?= $form->field($model, 'height')->textInput(['maxlength' => 5]) ?>
-
-    <?= $form->field($model, 'weight')->textInput(['maxlength' => 5]) ?>
-
-    <?= $form->field($model, 'id_color')->textInput() ?>
-
-    <?= $form->field($model, 'available')->textInput() ?>
-
-    <?= $form->field($model, 'status')->dropDownList([ 'active' => 'Active', 'disable' => 'Disable', ], ['prompt' => '']) ?>
-
-    <?= $form->field($model, 'unit_price')->textInput(['maxlength' => 10]) ?>
-
-    <?= $form->field($model, 'deleted')->textInput() ?>
-
-    <?= $form->field($model, 'created_at')->textInput(['maxlength' => 11]) ?>
-
-    <?= $form->field($model, 'updated_at')->textInput(['maxlength' => 11]) ?>
-
-    <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? Yii::t('item', 'Create') : Yii::t('item', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        </div>
     </div>
+    <div class="box-footer">
+        <?php
+        if ($model->isNewRecord) {
+            echo Html::submitButton(
+                Yii::t('common/application', 'Create'),
+                ['class' => 'btn btn-success']);
+        } else {
+            echo Html::a('<i class="fa fa-backward"></i>',
+                ['update', 'id' => $model->getPrevious()],
+                [
+                    'class' => 'btn btn-default',
+                    'title' => Yii::t('common/application', 'next')
+                ]);
+            echo Html::submitButton(
+                Yii::t('common/application', 'Update'),
+                ['class' => 'btn btn-primary']);
 
+            echo Html::a('<i class="fa fa-forward"></i>',
+                ['update', 'id' => $model->getNext()],
+                [
+                    'class' => 'btn btn-default',
+                    'title' => Yii::t('common/application', 'next')
+                ]);
+        }
+        ?>
+    </div>
     <?php ActiveForm::end(); ?>
-
 </div>
