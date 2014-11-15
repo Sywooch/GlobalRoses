@@ -67,6 +67,7 @@ class ColorController extends Backend
     {
         $model = new Color();
 
+        /*TODO add a color picker*/
         $this->content_header = Yii::t('common/application', 'content_header_' . __FUNCTION__);
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -87,6 +88,7 @@ class ColorController extends Backend
     {
         $model = $this->findModel($id);
 
+        /*TODO add a color picker*/
         $this->content_header = Yii::t('common/application', 'content_header_' . __FUNCTION__);
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);

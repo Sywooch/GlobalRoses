@@ -8,6 +8,7 @@ use \common\models\Item;
 use \common\models\orders\Item as OrderItem;
 use \yii\behaviors\TimestampBehavior;
 
+/*TODO add a color picker attribute*/
 /**
  * This is the model class for table "color".
  *
