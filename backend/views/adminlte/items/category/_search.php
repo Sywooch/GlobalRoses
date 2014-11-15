@@ -8,28 +8,20 @@ use yii\widgets\ActiveForm;
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="category-search">
+<div class="search">
 
     <?php $form = ActiveForm::begin([
         'action' => ['index'],
         'method' => 'get',
     ]); ?>
 
-    <?= $form->field($model, 'id') ?>
-
     <?= $form->field($model, 'name') ?>
 
-    <?= $form->field($model, 'id_parent') ?>
+    <?= $form->field($model, 'parent') ?>
 
-    <?= $form->field($model, 'reference') ?>
-
-    <?= $form->field($model, 'deleted') ?>
-
-    <?php // echo $form->field($model, 'created_at') ?>
-
-    <div class="form-group">
-        <?= Html::submitButton(Yii::t('items/category', 'Search'), ['class' => 'btn btn-primary']) ?>
-        <?= Html::resetButton(Yii::t('items/category', 'Reset'), ['class' => 'btn btn-default']) ?>
+    <div class="box-footer">
+        <?= Html::submitButton(Yii::t('common/application', 'Search'), ['class' => 'btn btn-primary']) ?>
+        <?= Html::resetButton(Yii::t('common/application', 'Reset'), ['class' => 'btn btn-default']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

@@ -53,13 +53,13 @@ IE9Asset::register($this);
 $languages = [];
 $languages['select2'] = [
     substr(Yii::$app->language, 0, 2) => [
-        'formatMatches' => Yii::t('commons/select2', 'formatNoMatches'),
-        'formatNoMatches' => Yii::t('commons/select2', 'formatNoMatches'),
-        'formatInputTooShort' => Yii::t('commons/select2', 'formatInputTooShort'),
-        'formatInputTooLong' => Yii::t('commons/select2', 'formatInputTooLong'),
-        'formatSelectionTooBig' => Yii::t('commons/select2', 'formatSelectionTooBig'),
-        'formatLoadMore' => Yii::t('commons/select2', 'formatLoadMore'),
-        'formatSearching' => Yii::t('commons/select2', 'formatSearching'),
+        'formatMatches' => Yii::t('common/select2', 'formatNoMatches'),
+        'formatNoMatches' => Yii::t('common/select2', 'formatNoMatches'),
+        'formatInputTooShort' => Yii::t('common/select2', 'formatInputTooShort'),
+        'formatInputTooLong' => Yii::t('common/select2', 'formatInputTooLong'),
+        'formatSelectionTooBig' => Yii::t('common/select2', 'formatSelectionTooBig'),
+        'formatLoadMore' => Yii::t('common/select2', 'formatLoadMore'),
+        'formatSearching' => Yii::t('common/select2', 'formatSearching'),
     ]];
 $this->registerJs('(function () {
     "use strict";

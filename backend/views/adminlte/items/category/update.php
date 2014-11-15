@@ -1,24 +1,25 @@
 <?php
 
-use yii\helpers\Html;
-
 /* @var $this yii\web\View */
 /* @var $model common\models\items\Category */
 
-$this->title = Yii::t('items/category', 'Update {modelClass}: ', [
-    'modelClass' => 'Category',
-]) . ' ' . $model->name;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('items/category', 'Categories'), 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = Yii::t('items/category', 'Update');
+
+$this->title = Yii::t('items/category', 'Categories');
+$this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="category-update">
+<div class="box">
+    <div class="box-header">
+        <i class="fa fa-ellipsis-v"></i>
 
-    <h1><?= Html::encode($this->title) ?></h1>
-
-    <?= $this->render('_form', [
-        'model' => $model,
-        'form_id' => 'update-category-form',
-    ]) ?>
-
-</div>
+        <h3 class="box-title"><?= Yii::t('items/category',
+                'Edit category {category}',
+                ['category' => $model->name]) ?></h3>
+    </div>
+    <!-- /.box-header -->
+    <div class="box-body">
+        <?= $this->render('_form', [
+            'model' => $model,
+            'form_id' => 'update-category-form',
+        ]) ?>
+    </div>
+</div><!-- /.box -->

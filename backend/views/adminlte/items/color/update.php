@@ -1,23 +1,26 @@
 <?php
 
-use yii\helpers\Html;
-
 /* @var $this yii\web\View */
 /* @var $model common\models\items\Color */
 
-$this->title = Yii::t('items/color', 'Update {modelClass}: ', [
-    'modelClass' => 'Color',
-]) . ' ' . $model->name;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('items/color', 'Colors'), 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = Yii::t('items/color', 'Update');
+
+$this->title = Yii::t('items/color', 'Colors');
+$this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="color-update">
+<div class="box">
+    <div class="box-header">
+        <i class="fa fa-ellipsis-v"></i>
 
-    <h1><?= Html::encode($this->title) ?></h1>
+        <h3 class="box-title"><?= Yii::t('items/color',
+                'Edit color {color}',
+                ['color' => $model->name]) ?></h3>
+    </div>
+    <!-- /.box-header -->
+    <div class="box-body">
+        <?= $this->render('_form', [
+            'model' => $model,
+            'form_id' => 'update-color-form',
+        ]) ?>
+    </div>
+</div><!-- /.box -->
 
-    <?= $this->render('_form', [
-        'model' => $model,
-    ]) ?>
-
-</div>

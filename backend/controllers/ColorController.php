@@ -5,7 +5,6 @@ namespace backend\controllers;
 use Yii;
 use common\models\items\Color;
 use common\models\items\ColorSearch;
-use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
@@ -20,6 +19,10 @@ class ColorController extends Backend
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
+                    'index' => ['get'],
+                    'view' => ['get'],
+                    'create' => ['get', 'post'],
+                    'update' => ['get', 'post'],
                     'delete' => ['post'],
                 ],
             ],
@@ -35,6 +38,7 @@ class ColorController extends Backend
         $searchModel = new ColorSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
+        $this->content_header = Yii::t('common/application', 'content_header_' . __FUNCTION__);
         return $this->render('/items/color/index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
@@ -48,6 +52,7 @@ class ColorController extends Backend
      */
     public function actionView($id)
     {
+        $this->content_header = Yii::t('common/application', 'content_header_' . __FUNCTION__);
         return $this->render('/items/color/view', [
             'model' => $this->findModel($id),
         ]);
@@ -62,6 +67,7 @@ class ColorController extends Backend
     {
         $model = new Color();
 
+        $this->content_header = Yii::t('common/application', 'content_header_' . __FUNCTION__);
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
@@ -81,6 +87,7 @@ class ColorController extends Backend
     {
         $model = $this->findModel($id);
 
+        $this->content_header = Yii::t('common/application', 'content_header_' . __FUNCTION__);
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {

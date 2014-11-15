@@ -21,8 +21,8 @@ class CategoryController extends Backend
                 'actions' => [
                     'index' => ['get'],
                     'view' => ['get'],
-                    'create' => ['post'],
-                    'update' => ['post'],
+                    'create' => ['get', 'post'],
+                    'update' => ['get', 'post'],
                     'delete' => ['post'],
                 ],
             ],
@@ -38,7 +38,7 @@ class CategoryController extends Backend
         $searchModel = new CategorySearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-        $this->content_header = Yii::t('items/category', 'content_header_' . __FUNCTION__);
+        $this->content_header = Yii::t('common/application', 'content_header_' . __FUNCTION__);
         return $this->render('/items/category/index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
@@ -52,7 +52,7 @@ class CategoryController extends Backend
      */
     public function actionView($id)
     {
-        $this->content_header = Yii::t('items/category', 'content_header_' . __FUNCTION__);
+        $this->content_header = Yii::t('common/application', 'content_header_' . __FUNCTION__);
         return $this->render('/items/category/view', [
             'model' => $this->findModel($id),
         ]);
@@ -66,20 +66,15 @@ class CategoryController extends Backend
     public function actionCreate()
     {
         $model = new Category();
-        Yii::$app->response->format = 'json';
 
+        $this->content_header = Yii::t('common/application', 'content_header_' . __FUNCTION__);
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            $model->refresh();
-            return [
-                'message' => 'Success!!!',
-            ];
-        }
-
-        return [
-            'html' => $this->renderAjax('/items/category/create', [
+            return $this->redirect(['view', 'id' => $model->id]);
+        } else {
+            return $this->render('/items/category/create', [
                 'model' => $model,
-            ])
-        ];
+            ]);
+        }
     }
 
     /**
@@ -92,6 +87,7 @@ class CategoryController extends Backend
     {
         $model = $this->findModel($id);
 
+        $this->content_header = Yii::t('common/application', 'content_header_' . __FUNCTION__);
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {

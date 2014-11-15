@@ -47,7 +47,7 @@ class Category extends ActiveRecord
             [['deleted', 'created_at', 'id_parent'], 'integer'],
             [['name'], 'string', 'max' => 255],
             [['reference'], 'string', 'max' => 50],
-            [['reference'], 'unique'],
+            [['reference', 'name'], 'unique'],
             [['parent'], 'safe']
         ];
     }
@@ -65,8 +65,21 @@ class Category extends ActiveRecord
                 ],
             ],
             'reference' => ReferenceBehavior::className(),
-            'deleted' => DeletedBehavior::className()
+            'deleted' => DeletedBehavior::className(),
         ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function beforeSave($insert)
+    {
+        if ($this->isNewRecord) {
+            if ($this->id_parent == '') {
+                $this->id_parent = self::DEFAULT_PARENT;
+            }
+        }
+        return parent::beforeSave($insert);
     }
 
     /**
@@ -75,11 +88,11 @@ class Category extends ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('items/category', 'ID'),
-            'name' => Yii::t('items/category', 'Name'),
-            'reference' => Yii::t('items/category', 'Reference'),
-            'deleted' => Yii::t('items/category', 'Deleted'),
-            'created_at' => Yii::t('items/category', 'Created At'),
+            'id' => Yii::t('common/application', 'ID'),
+            'name' => Yii::t('common/application', 'Name'),
+            'reference' => Yii::t('common/application', 'Reference'),
+            'deleted' => Yii::t('common/application', 'Deleted'),
+            'created_at' => Yii::t('common/application', 'Created At'),
             'parent' => Yii::t('items/category', 'Parent Category'),
             'id_parent' => Yii::t('items/category', 'id_parent'),
         ];
@@ -91,8 +104,8 @@ class Category extends ActiveRecord
     public function getChildren()
     {
         $children = $this->find()
-            ->where(['and', 'id_parent=:id_parent', 'id!=:id'])
-            ->params([':id_parent' => $this->id, ':id' => $this->id])->all();
+            ->andWhere(['and', 'id_parent=:id_parent', 'id!=:id'])
+            ->addParams([':id_parent' => $this->id, ':id' => $this->id])->all();
         return $children;
     }
 
@@ -102,8 +115,20 @@ class Category extends ActiveRecord
     public function getParent()
     {
         return $this->find()
-            ->where(['and', 'id=:id', 'id!=:id2'])
-            ->params([':id' => $this->id_parent, ':id2' => $this->id])->one();
+            ->andWhere(['and', 'id=:id', 'id!=:id2'])
+            ->addParams([':id' => $this->id_parent, ':id2' => $this->id]);
+    }
+
+    /**
+     * @return string
+     */
+    public function getParentName()
+    {
+        $parent = $this->getParent()->one();
+        if (is_null($parent)) {
+            return null;
+        }
+        return $parent->name;
     }
 
     /**
@@ -127,9 +152,9 @@ class Category extends ActiveRecord
      */
     public static function getGlobalCategories()
     {
-        return static::find()->indexBy('id')
-            ->where('id_parent=:id_parent')
-            ->params([':id_parent' => self::DEFAULT_PARENT])->all();
+        return self::find()->indexBy('id')
+            ->andWhere('id_parent=:id_parent')
+            ->addParams([':id_parent' => self::DEFAULT_PARENT])->all();
     }
 
     /**
@@ -146,9 +171,6 @@ class Category extends ActiveRecord
                     $list[$category->id] = $category->name;
                     $used[] = $category->id;
                 }
-                if ($category->id == self::DEFAULT_PARENT) {
-                    continue;
-                }
                 $children = $category->getChildren();
                 if (count($children) > 0) {
                     $list[$category->name] = [];
@@ -160,5 +182,47 @@ class Category extends ActiveRecord
             }
         }
         return $list;
+    }
+
+    public static function find()
+    {
+        $query = new CategoryQuery(get_called_class());
+        return $query->active();
+    }
+
+    public function getPrevious()
+    {
+        $current_id = $this->id;
+
+        $search = self::find()->andWhere('id<:id')->
+        addParams([':id' => $current_id])->
+        orderBy(['id' => SORT_DESC])->limit(1)->one();
+        if (is_null($search)) {
+            $search = self::find()->orderBy(['id' => SORT_DESC])->
+            limit(1)->one();
+        }
+
+        if (is_null($search)) {
+            return null;
+        }
+        return $search->id;
+    }
+
+    public function getNext()
+    {
+        $current_id = $this->id;
+
+        $search = self::find()->andWhere('id>:id')->
+        addParams([':id' => $current_id])->orderBy(['id' => SORT_ASC])->
+        limit(1)->one();
+        if (is_null($search)) {
+            $search = self::find()->orderBy(['id' => SORT_ASC])->
+            limit(1)->one();
+        }
+
+        if (is_null($search)) {
+            return null;
+        }
+        return $search->id;
     }
 }

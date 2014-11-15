@@ -2,6 +2,7 @@
 
 namespace common\models\items;
 
+use common\components\DeletedBehavior;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
@@ -18,8 +19,8 @@ class CategorySearch extends Category
     public function rules()
     {
         return [
-            [['id', 'deleted', 'created_at'], 'integer'],
-            [['name', 'reference'], 'safe'],
+            [['id', 'created_at'], 'integer'],
+            [['name'], 'safe'],
         ];
     }
 
@@ -56,12 +57,10 @@ class CategorySearch extends Category
 
         $query->andFilterWhere([
             'id' => $this->id,
-            'deleted' => $this->deleted,
             'created_at' => $this->created_at,
         ]);
 
-        $query->andFilterWhere(['like', 'name', $this->name])
-            ->andFilterWhere(['like', 'reference', $this->reference]);
+        $query->andFilterWhere(['like', 'name', $this->name]);
 
         return $dataProvider;
     }

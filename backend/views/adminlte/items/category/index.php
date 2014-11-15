@@ -2,8 +2,6 @@
 
 use yii\helpers\Html;
 use yii\helpers\Url;
-use yii\helpers\Json;
-use yii\bootstrap\Modal;
 use yii\grid\GridView;
 
 /* @var $this yii\web\View */
@@ -14,15 +12,13 @@ $this->title = Yii::t('items/category', 'Categories');
 $this->params['breadcrumbs'][] = $this->title;
 
 ?>
-<div class="category-index">
+<div class="index">
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-    <p><?= Html::button(
-            Yii::t('items/category', 'Create new'),
+    <p><?= Html::a(
+            Yii::t('common/application', 'Create new'),
+            Url::to('category/create'),
             [
-                'class' => 'btn btn-primary btn-sm',
-                'data-toggle' => 'modal',
-                'data-target' => '#category-create-modal',
-
+                'class' => 'btn btn-primary btn-sm'
             ]) ?></p>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -33,42 +29,14 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'label' => 'parent',
                 'value' => function ($data) {
-                    $a = $data->getParent();
+                    $a = $data->getParentName();
                     if (is_null($a)) {
                         return '-';
                     }
-                    return $a->name;
+                    return $a;
                 }
             ],
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
 </div>
-
-<?php
-Modal::begin([
-    'id' => 'category-create-modal',
-    'closeButton' => ['tag' => 'button', 'label' => '&times;'],
-    'header' => Yii::t('items/category', 'create_title'),
-    'options' => [
-        'data-modal-type' => 'app-modal',
-        'data-modal-options' => Json::encode([
-            'request' => Url::to('category/create'),
-        ]),
-    ]
-]);
-Modal::end();
-
-Modal::begin([
-    'id' => 'category-update-modal',
-    'closeButton' => ['tag' => 'button', 'label' => '&times;'],
-    'header' => Yii::t('items/category', 'update_title'),
-    'options' => [
-        'data-modal-type' => 'app-modal',
-        'data-modal-options' => Json::encode([
-            'request' => Url::to('category/update'),
-        ]),
-    ]
-]);
-Modal::end();
-?>

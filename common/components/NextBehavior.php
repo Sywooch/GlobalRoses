@@ -1,7 +1,7 @@
 <?php
 /**
  * Project GlobalRoses
- * File ReferenceBehavior.php
+ * File NextBehavior.php
  * @author Andreas Kondylis
  * @version 0.1
  * Date 11/13/14 8:29 PM
@@ -14,15 +14,17 @@ use yii\db\ActiveRecord;
 use yii\helpers\ArrayHelper;
 
 /**
- * Class ReferenceBehavior
+ * Class NextBehavior
  * @package common\components
  * @author Andreas Kondylis
  * @version 0.1
  */
-class ReferenceBehavior extends AttributeBehavior
+class NextBehavior extends AttributeBehavior
 {
 
-    public $referenceAttribute = 'reference';
+    const EVENT_GET_NEXT = 'getnext';
+
+    public $nextAttribute = 'id';
 
     public $value;
 
@@ -32,16 +34,13 @@ class ReferenceBehavior extends AttributeBehavior
     public function events()
     {
         return [
-            ActiveRecord::EVENT_BEFORE_INSERT => 'beforeCreate',
+            self::EVENT_GET_NEXT => 'getNext',
         ];
     }
 
-    /**
-     * @inheritdoc
-     */
-    public function beforeCreate($event)
+    public function getNext($event)
     {
-        $this->owner->{$this->referenceAttribute} = $this->getValue(null);
+        return $this->getValue(null);
     }
 
     /**
@@ -52,18 +51,21 @@ class ReferenceBehavior extends AttributeBehavior
         if ($this->value instanceof Expression) {
             return $this->value;
         } else {
-            $reference_value = $this->owner->{$this->referenceAttribute};
-            $existing_reference = ArrayHelper::map(
-                $this->owner->find()->all(), 'id', $this->referenceAttribute);
 
-            $is_null = ($reference_value == null);
-            $exists = in_array($reference_value, $existing_reference);
-            while ($is_null || $exists) {
-                $reference_value = uniqid();
-                $is_null = ($reference_value == null);
-                $exists = in_array($reference_value, $existing_reference);
+            $nextAttribute = $this->owner->{$this->nextAttribute};
+
+            $next_row = $this->owner->find()->where('id>:id')->
+            params([':id' => $nextAttribute])->orderBy(['id' => SORT_ASC])->one();
+            if (is_null($next_row)) {
+                $next_row = $this->owner->find()->where('id>:id')->
+                params([':id' => $nextAttribute])->orderBy(['id' => SORT_DESC])->one();
             }
-            return $reference_value;
+
+            if (is_null($next_row)) {
+                return null;
+            }
+            $nextAttribute = $next_row->id;
+            return $nextAttribute;
         }
     }
 
