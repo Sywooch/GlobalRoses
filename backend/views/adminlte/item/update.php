@@ -4,6 +4,8 @@ use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Item */
+/* @var $previousButton string */
+/* @var $nextButton string */
 
 $this->title = Yii::t('item', 'Items');
 $this->params['breadcrumbs'][] = $this->title;
@@ -21,6 +23,8 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= $this->render('_form', [
             'model' => $model,
             'form_id' => 'update-item-form',
+            'previousButton' => $previousButton,
+            'nextButton' => $nextButton,
         ]) ?>
     </div>
 </div><!-- /.box -->

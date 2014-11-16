@@ -5,6 +5,8 @@ use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\items\Category */
+/* @var $previousButton string */
+/* @var $nextButton string */
 
 $this->title = Yii::t('items/category', 'Categories');
 $this->params['breadcrumbs'][] = $this->title;
@@ -40,16 +42,12 @@ $this->params['breadcrumbs'][] = $this->title;
         ]) ?>
     </div>
     <div class="box-footer">
-        <?= Html::a('<i class="fa fa-backward"></i>',
-            ['view', 'id' => $model->getPrevious()],
-            [
-                'class' => 'btn btn-default',
-                'title' => Yii::t('common/application', 'previous')
-            ]) ?>
-        <?= Html::a(Yii::t('common/application', 'Edit'),
+        <?php
+        echo $previousButton;
+        echo Html::a(Yii::t('common/application', 'Edit'),
             ['update', 'id' => $model->id],
-            ['class' => 'btn btn-primary']) ?>
-        <?= Html::a(Yii::t('common/application', 'Delete'),
+            ['class' => 'btn btn-primary']);
+        echo Html::a(Yii::t('common/application', 'Delete'),
             ['delete', 'id' => $model->id],
             [
                 'class' => 'btn btn-danger',
@@ -57,12 +55,8 @@ $this->params['breadcrumbs'][] = $this->title;
                     'confirm' => Yii::t('items/category', 'Are you sure you want to delete this item?'),
                     'method' => 'post',
                 ],
-            ]) ?>
-        <?= Html::a('<i class="fa fa-forward"></i>',
-            ['view', 'id' => $model->getNext()],
-            [
-                'class' => 'btn btn-default',
-                'title' => Yii::t('common/application', 'next')
-            ]) ?>
+            ]);
+        echo $nextButton;
+        ?>
     </div>
 </div><!-- /.box -->

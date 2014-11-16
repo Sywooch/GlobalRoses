@@ -2,7 +2,7 @@
 
 namespace common\models\items;
 
-use common\components\DeletedBehavior;
+use common\components\SoftDeleteBehavior;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;

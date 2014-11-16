@@ -9,6 +9,8 @@ use \common\models\items\Category;
 /* @var $model common\models\items\Category */
 /* @var $form yii\widgets\ActiveForm */
 /* @var $form_id string */
+/* @var $previousButton string */
+/* @var $nextButton string */
 ?>
 
 <div class="form">
@@ -43,22 +45,16 @@ use \common\models\items\Category;
                 Yii::t('common/application', 'Create'),
                 ['class' => 'btn btn-success']);
         } else {
-            echo Html::a('<i class="fa fa-backward"></i>',
-                ['update', 'id' => $model->getPrevious()],
-                [
-                    'class' => 'btn btn-default',
-                    'title' => Yii::t('common/application', 'next')
-                ]);
+            if (isset($previousButton)) {
+                echo $previousButton;
+            }
             echo Html::submitButton(
                 Yii::t('common/application', 'Update'),
                 ['class' => 'btn btn-primary']);
 
-            echo Html::a('<i class="fa fa-forward"></i>',
-                ['update', 'id' => $model->getNext()],
-                [
-                    'class' => 'btn btn-default',
-                    'title' => Yii::t('common/application', 'next')
-                ]);
+            if (isset($nextButton)) {
+                echo $nextButton;
+            }
         }
         ?>
     </div>

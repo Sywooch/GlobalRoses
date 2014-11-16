@@ -7,6 +7,7 @@ return [
     'Deleted' => 'Deleted',
     'Created At' => 'Created At',
     'Updated At' => 'Updated At',
+    'Deleted At' => 'Deleted At',
     'Reference' => 'Reference',
 
     'content_header_actionIndex' => 'List',

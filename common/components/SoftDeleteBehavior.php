@@ -1,7 +1,7 @@
 <?php
 /**
  * Project GlobalRoses
- * File DeletedBehavior.php
+ * File SoftDeleteBehavior.php
  * @author Andreas Kondylis
  * @version 0.1
  * Date 11/13/14 8:29 PM
@@ -13,12 +13,12 @@ use yii\db\Expression;
 use yii\behaviors\AttributeBehavior;
 
 /**
- * Class DeletedBehavior
+ * Class SoftDeleteBehavior
  * @package common\components
  * @author Andreas Kondylis
  * @version 0.1
  */
-class DeletedBehavior extends AttributeBehavior
+class SoftDeleteBehavior extends AttributeBehavior
 {
 
     const DELETED_YES = '1';
@@ -27,27 +27,13 @@ class DeletedBehavior extends AttributeBehavior
 
     public $attribute = 'deleted';
 
-    public $value;
+    public $timestamp = 'deleted_at';
+
     /**
      * @var bool If true, this behavior will process '$model->delete()' as a soft-delete. Thus, the
      *           only way to truly delete a record is to call '$model->forceDelete()'
      */
     public $safeMode = true;
-
-    /**
-     * @inheritdoc
-     */
-    public function init()
-    {
-        parent::init();
-
-        if (empty($this->attributes)) {
-            $this->attributes = [
-                BaseActiveRecord::EVENT_BEFORE_INSERT => $this->attribute,
-                BaseActiveRecord::EVENT_BEFORE_DELETE => $this->attribute,
-            ];
-        }
-    }
 
     public function events()
     {
@@ -60,7 +46,9 @@ class DeletedBehavior extends AttributeBehavior
     public function insert($event)
     {
         $attribute = $this->attribute;
-        $this->owner->$attribute = $this->getValue($event);
+        $timestamp = $this->timestamp;
+        $this->owner->$attribute = self::DELETED_NO;
+        $this->owner->$timestamp = 0;
     }
 
     public function disable($event)
@@ -78,15 +66,19 @@ class DeletedBehavior extends AttributeBehavior
     protected function _disable()
     {
         $attribute = $this->attribute;
+        $timestamp = $this->timestamp;
         $this->owner->$attribute = self::DELETED_YES;
-        $this->owner->save(false, [$attribute]);
+        $this->owner->$timestamp = time();
+        $this->owner->save(false, [$attribute, $timestamp]);
     }
 
     protected function restore()
     {
         $attribute = $this->attribute;
+        $timestamp = $this->timestamp;
         $this->owner->$attribute = self::DELETED_NO;
-        $this->owner->save(false, [$attribute]);
+        $this->owner->$timestamp = 0;
+        $this->owner->save(false, [$attribute, $timestamp]);
     }
 
     /**
@@ -98,30 +90,5 @@ class DeletedBehavior extends AttributeBehavior
         $model = $this->owner;
         $this->detach();
         $model->delete();
-    }
-
-    /**
-     * @inheritdoc
-     */
-    protected function getValue($event)
-    {
-        if ($this->value instanceof Expression) {
-            return $this->value;
-        } else {
-            return $this->value !== null ? call_user_func($this->value, $event) : static::DELETED_NO;
-        }
-    }
-
-    /**
-     * Updates the deleted attribute to the current value.
-     *
-     * ```php
-     * $model->touch('reference');
-     * ```
-     * @param string $attribute the name of the attribute to update.
-     */
-    public function touch($attribute)
-    {
-        $this->owner->updateAttributes(array_fill_keys((array)$attribute, $this->getValue(null)));
     }
 }

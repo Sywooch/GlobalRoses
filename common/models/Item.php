@@ -9,7 +9,7 @@ use \common\models\items\Color;
 use \common\models\orders\Item as OrderItem;
 use \yii\behaviors\TimestampBehavior;
 use \common\components\ReferenceBehavior;
-use common\components\DeletedBehavior;
+use common\components\SoftDeleteBehavior;
 
 /**
  * This is the model class for table "item".
@@ -28,9 +28,10 @@ use common\components\DeletedBehavior;
  * @property integer $available
  * @property string $status
  * @property string $unit_price
- * @property integer $deleted
  * @property string $created_at
  * @property string $updated_at
+ * @property integer $deleted
+ * @property string $deleted_at
  *
  * @property Category $idCategory
  * @property Color $idColor
@@ -54,7 +55,7 @@ class Item extends ActiveRecord
         return [
             [['name', 'description'], 'required'],
             [['image', 'description', 'status'], 'string'],
-            [['id_category', 'quantity', 'id_color', 'available', 'deleted', 'created_at', 'updated_at'], 'integer'],
+            [['id_category', 'quantity', 'id_color', 'available', 'deleted', 'created_at', 'updated_at', 'deleted_at'], 'integer'],
             [['height', 'weight', 'unit_price'], 'number'],
             [['name'], 'string', 'max' => 255],
             [['reference'], 'string', 'max' => 50],
@@ -69,15 +70,9 @@ class Item extends ActiveRecord
     public function behaviors()
     {
         return [
-            [
-                'class' => TimestampBehavior::className(),
-                'attributes' => [
-                    ActiveRecord::EVENT_BEFORE_INSERT => ['created_at', 'updated_at'],
-                    ActiveRecord::EVENT_BEFORE_UPDATE => ['updated_at'],
-                ],
-            ],
+            'create-update' => TimestampBehavior::className(),
             'reference' => ReferenceBehavior::className(),
-            'deleted' => DeletedBehavior::className(),
+            'deleted' => SoftDeleteBehavior::className(),
         ];
     }
 
@@ -92,6 +87,7 @@ class Item extends ActiveRecord
             'reference' => Yii::t('common/application', 'Reference'),
             'deleted' => Yii::t('common/application', 'Deleted'),
             'created_at' => Yii::t('common/application', 'Created At'),
+            'deleted_at' => Yii::t('common/application', 'Deleted At'),
             'updated_at' => Yii::t('common/application', 'Updated At'),
             'image' => Yii::t('item', 'Image'),
             'description' => Yii::t('item', 'Description'),
@@ -145,7 +141,8 @@ class Item extends ActiveRecord
         addParams([':id' => $current_id])->
         orderBy(['id' => SORT_DESC])->limit(1)->one();
         if (is_null($search)) {
-            $search = self::find()->orderBy(['id' => SORT_DESC])->
+            $search = self::find()->andWhere('id!=:id')->
+            addParams(['id' => $this->id])->orderBy(['id' => SORT_DESC])->
             limit(1)->one();
         }
 
@@ -163,7 +160,8 @@ class Item extends ActiveRecord
         addParams([':id' => $current_id])->orderBy(['id' => SORT_ASC])->
         limit(1)->one();
         if (is_null($search)) {
-            $search = self::find()->orderBy(['id' => SORT_ASC])->
+            $search = self::find()->andWhere('id!=:id')->
+            addParams(['id' => $this->id])->orderBy(['id' => SORT_ASC])->
             limit(1)->one();
         }
 

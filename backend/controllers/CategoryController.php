@@ -52,9 +52,12 @@ class CategoryController extends Backend
      */
     public function actionView($id)
     {
+        $model = $this->findModel($id);
         $this->content_header = Yii::t('common/application', 'content_header_' . __FUNCTION__);
         return $this->render('/items/category/view', [
-            'model' => $this->findModel($id),
+            'model' => $model,
+            'previousButton' => $this->previousButton($model, 'view'),
+            'nextButton' => $this->nextButton($model, 'view'),
         ]);
     }
 
@@ -93,6 +96,8 @@ class CategoryController extends Backend
         } else {
             return $this->render('/items/category/update', [
                 'model' => $model,
+                'previousButton' => $this->previousButton($model, 'update'),
+                'nextButton' => $this->nextButton($model, 'update'),
             ]);
         }
     }

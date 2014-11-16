@@ -8,7 +8,7 @@ use \common\models\Item;
 use \common\models\orders\Item as OrderItem;
 use \yii\behaviors\TimestampBehavior;
 use \common\components\ReferenceBehavior;
-use common\components\DeletedBehavior;
+use common\components\SoftDeleteBehavior;
 
 /**
  * This is the model class for table "category".
@@ -16,9 +16,10 @@ use common\components\DeletedBehavior;
  * @property integer $id
  * @property string $name
  * @property string $reference
- * @property integer $deleted
- * @property integer $created_at
  * @property integer $id_parent
+ * @property integer $created_at
+ * @property integer $deleted
+ * @property string $deleted_at
  *
  * @property Category $parent
  * @property Category[] $children
@@ -44,7 +45,7 @@ class Category extends ActiveRecord
     {
         return [
             [['name'], 'required'],
-            [['deleted', 'created_at', 'id_parent'], 'integer'],
+            [['deleted', 'created_at', 'deleted_at', 'id_parent'], 'integer'],
             [['name'], 'string', 'max' => 255],
             [['reference'], 'string', 'max' => 50],
             [['reference', 'name'], 'unique'],
@@ -65,7 +66,7 @@ class Category extends ActiveRecord
                 ],
             ],
             'reference' => ReferenceBehavior::className(),
-            'deleted' => DeletedBehavior::className(),
+            'deleted' => SoftDeleteBehavior::className(),
         ];
     }
 
@@ -93,6 +94,7 @@ class Category extends ActiveRecord
             'reference' => Yii::t('common/application', 'Reference'),
             'deleted' => Yii::t('common/application', 'Deleted'),
             'created_at' => Yii::t('common/application', 'Created At'),
+            'deleted_at' => Yii::t('common/application', 'Deleted At'),
             'parent' => Yii::t('items/category', 'Parent Category'),
             'id_parent' => Yii::t('items/category', 'id_parent'),
         ];
