@@ -26,4 +26,5 @@ return [
     'Reset' => 'Reset',
     'previous' => 'previous',
     'next' => 'next',
+    'Select ...' => 'Select ...',
 ];

@@ -29,6 +29,20 @@ class ReferenceBehavior extends AttributeBehavior
     /**
      * @inheritdoc
      */
+    public function init()
+    {
+        parent::init();
+
+        if (empty($this->attributes)) {
+            $this->attributes = [
+                ActiveRecord::EVENT_BEFORE_INSERT => [$this->referenceAttribute],
+            ];
+        }
+    }
+
+    /**
+     * @inheritdoc
+     */
     public function events()
     {
         return [

@@ -9,7 +9,6 @@
 namespace common\components;
 
 use yii\db\BaseActiveRecord;
-use yii\db\Expression;
 use yii\behaviors\AttributeBehavior;
 
 /**
@@ -25,15 +24,30 @@ class SoftDeleteBehavior extends AttributeBehavior
 
     const DELETED_NO = '0';
 
-    public $attribute = 'deleted';
+    public $attributeDeleted = 'deleted';
 
-    public $timestamp = 'deleted_at';
+    public $attributeTimestamp = 'deleted_at';
 
     /**
      * @var bool If true, this behavior will process '$model->delete()' as a soft-delete. Thus, the
      *           only way to truly delete a record is to call '$model->forceDelete()'
      */
     public $safeMode = true;
+
+    /**
+     * @inheritdoc
+     */
+    public function init()
+    {
+        parent::init();
+
+        if (empty($this->attributes)) {
+            $this->attributes = [
+                BaseActiveRecord::EVENT_BEFORE_INSERT => [$this->attributeDeleted, $this->attributeTimestamp],
+                BaseActiveRecord::EVENT_BEFORE_DELETE => [$this->attributeDeleted, $this->attributeTimestamp],
+            ];
+        }
+    }
 
     public function events()
     {
@@ -45,10 +59,10 @@ class SoftDeleteBehavior extends AttributeBehavior
 
     public function insert($event)
     {
-        $attribute = $this->attribute;
-        $timestamp = $this->timestamp;
-        $this->owner->$attribute = self::DELETED_NO;
-        $this->owner->$timestamp = 0;
+        $attributeDeleted = $this->attributeDeleted;
+        $attributeTimestamp = $this->attributeTimestamp;
+        $this->owner->$attributeDeleted = self::DELETED_NO;
+        $this->owner->$attributeTimestamp = 0;
     }
 
     public function disable($event)
@@ -65,20 +79,20 @@ class SoftDeleteBehavior extends AttributeBehavior
 
     protected function _disable()
     {
-        $attribute = $this->attribute;
-        $timestamp = $this->timestamp;
-        $this->owner->$attribute = self::DELETED_YES;
-        $this->owner->$timestamp = time();
-        $this->owner->save(false, [$attribute, $timestamp]);
+        $attributeDeleted = $this->attributeDeleted;
+        $attributeTimestamp = $this->attributeTimestamp;
+        $this->owner->$attributeDeleted = self::DELETED_YES;
+        $this->owner->$attributeTimestamp = time();
+        $this->owner->save(false, [$attributeDeleted, $attributeTimestamp]);
     }
 
     protected function restore()
     {
-        $attribute = $this->attribute;
-        $timestamp = $this->timestamp;
-        $this->owner->$attribute = self::DELETED_NO;
-        $this->owner->$timestamp = 0;
-        $this->owner->save(false, [$attribute, $timestamp]);
+        $attributeDeleted = $this->attributeDeleted;
+        $attributeTimestamp = $this->attributeTimestamp;
+        $this->owner->$attributeDeleted = self::DELETED_NO;
+        $this->owner->$attributeTimestamp = 0;
+        $this->owner->save(false, [$attributeDeleted, $attributeTimestamp]);
     }
 
     /**

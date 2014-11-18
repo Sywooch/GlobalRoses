@@ -29,7 +29,7 @@ use yii\widgets\ActiveForm;
 
     <?php echo $form->field($model, 'weight') ?>
 
-    <?php echo $form->field($model, 'id_color') ?>
+    <?php echo $form->field($model, 'color') ?>
 
     <?php echo $form->field($model, 'available') ?>
 

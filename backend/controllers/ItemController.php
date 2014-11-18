@@ -5,8 +5,10 @@ namespace backend\controllers;
 use Yii;
 use common\models\Item;
 use common\models\ItemSearch;
+use yii\behaviors\TimestampBehavior;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
 
 /**
  * ItemController implements the CRUD actions for Item model.
@@ -69,15 +71,19 @@ class ItemController extends Backend
     public function actionCreate()
     {
         $model = new Item();
-
         $this->content_header = Yii::t('common/application', 'content_header_' . __FUNCTION__);
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('create', [
-                'model' => $model,
-            ]);
+        $data = Yii::$app->request->post();
+        if ($model->load($data)) {
+            $model->upload_file = UploadedFile::getInstance($model, 'upload_file');
+            if ($model->save()) {
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
         }
+        $model->status = 1;
+        $model->available = 1;
+        return $this->render('create', [
+            'model' => $model,
+        ]);
     }
 
     /**

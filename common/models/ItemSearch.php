@@ -18,8 +18,8 @@ class ItemSearch extends Item
     public function rules()
     {
         return [
-            [['id', 'id_category', 'quantity', 'id_color', 'available', 'deleted', 'created_at', 'updated_at'], 'integer'],
-            [['name', 'reference', 'image', 'description', 'description_short', 'status'], 'safe'],
+            [['id', 'id_category', 'quantity', 'available', 'deleted', 'created_at', 'updated_at'], 'integer'],
+            [['name', 'reference', 'image', 'description', 'description_short', 'color', 'status'], 'safe'],
             [['height', 'weight', 'unit_price'], 'number'],
         ];
     }
@@ -58,7 +58,7 @@ class ItemSearch extends Item
             'quantity' => $this->quantity,
             'height' => $this->height,
             'weight' => $this->weight,
-            'id_color' => $this->id_color,
+            'color' => $this->color,
             'available' => $this->available,
             'unit_price' => $this->unit_price,
             'deleted' => $this->deleted,
@@ -68,6 +68,7 @@ class ItemSearch extends Item
 
         $query->andFilterWhere(['like', 'name', $this->name])
             ->andFilterWhere(['like', 'reference', $this->reference])
+            ->andFilterWhere(['like', 'color', $this->color])
             ->andFilterWhere(['like', 'image', $this->image])
             ->andFilterWhere(['like', 'description', $this->description])
             ->andFilterWhere(['like', 'description_short', $this->description_short])

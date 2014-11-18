@@ -3,14 +3,6 @@
     -webkit-font-smoothing: antialiased;
 }
 
-*:before, *:after {
-    box-sizing: border-box;
-}
-
-*:before, *:after {
-    box-sizing: border-box;
-}
-
 .modal-content > .overlay {
     background: none repeat scroll 0 0 rgba(255, 255, 255, 0.7);
     z-index: 1010;
@@ -35,4 +27,26 @@
     position: absolute;
     top: 0;
     width: 100%;
+}
+
+.has-success .input-group-btn .btn-default:hover,
+.has-success .input-group-btn .btn-default:focus,
+.has-success .input-group-btn .btn-default.focus,
+.has-success .input-group-btn .btn-default:active,
+.has-success .input-group-btn .btn-default.active,
+.open > .dropdown-toggle.has-success .input-group-btn .btn-default {
+    background-color: #449d44;
+    border-color: #398439;
+    color: #000;
+}
+
+.has-success .bootstrap-touchspin .input-group-btn-vertical .btn-default:hover,
+.has-success .bootstrap-touchspin .input-group-btn-vertical .btn-default:focus,
+.has-success .bootstrap-touchspin .input-group-btn-vertical .btn-default.focus,
+.has-success .bootstrap-touchspin .input-group-btn-vertical .btn-default:active,
+.has-success .bootstrap-touchspin .input-group-btn-vertical .btn-default.active,
+.open > .dropdown-toggle.has-success .bootstrap-touchspin .input-group-btn-vertical .btn-default {
+    background-color: #449d44;
+    border-color: #398439;
+    color: #000;
 }
