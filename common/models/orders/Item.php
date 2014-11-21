@@ -13,7 +13,6 @@ use Yii;
  * @property string $item_name
  * @property string $id_item_category
  * @property string $c_name
- * @property integer $id_item_color
  * @property string $item_color
  * @property string $height
  * @property integer $quantity
@@ -23,12 +22,10 @@ use Yii;
  * @property string $updated_at
  *
  * @property Category $idCategory
- * @property Color $idColor
  * @property Order $idOrder
  * @property Item $idItem
  * @property Item[] $items
  * @property Category $idItemCategory
- * @property Color $idItemColor
  */
 class Item extends \yii\db\ActiveRecord
 {
@@ -46,8 +43,8 @@ class Item extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id_order', 'id_item', 'item_name', 'id_item_category', 'c_name', 'id_item_color', 'item_color', 'height', 'unit_price', 'total_price', 'created_at', 'updated_at'], 'required'],
-            [['id_order', 'id_item', 'id_item_category', 'id_item_color', 'quantity', 'created_at', 'updated_at'], 'integer'],
+            [['id_order', 'id_item', 'item_name', 'id_item_category', 'c_name', 'item_color', 'height', 'unit_price', 'total_price', 'created_at', 'updated_at'], 'required'],
+            [['id_order', 'id_item', 'id_item_category', 'quantity', 'created_at', 'updated_at'], 'integer'],
             [['height', 'unit_price', 'total_price'], 'number'],
             [['item_name', 'c_name', 'item_color'], 'string', 'max' => 255]
         ];
@@ -65,7 +62,6 @@ class Item extends \yii\db\ActiveRecord
             'item_name' => Yii::t('orders/item', 'Item Name'),
             'id_item_category' => Yii::t('orders/item', 'Id Item Category'),
             'c_name' => Yii::t('orders/item', 'C Name'),
-            'id_item_color' => Yii::t('orders/item', 'Id Item Color'),
             'item_color' => Yii::t('orders/item', 'Item Color'),
             'height' => Yii::t('orders/item', 'Height'),
             'quantity' => Yii::t('orders/item', 'Quantity'),
@@ -74,22 +70,6 @@ class Item extends \yii\db\ActiveRecord
             'created_at' => Yii::t('orders/item', 'Created At'),
             'updated_at' => Yii::t('orders/item', 'Updated At'),
         ];
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getIdCategory()
-    {
-        return $this->hasOne(Category::className(), ['id' => 'id_category']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getIdColor()
-    {
-        return $this->hasOne(Color::className(), ['id' => 'id_color']);
     }
 
     /**
@@ -124,11 +104,4 @@ class Item extends \yii\db\ActiveRecord
         return $this->hasOne(Category::className(), ['id' => 'id_item_category']);
     }
 
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getIdItemColor()
-    {
-        return $this->hasOne(Color::className(), ['id' => 'id_item_color']);
-    }
 }

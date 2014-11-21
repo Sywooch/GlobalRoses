@@ -46,23 +46,17 @@ use yii\helpers\Url;
                 <span><?= Yii::t('dashboard', 'menu-title') ?></span>
             </a>
         </li>
-        <li class="treeview">
-            <a href="#">
+        <li>
+            <a href="<?= Url::toRoute(['item/']) ?>">
                 <i class="fa fa-bar-chart-o"></i>
                 <span><?= Yii::t('item', 'menu-title') ?></span>
-                <i class="fa fa-angle-left pull-right"></i>
             </a>
-            <ul class="treeview-menu">
-                <li><a href="<?= Url::toRoute(['item/']) ?>"><i
-                            class="fa fa-angle-double-right"></i> <?= Yii::t('item', 'menu-title') ?>
-                    </a></li>
-                <li><a href="<?= Url::toRoute(['category/']) ?>"><i
-                            class="fa fa-angle-double-right"></i> <?= Yii::t('items/category', 'menu-title') ?>
-                    </a></li>
-                <li><a href="<?= Url::toRoute(['color/']) ?>"><i
-                            class="fa fa-angle-double-right"></i> <?= Yii::t('items/color', 'menu-title') ?>
-                    </a></li>
-            </ul>
+        </li>
+        <li>
+            <a href="<?= Url::toRoute(['category/']) ?>">
+                <i class="fa fa-bar-chart-o"></i>
+                <span><?= Yii::t('items/category', 'menu-title') ?></span>
+            </a>
         </li>
         <li>
             <a href="<?= Url::toRoute(['order/']) ?>">

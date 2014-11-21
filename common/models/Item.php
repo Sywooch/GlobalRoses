@@ -5,7 +5,6 @@ namespace common\models;
 use Yii;
 use \yii\db\ActiveRecord;
 use \common\models\items\Category;
-use \common\models\items\Color;
 use \common\models\orders\Item as OrderItem;
 use \yii\behaviors\TimestampBehavior;
 use \common\components\ReferenceBehavior;
@@ -20,10 +19,9 @@ use common\components\SingleFileUploadBehavior;
  * @property string $reference
  * @property string $file
  * @property string $file_name_original
- * @property string $description
- * @property string $description_short
  * @property string $id_category
  * @property integer $quantity
+ * @property integer $stock
  * @property string $height
  * @property string $weight
  * @property string $color
@@ -60,13 +58,12 @@ class Item extends ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'description'], 'required'],
+            [['name', 'stock', 'quantity'], 'required'],
             [['file', 'file_name_original', 'description', 'status', 'color'], 'string'],
             [['id_category', 'quantity', 'available', 'deleted', 'created_at', 'updated_at', 'deleted_at'], 'integer'],
             [['height', 'weight', 'unit_price'], 'number'],
             [['name'], 'string', 'max' => 255],
             [['reference'], 'string', 'max' => 50],
-            [['description_short'], 'string', 'max' => 100],
             [['reference'], 'unique'],
             [['upload_file'], 'safe'],
             [['upload_file'], 'file', 'extensions' => 'jpg, gif, png'],
@@ -102,10 +99,9 @@ class Item extends ActiveRecord
             'file' => Yii::t('item', 'Image'),
             'file_name_original' => Yii::t('item', 'image original name'),
             'upload_file' => Yii::t('item', 'Upload Image'),
-            'description' => Yii::t('item', 'Description'),
-            'description_short' => Yii::t('item', 'Description Short'),
             'id_category' => Yii::t('item', 'Category'),
             'quantity' => Yii::t('item', 'Quantity'),
+            'stock' => Yii::t('item', 'Stock'),
             'height' => Yii::t('item', 'Height'),
             'weight' => Yii::t('item', 'Weight'),
             'color' => Yii::t('item', 'Color'),

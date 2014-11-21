@@ -50,20 +50,6 @@ use \common\models\items\Category;
             </div>
         </div>
         <div class="row">
-            <div class="col-md-6">
-                <?= $form->field($model, 'description')->textarea([
-                    'rows' => 6,
-                    'placeholder' => Yii::t('item', 'Placeholder: Description ...')
-                ]) ?>
-            </div>
-            <div class="col-md-6">
-                <?= $form->field($model, 'description_short')->textarea([
-                    'rows' => 6,
-                    'placeholder' => Yii::t('item', 'Placeholder: Short description ...')
-                ]) ?>
-            </div>
-        </div>
-        <div class="row">
             <div class="col-md-3">
                 <?= $form->field($model, 'id_category')->widget(Select2::classname(), [
                     'data' => Category::getCategoryGrouped(),
@@ -173,8 +159,19 @@ use \common\models\items\Category;
             </div>
         </div>
         <div class="row">
-
-
+            <div class="col-md-3">
+                <?= $form->field($model, 'stock')->widget(TouchSpin::classname(), [
+                    'options' => [
+                        'placeholder' => Yii::t('item', 'Placeholder: Set stock ...'),
+                    ],
+                    'pluginOptions' => [
+                        'verticalbuttons' => true,
+                        'initval' => 1,
+                        'min' => 0,
+                        'max' => 2000,
+                    ]
+                ]) ?>
+            </div>
         </div>
     </div>
     <div class="box-footer">
