@@ -18,6 +18,7 @@ return [
     'Create new' => 'Create new',
     '(not set)' => '(not set)',
 
+    'View' => 'View',
     'Edit' => 'Edit',
     'Update' => 'Update',
     'Delete' => 'Delete',
@@ -27,4 +28,9 @@ return [
     'previous' => 'previous',
     'next' => 'next',
     'Select ...' => 'Select ...',
+
+    'Total' => 'Total',
+    'Active' => 'Active',
+    'Inactive' => 'Inactive',
+    'All' => 'All',
 ];

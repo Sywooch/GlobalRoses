@@ -25,7 +25,7 @@ use \common\models\items\Category;
             </div>
             <div class="col-md-6">
                 <?= $form->field($model, 'id_parent')->widget(Select2::classname(), [
-                    'data' => array_merge(["" => ""], Category::getCategoryGrouped()),
+                    'data' => Category::getCategoryGrouped(),
                     'language' => Yii::$app->language,
                     'options' => [
                         'id' => 'category-parent-id',

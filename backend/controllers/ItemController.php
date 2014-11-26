@@ -5,7 +5,6 @@ namespace backend\controllers;
 use Yii;
 use common\models\Item;
 use common\models\ItemSearch;
-use yii\behaviors\TimestampBehavior;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\web\UploadedFile;
@@ -72,8 +71,7 @@ class ItemController extends Backend
     {
         $model = new Item();
         $this->content_header = Yii::t('common/application', 'content_header_' . __FUNCTION__);
-        $data = Yii::$app->request->post();
-        if ($model->load($data)) {
+        if ($model->load(Yii::$app->request->post())) {
             $model->upload_file = UploadedFile::getInstance($model, 'upload_file');
             if ($model->save()) {
                 return $this->redirect(['view', 'id' => $model->id]);
@@ -97,8 +95,16 @@ class ItemController extends Backend
         $model = $this->findModel($id);
 
         $this->content_header = Yii::t('common/application', 'content_header_' . __FUNCTION__);
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        $data = Yii::$app->request->post();
+        if ($model->load($data)) {
+            if ($data['file_cleared'] == 1) {
+                $model->upload_file = UploadedFile::getInstance($model, 'upload_file');
+            } else {
+                $model->upload_file = false;
+            }
+            if ($model->save()) {
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
         } else {
             return $this->render('update', [
                 'model' => $model,

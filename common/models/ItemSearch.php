@@ -5,7 +5,6 @@ namespace common\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use common\models\Item;
 
 /**
  * ItemSearch represents the model behind the search form about `common\models\Item`.
@@ -19,8 +18,8 @@ class ItemSearch extends Item
     {
         return [
             [['id', 'id_category', 'quantity', 'stock', 'available', 'deleted', 'created_at', 'updated_at'], 'integer'],
-            [['name', 'reference', 'image', 'color', 'status'], 'safe'],
             [['height', 'weight', 'unit_price'], 'number'],
+            [['name', 'reference', 'color', 'status'], 'safe'],
         ];
     }
 
@@ -53,25 +52,26 @@ class ItemSearch extends Item
         }
 
         $query->andFilterWhere([
-            'id' => $this->id,
-            'id_category' => $this->id_category,
-            'quantity' => $this->quantity,
-            'stock' => $this->stock,
-            'height' => $this->height,
-            'weight' => $this->weight,
-            'color' => $this->color,
-            'available' => $this->available,
-            'unit_price' => $this->unit_price,
-            'deleted' => $this->deleted,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
+            '`item`.`id`' => $this->id,
+            '`item`.`id_category`' => $this->id_category,
+            '`item`.`quantity`' => $this->quantity,
+            '`item`.`stock`' => $this->stock,
+            '`item`.`height`' => $this->height,
+            '`item`.`weight`' => $this->weight,
+            '`item`.`color`' => $this->color,
+            '`item`.`available`' => $this->available,
+            '`item`.`unit_price`' => $this->unit_price,
+            '`item`.`deleted`' => $this->deleted,
+            '`item`.`created_at`' => $this->created_at,
+            '`item`.`updated_at`' => $this->updated_at,
         ]);
 
-        $query->andFilterWhere(['like', 'name', $this->name])
-            ->andFilterWhere(['like', 'reference', $this->reference])
-            ->andFilterWhere(['like', 'color', $this->color])
-            ->andFilterWhere(['like', 'image', $this->image])
-            ->andFilterWhere(['like', 'status', $this->status]);
+        $query->joinWith('idCategory');
+
+        $query->andFilterWhere(['like', '`item`.`name`', $this->name])
+            ->andFilterWhere(['like', '`item`.`reference`', $this->reference])
+            ->andFilterWhere(['like', '`item`.`color`', $this->color])
+            ->andFilterWhere(['like', '`item`.`status`', $this->status]);
 
         return $dataProvider;
     }

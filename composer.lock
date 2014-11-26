@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "655b8982e3bf0305eb99b90a0cef8a3e",
+    "hash": "e91aaf6655a941b8910db9dae74c2765",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -102,16 +102,16 @@
         },
         {
             "name": "bower-asset/jquery.inputmask",
-            "version": "3.1.38",
+            "version": "3.1.41",
             "source": {
                 "type": "git",
                 "url": "https://github.com/RobinHerbots/jquery.inputmask.git",
-                "reference": "464cddbdea65411896468f40321e68abcc75a34c"
+                "reference": "9c2c236cf29b3e78b635f2ba3c588174336d9228"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/RobinHerbots/jquery.inputmask/zipball/464cddbdea65411896468f40321e68abcc75a34c",
-                "reference": "464cddbdea65411896468f40321e68abcc75a34c",
+                "url": "https://api.github.com/repos/RobinHerbots/jquery.inputmask/zipball/9c2c236cf29b3e78b635f2ba3c588174336d9228",
+                "reference": "9c2c236cf29b3e78b635f2ba3c588174336d9228",
                 "shasum": ""
             },
             "require": {
@@ -313,16 +313,16 @@
         },
         {
             "name": "kartik-v/bootstrap-fileinput",
-            "version": "v2.8.0",
+            "version": "v2.9.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/kartik-v/bootstrap-fileinput.git",
-                "reference": "9273a75bcb6d447f1f1c92594b78b1b19a08b4b7"
+                "reference": "6483dc80d90bdfcca54b89eaa13f72d92e073efb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kartik-v/bootstrap-fileinput/zipball/9273a75bcb6d447f1f1c92594b78b1b19a08b4b7",
-                "reference": "9273a75bcb6d447f1f1c92594b78b1b19a08b4b7",
+                "url": "https://api.github.com/repos/kartik-v/bootstrap-fileinput/zipball/6483dc80d90bdfcca54b89eaa13f72d92e073efb",
+                "reference": "6483dc80d90bdfcca54b89eaa13f72d92e073efb",
                 "shasum": ""
             },
             "type": "library",
@@ -354,7 +354,51 @@
                 "preview",
                 "upload"
             ],
-            "time": "2014-11-13 18:14:54"
+            "time": "2014-11-23 11:00:15"
+        },
+        {
+            "name": "kartik-v/bootstrap-popover-x",
+            "version": "v1.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/kartik-v/bootstrap-popover-x.git",
+                "reference": "f63c36594e9e6a7a1d8cd9111be424378d8e1b5f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/kartik-v/bootstrap-popover-x/zipball/f63c36594e9e6a7a1d8cd9111be424378d8e1b5f",
+                "reference": "f63c36594e9e6a7a1d8cd9111be424378d8e1b5f",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "kartik\\plugins\\popover\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD 3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Kartik Visweswaran",
+                    "email": "kartikv2@gmail.com",
+                    "homepage": "http://www.krajee.com/"
+                }
+            ],
+            "description": "Bootstrap Popover Extended - Popover with modal behavior, styling enhancements and more.",
+            "homepage": "https://github.com/kartik-v/bootstrap-popover-x",
+            "keywords": [
+                "bootstrap",
+                "extended",
+                "jquery",
+                "modal",
+                "modal-popover",
+                "popover",
+                "popover-x"
+            ],
+            "time": "2014-11-24 09:34:14"
         },
         {
             "name": "kartik-v/bootstrap-star-rating",
@@ -438,6 +482,49 @@
                 "select"
             ],
             "time": "2014-11-08 13:25:26"
+        },
+        {
+            "name": "kartik-v/mpdf",
+            "version": "v1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/kartik-v/mpdf.git",
+                "reference": "46148a9d43b88f3832f6bc348b6a55d9a482187f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/kartik-v/mpdf/zipball/46148a9d43b88f3832f6bc348b6a55d9a482187f",
+                "reference": "46148a9d43b88f3832f6bc348b6a55d9a482187f",
+                "shasum": ""
+            },
+            "require": {
+                "ext-mbstring": "*",
+                "php": ">=4.3.10"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "mpdf.php",
+                    "classes"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-1.0+"
+            ],
+            "authors": [
+                {
+                    "name": "Ian N Back"
+                }
+            ],
+            "description": "A PHP class to generate PDF files from HTML with Unicode/UTF-8 and CJK support. This is a fork of the official mPDF library.",
+            "homepage": "http://www.mpdf1.com/mpdf/index.php",
+            "keywords": [
+                "pdf",
+                "php",
+                "utf-8"
+            ],
+            "time": "2014-11-08 13:41:48"
         },
         {
             "name": "kartik-v/yii2-builder",
@@ -535,17 +622,65 @@
             "time": "2014-11-10 14:04:10"
         },
         {
+            "name": "kartik-v/yii2-editable",
+            "version": "v1.6.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/kartik-v/yii2-editable.git",
+                "reference": "29ef26d5670997e18711963745b3b78094fa249f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/kartik-v/yii2-editable/zipball/29ef26d5670997e18711963745b3b78094fa249f",
+                "reference": "29ef26d5670997e18711963745b3b78094fa249f",
+                "shasum": ""
+            },
+            "require": {
+                "kartik-v/yii2-krajee-base": "*",
+                "kartik-v/yii2-popover-x": "*"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "kartik\\editable\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD 3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Kartik Visweswaran",
+                    "email": "kartikv2@gmail.com",
+                    "homepage": "http://www.krajee.com/"
+                }
+            ],
+            "description": "An enhanced editable widget for Yii 2.0 that allows easy editing of displayed data with numerous configuration possibilities.",
+            "homepage": "https://github.com/kartik-v/yii2-editable",
+            "keywords": [
+                "bootstrap",
+                "editable",
+                "input",
+                "jquery",
+                "popover",
+                "popover-x",
+                "widget"
+            ],
+            "time": "2014-11-22 11:49:12"
+        },
+        {
             "name": "kartik-v/yii2-grid",
             "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/kartik-v/yii2-grid.git",
-                "reference": "4a2eb1d92bdfa901d5622d4dc18893c0a26b01fe"
+                "reference": "eecda0592347881f0ad6506c819679c9f4edef67"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kartik-v/yii2-grid/zipball/4a2eb1d92bdfa901d5622d4dc18893c0a26b01fe",
-                "reference": "4a2eb1d92bdfa901d5622d4dc18893c0a26b01fe",
+                "url": "https://api.github.com/repos/kartik-v/yii2-grid/zipball/eecda0592347881f0ad6506c819679c9f4edef67",
+                "reference": "eecda0592347881f0ad6506c819679c9f4edef67",
                 "shasum": ""
             },
             "require": {
@@ -576,7 +711,7 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2014-11-14 08:48:40"
+            "time": "2014-11-22 11:54:39"
         },
         {
             "name": "kartik-v/yii2-helpers",
@@ -630,12 +765,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/kartik-v/yii2-krajee-base.git",
-                "reference": "175e65fd84dbca518155bb978986b8ac3ed428ba"
+                "reference": "0c4d3907f9b47036696d22ed8b8b2e0af5e6a2e7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kartik-v/yii2-krajee-base/zipball/175e65fd84dbca518155bb978986b8ac3ed428ba",
-                "reference": "175e65fd84dbca518155bb978986b8ac3ed428ba",
+                "url": "https://api.github.com/repos/kartik-v/yii2-krajee-base/zipball/0c4d3907f9b47036696d22ed8b8b2e0af5e6a2e7",
+                "reference": "0c4d3907f9b47036696d22ed8b8b2e0af5e6a2e7",
                 "shasum": ""
             },
             "require": {
@@ -668,20 +803,20 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2014-11-14 19:10:10"
+            "time": "2014-11-25 07:58:40"
         },
         {
             "name": "kartik-v/yii2-money",
-            "version": "v1.1.0",
+            "version": "v1.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/kartik-v/yii2-money.git",
-                "reference": "492f4239b2616c4afd3ee41b12547907cb643d7b"
+                "reference": "70e7275a7015fabc9d9428276242862df936c2e2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kartik-v/yii2-money/zipball/492f4239b2616c4afd3ee41b12547907cb643d7b",
-                "reference": "492f4239b2616c4afd3ee41b12547907cb643d7b",
+                "url": "https://api.github.com/repos/kartik-v/yii2-money/zipball/70e7275a7015fabc9d9428276242862df936c2e2",
+                "reference": "70e7275a7015fabc9d9428276242862df936c2e2",
                 "shasum": ""
             },
             "require": {
@@ -718,20 +853,115 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2014-11-10 18:02:45"
+            "time": "2014-11-25 09:21:12"
         },
         {
-            "name": "kartik-v/yii2-widget-activeform",
-            "version": "v1.1.0",
+            "name": "kartik-v/yii2-mpdf",
+            "version": "v1.0.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/kartik-v/yii2-widget-activeform.git",
-                "reference": "d823756adf75f0973e6ace7c2429e6be628588ff"
+                "url": "https://github.com/kartik-v/yii2-mpdf.git",
+                "reference": "4599a1d95d7e0afb3279322e302717b7e4f52dd3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kartik-v/yii2-widget-activeform/zipball/d823756adf75f0973e6ace7c2429e6be628588ff",
-                "reference": "d823756adf75f0973e6ace7c2429e6be628588ff",
+                "url": "https://api.github.com/repos/kartik-v/yii2-mpdf/zipball/4599a1d95d7e0afb3279322e302717b7e4f52dd3",
+                "reference": "4599a1d95d7e0afb3279322e302717b7e4f52dd3",
+                "shasum": ""
+            },
+            "require": {
+                "kartik-v/mpdf": "*"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "kartik\\mpdf\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD 3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Kartik Visweswaran",
+                    "email": "kartikv2@gmail.com",
+                    "homepage": "http://www.krajee.com/"
+                }
+            ],
+            "description": "A Yii2 wrapper component for the mPDF library which generates PDF files from UTF-8 encoded HTML.",
+            "homepage": "https://github.com/kartik-v/yii2-mpdf",
+            "keywords": [
+                "component",
+                "extension",
+                "html",
+                "mpdf",
+                "pdf",
+                "utf8",
+                "yii2"
+            ],
+            "time": "2014-11-10 18:09:37"
+        },
+        {
+            "name": "kartik-v/yii2-popover-x",
+            "version": "v1.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/kartik-v/yii2-popover-x.git",
+                "reference": "b1c458338a315d047b74356532563722ce9e29c6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/kartik-v/yii2-popover-x/zipball/b1c458338a315d047b74356532563722ce9e29c6",
+                "reference": "b1c458338a315d047b74356532563722ce9e29c6",
+                "shasum": ""
+            },
+            "require": {
+                "kartik-v/bootstrap-popover-x": "*",
+                "kartik-v/yii2-krajee-base": "*"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "kartik\\popover\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD 3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Kartik Visweswaran",
+                    "email": "kartikv2@gmail.com",
+                    "homepage": "http://www.krajee.com/"
+                }
+            ],
+            "description": "An extended bootstrap 3.0 popover widget which combines both the bootstrap popover and modal features and includes various new styling enhancements.",
+            "homepage": "https://github.com/kartik-v/yii2-popover-x",
+            "keywords": [
+                "bootstrap",
+                "extended",
+                "jquery",
+                "modal",
+                "modal-popover",
+                "popover",
+                "popover-x"
+            ],
+            "time": "2014-11-25 09:26:09"
+        },
+        {
+            "name": "kartik-v/yii2-widget-activeform",
+            "version": "v1.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/kartik-v/yii2-widget-activeform.git",
+                "reference": "33399c3c44141f5a9e013e9829402d2ca6642bdf"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/kartik-v/yii2-widget-activeform/zipball/33399c3c44141f5a9e013e9829402d2ca6642bdf",
+                "reference": "33399c3c44141f5a9e013e9829402d2ca6642bdf",
                 "shasum": ""
             },
             "require": {
@@ -765,7 +995,7 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2014-11-16 05:20:59"
+            "time": "2014-11-26 10:04:45"
         },
         {
             "name": "kartik-v/yii2-widget-affix",
@@ -1408,16 +1638,16 @@
         },
         {
             "name": "kartik-v/yii2-widget-switchinput",
-            "version": "v1.0.0",
+            "version": "v1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/kartik-v/yii2-widget-switchinput.git",
-                "reference": "8e06c83bd3f9879e6fe96d2fac32de77f1bc0f2b"
+                "reference": "318973fcafa46968e0d2aa6cd510806dc4ef25f0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kartik-v/yii2-widget-switchinput/zipball/8e06c83bd3f9879e6fe96d2fac32de77f1bc0f2b",
-                "reference": "8e06c83bd3f9879e6fe96d2fac32de77f1bc0f2b",
+                "url": "https://api.github.com/repos/kartik-v/yii2-widget-switchinput/zipball/318973fcafa46968e0d2aa6cd510806dc4ef25f0",
+                "reference": "318973fcafa46968e0d2aa6cd510806dc4ef25f0",
                 "shasum": ""
             },
             "require": {
@@ -1454,7 +1684,7 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2014-11-08 20:25:50"
+            "time": "2014-11-24 07:23:51"
         },
         {
             "name": "kartik-v/yii2-widget-timepicker",

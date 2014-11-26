@@ -26,7 +26,9 @@
         "kartik-v/yii2-builder": "dev-master",
         "kartik-v/yii2-helpers": "dev-master",
         "kartik-v/yii2-detail-view": "*",
-        "kartik-v/yii2-money": "*"
+        "kartik-v/yii2-money": "*",
+        "kartik-v/yii2-mpdf": "*",
+        "kartik-v/yii2-editable": "*"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "2.*",

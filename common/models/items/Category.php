@@ -112,7 +112,7 @@ class Category extends ActiveRecord
     public function getChildren()
     {
         $children = $this->find()
-            ->andWhere(['and', 'id_parent=:id_parent', 'id!=:id'])
+            ->andWhere(['and', '`category`.`id_parent`=:id_parent', '`category`.`id`!=:id'])
             ->addParams([':id_parent' => $this->id, ':id' => $this->id])->all();
         return $children;
     }
@@ -123,7 +123,7 @@ class Category extends ActiveRecord
     public function getParent()
     {
         return $this->find()
-            ->andWhere(['and', 'id=:id', 'id!=:id2'])
+            ->andWhere(['and', '`category`.`id`=:id', '`category`.`id`!=:id2'])
             ->addParams([':id' => $this->id_parent, ':id2' => $this->id]);
     }
 
@@ -161,7 +161,7 @@ class Category extends ActiveRecord
     public static function getGlobalCategories()
     {
         return self::find()->indexBy('id')
-            ->andWhere('id_parent=:id_parent')
+            ->andWhere('`category`.`id_parent`=:id_parent')
             ->addParams([':id_parent' => self::DEFAULT_PARENT])->all();
     }
 
@@ -196,7 +196,7 @@ class Category extends ActiveRecord
     {
         $current_id = $this->id;
 
-        $search = self::find()->andWhere('id<:id')->
+        $search = self::find()->andWhere('`category`.`id`<:id')->
         addParams([':id' => $current_id])->
         orderBy(['id' => SORT_DESC])->limit(1)->one();
         if (is_null($search)) {
@@ -214,7 +214,7 @@ class Category extends ActiveRecord
     {
         $current_id = $this->id;
 
-        $search = self::find()->andWhere('id>:id')->
+        $search = self::find()->andWhere('`category`.`id`>:id')->
         addParams([':id' => $current_id])->orderBy(['id' => SORT_ASC])->
         limit(1)->one();
         if (is_null($search)) {

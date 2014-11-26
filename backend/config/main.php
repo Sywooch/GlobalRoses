@@ -7,13 +7,14 @@ $params = array_merge(
 );
 
 $components = require(__DIR__ . '/components.php');
+$modules = require(__DIR__ . '/modules.php');
 
 return [
     'id' => 'app-backend',
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'backend\controllers',
     'bootstrap' => ['log'],
-    'modules' => [],
+    'modules' => $modules,
     'homeUrl' => '/admin',
     'components' => $components,
     'params' => $params,

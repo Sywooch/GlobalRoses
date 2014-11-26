@@ -29,5 +29,5 @@ return [
     'Weight' => 'Weight',
     'Available' => 'Available',
     'Status' => 'Status',
-    'Unit Price' => 'Unit Price',
+    'average price {price}' => 'average price {price}',
 ];

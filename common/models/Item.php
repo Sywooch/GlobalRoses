@@ -4,6 +4,7 @@ namespace common\models;
 
 use Yii;
 use \yii\db\ActiveRecord;
+use \yii\helpers\Url;
 use \common\models\items\Category;
 use \common\models\orders\Item as OrderItem;
 use \yii\behaviors\TimestampBehavior;
@@ -38,6 +39,12 @@ use common\components\SingleFileUploadBehavior;
  */
 class Item extends ActiveRecord
 {
+    const STATUS_ON = 1;
+    const STATUS_OFF = 0;
+
+    const AVAILABLE_ON = 1;
+    const AVAILABLE_OFF = 0;
+
     /**
      * @var mixed upload_file the attribute for rendering the file input
      * widget for upload on the form
@@ -59,8 +66,8 @@ class Item extends ActiveRecord
     {
         return [
             [['name', 'stock', 'quantity'], 'required'],
-            [['file', 'file_name_original', 'description', 'status', 'color'], 'string'],
-            [['id_category', 'quantity', 'available', 'deleted', 'created_at', 'updated_at', 'deleted_at'], 'integer'],
+            [['file', 'file_name_original', 'status', 'color'], 'string'],
+            [['id_category', 'quantity', 'stock', 'available', 'deleted', 'created_at', 'updated_at', 'deleted_at'], 'integer'],
             [['height', 'weight', 'unit_price'], 'number'],
             [['name'], 'string', 'max' => 255],
             [['reference'], 'string', 'max' => 50],
@@ -137,11 +144,11 @@ class Item extends ActiveRecord
     {
         $current_id = $this->id;
 
-        $search = self::find()->andWhere('id<:id')->
+        $search = self::find()->andWhere('`item`.`id`<:id')->
         addParams([':id' => $current_id])->
         orderBy(['id' => SORT_DESC])->limit(1)->one();
         if (is_null($search)) {
-            $search = self::find()->andWhere('id!=:id')->
+            $search = self::find()->andWhere('`item`.`id`!=:id')->
             addParams(['id' => $this->id])->orderBy(['id' => SORT_DESC])->
             limit(1)->one();
         }
@@ -156,11 +163,11 @@ class Item extends ActiveRecord
     {
         $current_id = $this->id;
 
-        $search = self::find()->andWhere('id>:id')->
+        $search = self::find()->andWhere('`item`.`id`>:id')->
         addParams([':id' => $current_id])->orderBy(['id' => SORT_ASC])->
         limit(1)->one();
         if (is_null($search)) {
-            $search = self::find()->andWhere('id!=:id')->
+            $search = self::find()->andWhere('`item`.`id`!=:id')->
             addParams(['id' => $this->id])->orderBy(['id' => SORT_ASC])->
             limit(1)->one();
         }
@@ -171,20 +178,70 @@ class Item extends ActiveRecord
         return $search->id;
     }
 
+    /*--------------------------------------------------------------------------
+     * File methods - Start
+     -------------------------------------------------------------------------*/
     public function getTmpFolderPath()
     {
-        return Yii::$app->basePath . '/uploads/image/item/tmp/';
+        return sprintf('%s/uploads/image/item/tmp/', rtrim(Yii::getAlias('@webroot'), '/\\'));
     }
 
     public function getFolderPath()
     {
         return ($this->isNewRecord)
             ? $this->getTmpFolderPath()
-            : sprintf(Yii::$app->basePath . '/uploads/image/item/%d/', $this->id);
+            : sprintf('%s/uploads/image/item/%d/', rtrim(Yii::getAlias('@webroot'), '/\\'), $this->id);
     }
 
     public function getFilePath()
     {
         return $this->getFolderPath() . $this->file;
     }
+
+    public function getFileUrl()
+    {
+        return Url::to(sprintf('@web/uploads/image/item/%d/%s', $this->id, $this->file));
+    }
+
+    public function fileExists()
+    {
+        $file = $this->getFilePath();
+        return (file_exists($file) && is_file($file));
+    }
+
+    /*--------------------------------------------------------------------------
+     * File methods - End
+     -------------------------------------------------------------------------*/
+
+    /*--------------------------------------------------------------------------
+     * Color methods - Start
+     -------------------------------------------------------------------------*/
+    public static function getUsedColor($batch = 0)
+    {
+        $q_colors = self::find()->select('color')->
+        andWhere(['and', 'color IS NOT NULL', 'color != ""'])->
+        addGroupBy('color')->asArray();
+        $rs = [];
+
+        if ($batch > 0) {
+            foreach ($q_colors->batch($batch) as $colors) {
+                if (count($colors) > 0) {
+                    foreach ($colors as $c) {
+                        $rs[] = $c['color'];
+                    }
+                }
+            }
+        } else {
+            $colors = $q_colors->all();
+            if (count($colors) > 0) {
+                foreach ($colors as $c) {
+                    $rs[] = $c['color'];
+                }
+            }
+        }
+        return $rs;
+    }
+    /*--------------------------------------------------------------------------
+     * Color methods - End
+     -------------------------------------------------------------------------*/
 }

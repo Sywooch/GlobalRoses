@@ -1,7 +1,7 @@
 <?php
 
 use yii\helpers\Html;
-use yii\widgets\DetailView;
+use kartik\detail\DetailView;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Item */
@@ -23,12 +23,15 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="box-body">
         <?= DetailView::widget([
             'model' => $model,
+            'condensed' => true,
+            'hover' => true,
+            'mode' => DetailView::MODE_VIEW,
+            'panel' => [
+                'heading' => 'Book # ' . $model->id,
+                'type' => DetailView::TYPE_INFO,
+            ],
             'attributes' => [
                 'name',
-                'name',
-                'reference',
-                'file:ntext',
-                'id_category',
                 'quantity',
                 'stock',
                 'height',
@@ -37,23 +40,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'available',
                 'status',
                 'unit_price',
-                [
-                    'attribute' => 'created_at',
-                    'format' => [
-                        'Datetime',
-                        'type' => 'dd/MM/YYYY HH:mm'
-                    ]
-                    ,
-                ],
-                [
-                    'attribute' => 'updated_at',
-                    'format' => [
-                        'Datetime',
-                        'type' => 'dd/MM/YYYY HH:mm'
-                    ]
-                    ,
-                ]
-            ],
+            ]
         ]) ?>
     </div>
     <div class="box-footer">

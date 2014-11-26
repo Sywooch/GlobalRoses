@@ -35,6 +35,7 @@ class SingleFileUploadBehavior extends AttributeBehavior
     {
         return [
             BaseActiveRecord::EVENT_AFTER_INSERT => 'upload',
+            BaseActiveRecord::EVENT_BEFORE_UPDATE => 'check_update',
         ];
     }
 
@@ -44,6 +45,7 @@ class SingleFileUploadBehavior extends AttributeBehavior
         if ($upload_file == null) {
             return true;
         }
+
         $original_name = $upload_file->name;
         $ext = end(explode('.', $original_name));
 
@@ -61,5 +63,18 @@ class SingleFileUploadBehavior extends AttributeBehavior
             return true;
         }
         return false;
+    }
+
+    public function check_update($event)
+    {
+        $upload_file = $this->owner->{$this->attributeFileTmp};
+        if ($upload_file == false) {
+            return true;
+        }
+
+        $oldFilePath = $this->owner->getFilePath();
+        $upload = $this->upload($event);
+        @unlink($oldFilePath);
+        return $upload;
     }
 }
