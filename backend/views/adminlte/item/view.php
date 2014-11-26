@@ -1,6 +1,6 @@
 <?php
 
-use yii\helpers\Html;
+use \kartik\helpers\Html;
 use kartik\detail\DetailView;
 
 /* @var $this yii\web\View */
@@ -10,39 +10,96 @@ use kartik\detail\DetailView;
 
 $this->title = Yii::t('item', 'Items');
 $this->params['breadcrumbs'][] = $this->title;
+$image_url = ($model->fileExists())
+    ? $model->getFileUrl()
+    : 'http://placehold.it/212x212';
 ?>
 <div class="box">
     <div class="box-header">
         <i class="fa fa-ellipsis-v"></i>
-
         <h3 class="box-title"><?= Yii::t('item',
                 'View item {item}',
                 ['item' => $model->name]) ?></h3>
     </div>
     <!-- /.box-header -->
-    <div class="box-body">
-        <?= DetailView::widget([
-            'model' => $model,
-            'condensed' => true,
-            'hover' => true,
-            'mode' => DetailView::MODE_VIEW,
-            'panel' => [
-                'heading' => 'Book # ' . $model->id,
-                'type' => DetailView::TYPE_INFO,
-            ],
-            'attributes' => [
-                'name',
-                'quantity',
-                'stock',
-                'height',
-                'weight',
-                'color',
-                'available',
-                'status',
-                'unit_price',
-            ]
-        ]) ?>
+    <div class="row">
+        <div class="col-sm-2">
+            <?= Html::img($image_url, [
+                'class' => 'img-thumbnail'
+            ]); ?>
+        </div>
+        <div class="col-sm-10">
+            <?= DetailView::widget([
+                'model' => $model,
+                'condensed' => true,
+                'hover' => true,
+                'mode' => DetailView::MODE_VIEW,
+                'panel' => [
+                    'heading' => 'Book # ' . $model->id,
+                    'type' => DetailView::TYPE_INFO,
+                ],
+                'attributes' => [
+                    [
+                        'attribute' => 'reference',
+                        'format' => 'raw',
+                        'value' => '<kbd>' . $model->reference . '</kbd>',
+                        'displayOnly' => true
+                    ],
+                    'attribute' => 'name',
+                    [
+                        'attribute' => 'color',
+                        'format' => 'raw',
+                        'value' => "<span class='badge' style='background-color:{$model->color}'>&nbsp;</span> <code>{$model->color}</code>",
+                        'type' => DetailView::INPUT_COLOR,
+                        'inputWidth' => '40%', // control your input size
+                    ],
+                    [
+                        'attribute' => 'status',
+                        'format' => 'raw',
+                        'value' => $model->status ?
+                            '<span class="label label-success">Yes</span>' :
+                            '<span class="label label-danger">No</span>',
+                        'type' => DetailView::INPUT_SWITCH
+                    ],
+                    [
+                        'attribute' => 'available',
+                        'format' => 'raw',
+                        'value' => $model->status ?
+                            '<span class="label label-success">Yes</span>' :
+                            '<span class="label label-danger">No</span>',
+                        'type' => DetailView::INPUT_SWITCH
+                    ],
+                    [
+                        'attribute' => 'quantity',
+                        'format' => 'integer',
+                        'inputWidth' => '20%'
+                    ],
+                    [
+                        'attribute' => 'stock',
+                        'format' => 'integer',
+                        'inputWidth' => '20%'
+                    ],
+                    [
+                        'attribute' => 'height',
+                        'format' => ['decimal', 2],
+                        'inputWidth' => '20%'
+                    ],
+                    [
+                        'attribute' => 'weight',
+                        'format' => ['decimal', 2],
+                        'inputWidth' => '20%'
+                    ],
+                    [
+                        'attribute' => 'unit_price',
+                        'format' => ['decimal', 2],
+                        'inputWidth' => '20%'
+                    ],
+                ]
+            ]) ?>
+        </div>
     </div>
+
+</div>
     <div class="box-footer">
         <?php
         echo $previousButton;
@@ -60,5 +117,4 @@ $this->params['breadcrumbs'][] = $this->title;
             ]);
         echo $nextButton;
         ?>
-    </div>
 </div><!-- /.box -->
