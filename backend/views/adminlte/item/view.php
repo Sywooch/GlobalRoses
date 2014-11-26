@@ -14,14 +14,6 @@ $image_url = ($model->fileExists())
     ? $model->getFileUrl()
     : 'http://placehold.it/212x212';
 ?>
-<div class="box">
-    <div class="box-header">
-        <i class="fa fa-ellipsis-v"></i>
-        <h3 class="box-title"><?= Yii::t('item',
-                'View item {item}',
-                ['item' => $model->name]) ?></h3>
-    </div>
-    <!-- /.box-header -->
     <div class="row">
         <div class="col-sm-2">
             <?= Html::img($image_url, [
@@ -35,8 +27,9 @@ $image_url = ($model->fileExists())
                 'hover' => true,
                 'mode' => DetailView::MODE_VIEW,
                 'panel' => [
-                    'heading' => 'Book # ' . $model->id,
-                    'type' => DetailView::TYPE_INFO,
+                    'heading' => '<i class="fa fa-ellipsis-v"></i>&nbsp;<span>' .
+                        Yii::t('item', 'View item {item}', ['item' => $model->name]) . '</span>',
+                    'type' => DetailView::TYPE_DEFAULT,
                 ],
                 'attributes' => [
                     [
@@ -98,8 +91,6 @@ $image_url = ($model->fileExists())
             ]) ?>
         </div>
     </div>
-
-</div>
     <div class="box-footer">
         <?php
         echo $previousButton;
@@ -117,4 +108,4 @@ $image_url = ($model->fileExists())
             ]);
         echo $nextButton;
         ?>
-</div><!-- /.box -->
+    </div><!-- /.box -->
