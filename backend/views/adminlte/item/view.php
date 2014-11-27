@@ -1,7 +1,8 @@
 <?php
 
 use \kartik\helpers\Html;
-use kartik\detail\DetailView;
+use common\components\DetailView;
+use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Item */
@@ -25,6 +26,23 @@ $image_url = ($model->fileExists())
                 'model' => $model,
                 'condensed' => true,
                 'hover' => true,
+                'deleteOptions' => [
+                    'data' => [
+                        'confirm' => Yii::t('item', 'Are you sure you want to delete this item?'),
+                        'method' => 'post',
+                    ],
+                    'url' => Url::to(['delete', 'id' => $model->id])
+                ],
+                'previousOptions' => [
+                    'url' => Url::to(['view', 'id' => $model->id - 1])
+                ],
+                'nextOptions' => [
+                    'url' => Url::to(['view', 'id' => $model->id + 1])
+                ],
+                'updateOptions' => [
+                    'url' => Url::to(['update', 'id' => $model->id])
+                ],
+//                'enableEditMode' => false,
                 'mode' => DetailView::MODE_VIEW,
                 'panel' => [
                     'heading' => '<i class="fa fa-ellipsis-v"></i>&nbsp;<span>' .

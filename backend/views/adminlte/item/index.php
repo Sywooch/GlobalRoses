@@ -44,6 +44,12 @@ $gridColumns = [
     ],
     [
         'attribute' => 'name',
+        'format' => 'raw',
+        'value' => function ($model, $key, $index, $widget) {
+            return Html::a($model->name, ['view', 'id' => $model->id], [
+                'data-pjax' => 0,
+            ]);
+        },
         'pageSummary' => Yii::t('common/application', 'Total'),
         'vAlign' => 'middle',
         'headerOptions' => ['class' => 'kv-sticky-column'],
@@ -170,8 +176,8 @@ $gridColumns = [
     ]
 ];
 echo GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
+    'dataProvider' => $dataProvider,
+    'filterModel' => $searchModel,
     'columns' => $gridColumns,
     'bordered' => true,
     'striped' => true,
@@ -179,7 +185,7 @@ echo GridView::widget([
     'responsive' => true,
     'hover' => false,
     'showPageSummary' => true,
-    'pjax' => true, // pjax is set to always true for this demo
+    'pjax' => true,
     // set your toolbar
     'toolbar' => [
         ['content' =>
@@ -197,27 +203,11 @@ echo GridView::widget([
                     'class' => 'btn btn-default',
                     'title' => Yii::t('kvgrid', 'Reset Grid')
                 ])
-        ],
-        '{export}',
+        ]
     ],
     'panel' => [
         'type' => GridView::TYPE_DEFAULT,
         'heading' => false,
-    ],
-    // set export properties
-    'export' => [
-        'fontAwesome' => true
-    ],
-    'exportConfig' => [
-        GridView::CSV => [
-            'label' => Yii::t('kvgrid', 'CSV'),
-        ],
-        GridView::EXCEL => [
-            'label' => Yii::t('kvgrid', 'Excel'),
-        ],
-        GridView::PDF => [
-            'label' => Yii::t('kvgrid', 'PDF'),
-        ],
     ]
 ]);
 ?>
