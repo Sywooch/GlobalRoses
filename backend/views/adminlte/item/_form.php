@@ -204,24 +204,35 @@ use \common\models\items\Category;
         </div>
     </div>
     <div class="box-footer">
-        <?php
-        if ($model->isNewRecord) {
-            echo Html::submitButton(
-                Yii::t('common/application', 'Create'),
-                ['class' => 'btn btn-success']);
-        } else {
-            if (isset($previousButton)) {
-                echo $previousButton;
+        <div class="btn-group" role="group">
+            <?php
+            if ($model->isNewRecord) {
+                echo Html::submitButton(
+                    Yii::t('common/application', 'Create'),
+                    ['class' => 'btn btn-success  btn-sm']);
+            } else {
+                if (isset($previousButton)) {
+                    echo $previousButton;
+                }
+                echo Html::a(
+                    '<i class="glyphicon glyphicon-eye-open"></i>',
+                    ['view', 'id' => $model->id],
+                    [
+                        'class' => 'btn btn-success  btn-sm',
+                        'title' => Yii::t('common/application', 'View')
+                    ]);
+                echo Html::submitButton(
+                    '<i class="glyphicon glyphicon-floppy-disk"></i>',
+                    [
+                        'class' => 'btn btn-primary  btn-sm',
+                        'title' => Yii::t('common/application', 'Update')
+                    ]);
+                if (isset($nextButton)) {
+                    echo $nextButton;
+                }
             }
-            echo Html::submitButton(
-                Yii::t('common/application', 'Update'),
-                ['class' => 'btn btn-primary']);
-
-            if (isset($nextButton)) {
-                echo $nextButton;
-            }
-        }
-        ?>
+            ?>
+        </div>
     </div>
     <?php ActiveForm::end(); ?>
 </div>

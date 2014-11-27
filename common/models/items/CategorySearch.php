@@ -19,7 +19,7 @@ class CategorySearch extends Category
     public function rules()
     {
         return [
-            [['id', 'created_at'], 'integer'],
+            [['id', 'id_parent', 'created_at'], 'integer'],
             [['name'], 'safe'],
         ];
     }
@@ -56,8 +56,9 @@ class CategorySearch extends Category
         }
 
         $query->andFilterWhere([
-            'id' => $this->id,
-            'created_at' => $this->created_at,
+            '`category`.`id`' => $this->id,
+            '`category`.`created_at`' => $this->created_at,
+            '`category`.`id_parent`' => $this->id_parent,
         ]);
 
         $query->andFilterWhere(['like', 'name', $this->name]);

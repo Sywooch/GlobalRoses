@@ -17,7 +17,7 @@ abstract class Backend extends Controller
     {
         $prev = $model->getPrevious();
         $options = [
-            'class' => 'btn btn-default',
+            'class' => 'btn btn-default btn-sm',
             'title' => Yii::t('common/application', 'previous')
         ];
         if (is_null($prev)) {
@@ -32,7 +32,7 @@ abstract class Backend extends Controller
     {
         $next = $model->getNext();
         $options = [
-            'class' => 'btn btn-default',
+            'class' => 'btn btn-default btn-sm',
             'title' => Yii::t('common/application', 'next')
         ];
         if (is_null($next)) {

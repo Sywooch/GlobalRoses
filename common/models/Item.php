@@ -140,16 +140,19 @@ class Item extends ActiveRecord
         return $this->hasMany(OrderItem::className(), ['id_item' => 'id']);
     }
 
+    /*--------------------------------------------------------------------------
+     * Iteration methods - Start
+     -------------------------------------------------------------------------*/
     public function getPrevious()
     {
         $current_id = $this->id;
 
         $search = self::find()->andWhere('`item`.`id`<:id')->
         addParams([':id' => $current_id])->
-        orderBy(['id' => SORT_DESC])->limit(1)->one();
+        orderBy(['`item`.`id`' => SORT_DESC])->limit(1)->one();
         if (is_null($search)) {
             $search = self::find()->andWhere('`item`.`id`!=:id')->
-            addParams(['id' => $this->id])->orderBy(['id' => SORT_DESC])->
+            addParams(['id' => $this->id])->orderBy(['`item`.`id`' => SORT_DESC])->
             limit(1)->one();
         }
 
@@ -164,11 +167,11 @@ class Item extends ActiveRecord
         $current_id = $this->id;
 
         $search = self::find()->andWhere('`item`.`id`>:id')->
-        addParams([':id' => $current_id])->orderBy(['id' => SORT_ASC])->
+        addParams([':id' => $current_id])->orderBy(['`item`.`id`' => SORT_ASC])->
         limit(1)->one();
         if (is_null($search)) {
             $search = self::find()->andWhere('`item`.`id`!=:id')->
-            addParams(['id' => $this->id])->orderBy(['id' => SORT_ASC])->
+            addParams(['id' => $this->id])->orderBy(['`item`.`id`' => SORT_ASC])->
             limit(1)->one();
         }
 
@@ -177,6 +180,9 @@ class Item extends ActiveRecord
         }
         return $search->id;
     }
+    /*--------------------------------------------------------------------------
+     * Iteration methods - Start
+     -------------------------------------------------------------------------*/
 
     /*--------------------------------------------------------------------------
      * File methods - Start

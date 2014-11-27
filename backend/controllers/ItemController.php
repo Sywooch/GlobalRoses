@@ -56,9 +56,7 @@ class ItemController extends Backend
         $model = $this->findModel($id);
         $this->content_header = Yii::t('common/application', 'content_header_' . __FUNCTION__);
         return $this->render('view', [
-            'model' => $model,
-            'previousButton' => $this->previousButton($model, 'view'),
-            'nextButton' => $this->nextButton($model, 'view'),
+            'model' => $model
         ]);
     }
 

@@ -5,10 +5,7 @@ namespace common\components;
 use Yii;
 use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
-use yii\helpers\Json;
 use kartik\helpers\Html;
-use yii\base\InvalidConfigException;
-use kartik\base\Config;
 
 class DetailView extends \kartik\detail\DetailView
 {
@@ -65,6 +62,11 @@ class DetailView extends \kartik\detail\DetailView
      *    Defaults to '<span class="glyphicon glyphicon-step-forward"></span>'.
      */
     public $nextOptions = [];
+
+    /**
+     * @var array the HTML attributes for the container displaying the VIEW mode buttons.
+     */
+    public $viewButtonsContainer = ['class' => 'btn-group', 'role' => 'group'];
 
     public function init()
     {
@@ -144,7 +146,7 @@ class DetailView extends \kartik\detail\DetailView
         ]);
         Html::addCssClass($this->viewButtonsContainer, 'kv-buttons-1');
         echo strtr($output, [
-            '{buttons}' => Html::tag('span', $this->renderButtons(1), $this->viewButtonsContainer)
+            '{buttons}' => Html::tag('div', $this->renderButtons(1), $this->viewButtonsContainer)
         ]);
         ActiveForm::end();
     }
@@ -219,16 +221,16 @@ class DetailView extends \kartik\detail\DetailView
     protected function renderButton($type)
     {
         if ($type === 'previous') {
-            return $this->getDefaultButton('previous', '<span class="glyphicon glyphicon-step-backward"></span>', 'Previous', $this->previousOptions);
+            return $this->getDefaultButton('previous', '<i class="glyphicon glyphicon-step-backward"></i>', 'Previous', $this->previousOptions);
         }
         if ($type === 'update') {
-            return $this->getDefaultButton('update', '<span class="glyphicon glyphicon-pencil"></span>', 'Edit', $this->updateOptions);
+            return $this->getDefaultButton('update', '<i class="glyphicon glyphicon-pencil"></i>', 'Edit', $this->updateOptions);
         }
         if ($type === 'delete') {
-            return $this->getDefaultButton('delete', '<span class="glyphicon glyphicon-trash"></span>', 'Delete', $this->deleteOptions);
+            return $this->getDefaultButton('delete', '<i class="glyphicon glyphicon-trash"></i>', 'Delete', $this->deleteOptions);
         }
         if ($type === 'next') {
-            return $this->getDefaultButton('next', '<span class="glyphicon glyphicon-step-forward"></span>', 'Next', $this->nextOptions);
+            return $this->getDefaultButton('next', '<i class="glyphicon glyphicon-step-forward"></i>', 'Next', $this->nextOptions);
         }
     }
 }

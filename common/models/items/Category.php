@@ -120,6 +120,14 @@ class Category extends ActiveRecord
     /**
      * @return \common\models\items\Category
      */
+    public function getIdParent()
+    {
+        return $this->hasOne(self::className(), ['id' => 'id_parent']);
+    }
+
+    /**
+     * @return \common\models\items\Category
+     */
     public function getParent()
     {
         return $this->find()

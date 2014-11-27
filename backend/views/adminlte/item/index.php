@@ -18,7 +18,6 @@ $this->title = Yii::t('item', 'Items');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="index">
-<?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 <?php
 
 $colors = Item::getUsedColor(5);
@@ -52,8 +51,6 @@ $gridColumns = [
         },
         'pageSummary' => Yii::t('common/application', 'Total'),
         'vAlign' => 'middle',
-        'headerOptions' => ['class' => 'kv-sticky-column'],
-        'contentOptions' => ['class' => 'kv-sticky-column'],
     ],
     [
         'attribute' => 'id_category',
