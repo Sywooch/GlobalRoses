@@ -12,12 +12,15 @@ use yii\web\BadRequestHttpException;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
+use frontend\models\ItemSearchForm;
 
 /**
  * Site controller
  */
 class SiteController extends Controller
 {
+    public $item_search_model;
+
     /**
      * @inheritdoc
      */
@@ -68,6 +71,7 @@ class SiteController extends Controller
     public function actionIndex()
     {
         $this->layout = 'carousel';
+        $this->item_search_model = new ItemSearchForm();
         return $this->render('index');
     }
 
