@@ -1,44 +1,44 @@
 <?php
 
 use yii\helpers\Html;
-use yii\widgets\DetailView;
+use common\components\DetailView;
+use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\User */
 
-$this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('user', 'Users'), 'url' => ['index']];
+$this->title = Yii::t('user', 'Users');
 $this->params['breadcrumbs'][] = $this->title;
+$this->params['breadcrumbs'][] = $model->username;
 ?>
-<div class="user-view">
-
-    <h1><?= Html::encode($this->title) ?></h1>
-
-    <p>
-        <?= Html::a(Yii::t('user', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a(Yii::t('user', 'Delete'), ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => Yii::t('user', 'Are you sure you want to delete this item?'),
-                'method' => 'post',
+<div class="row">
+    <div class="col-sm-12">
+        <?= DetailView::widget([
+            'model' => $model,
+            'updateOptions' => [
+                'class' => 'btn btn-info btn-xs',
+                'url' => Url::to(['update', 'id' => $model->id])
             ],
+            'mode' => DetailView::MODE_VIEW,
+            'panel' => [
+                'heading' => '<i class="fa fa-ellipsis-v"></i>&nbsp;<span>' .
+                    Yii::t('user', 'View user {username}', ['item' => $model->username]) . '</span>',
+                'type' => DetailView::TYPE_DEFAULT,
+            ],
+            'attributes' => [
+                [
+                    'attribute' => 'username',
+                    'format' => 'raw',
+                    'value' => '<kbd>' . $model->username . '</kbd>',
+                    'displayOnly' => true
+                ],
+                [
+                    'attribute' => 'email',
+                ],
+                [
+                    'attribute' => 'role',
+                ],
+            ]
         ]) ?>
-    </p>
-
-    <?= DetailView::widget([
-        'model' => $model,
-        'attributes' => [
-            'id',
-            'username',
-            'auth_key',
-            'password_hash',
-            'password_reset_token',
-            'email:email',
-            'role',
-            'status',
-            'created_at',
-            'updated_at',
-        ],
-    ]) ?>
-
+    </div>
 </div>

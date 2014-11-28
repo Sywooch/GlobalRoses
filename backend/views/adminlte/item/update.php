@@ -8,7 +8,9 @@ use yii\helpers\Html;
 /* @var $nextButton string */
 
 $this->title = Yii::t('item', 'Items');
-$this->params['breadcrumbs'][] = $this->title;
+$this->params['breadcrumbs'][] = ['label' => $this->title, 'url' => ['index']];
+$this->params['breadcrumbs'][] = $model->name;
+
 ?>
 <div class="box">
     <div class="box-header">

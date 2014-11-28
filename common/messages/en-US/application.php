@@ -26,7 +26,9 @@ return [
     'Search' => 'Search',
     'Reset' => 'Reset',
     'previous' => 'previous',
+    'Previous' => 'Previous',
     'next' => 'next',
+    'Next' => 'Next',
     'Select ...' => 'Select ...',
 
     'Total' => 'Total',

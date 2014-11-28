@@ -6,7 +6,8 @@
 /* @var $nextButton string */
 
 $this->title = Yii::t('items/category', 'Categories');
-$this->params['breadcrumbs'][] = $this->title;
+$this->params['breadcrumbs'][] = ['label' => $this->title, 'url' => ['index']];
+$this->params['breadcrumbs'][] = $model->name;
 ?>
 <div class="box">
     <div class="box-header">

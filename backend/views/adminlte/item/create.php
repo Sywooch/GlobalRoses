@@ -7,7 +7,8 @@ use yii\helpers\Html;
 /* @var $model common\models\Item */
 
 $this->title = Yii::t('item', 'Items');
-$this->params['breadcrumbs'][] = $this->title;
+$this->params['breadcrumbs'][] = ['label' => $this->title, 'url' => ['index']];
+$this->params['breadcrumbs'][] = Yii::t('item', 'new item');
 ?>
 <div class="box">
     <div class="box-header">

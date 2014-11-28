@@ -5,7 +5,8 @@
 
 
 $this->title = Yii::t('items/category', 'Categories');
-$this->params['breadcrumbs'][] = $this->title;
+$this->params['breadcrumbs'][] = ['label' => $this->title, 'url' => ['index']];
+$this->params['breadcrumbs'][] = Yii::t('items/category', 'new item');
 ?>
 <div class="box">
     <div class="box-header">

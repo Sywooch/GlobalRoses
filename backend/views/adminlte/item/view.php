@@ -8,7 +8,9 @@ use yii\helpers\Url;
 /* @var $model common\models\Item */
 
 $this->title = Yii::t('item', 'Items');
-$this->params['breadcrumbs'][] = $this->title;
+$this->params['breadcrumbs'][] = ['label' => $this->title, 'url' => ['index']];
+$this->params['breadcrumbs'][] = $model->name;
+
 $image_url = ($model->fileExists())
     ? $model->getFileUrl()
     : 'http://placehold.it/212x212';

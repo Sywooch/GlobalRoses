@@ -8,7 +8,8 @@ use yii\helpers\Url;
 /* @var $model common\models\items\Category */
 
 $this->title = Yii::t('items/category', 'Categories');
-$this->params['breadcrumbs'][] = $this->title;
+$this->params['breadcrumbs'][] = ['label' => $this->title, 'url' => ['index']];
+$this->params['breadcrumbs'][] = $model->name;
 
 $prev = $model->getPrevious();
 $next = $model->getNext();

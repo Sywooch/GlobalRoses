@@ -31,4 +31,5 @@ return [
     'Available' => 'Available',
     'Status' => 'Status',
     'average price {price}' => 'average price {price}',
+    'new item' => 'new item'
 ];

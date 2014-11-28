@@ -206,7 +206,7 @@ class DetailView extends \kartik\detail\DetailView
             $options['class'] = 'btn btn-xs btn-' . $btnStyle;
         }
         Html::addCssClass($options, 'kv-btn-' . $type);
-        $options = ArrayHelper::merge(['title' => Yii::t('kvdetail', $title)], $options);
+        $options = ArrayHelper::merge(['title' => $title], $options);
 
         $url = ArrayHelper::remove($options, 'url', '#');
         return Html::a($label, $url, $options);
@@ -221,16 +221,24 @@ class DetailView extends \kartik\detail\DetailView
     protected function renderButton($type)
     {
         if ($type === 'previous') {
-            return $this->getDefaultButton('previous', '<i class="glyphicon glyphicon-step-backward"></i>', 'Previous', $this->previousOptions);
+            return $this->getDefaultButton('previous',
+                '<i class="glyphicon glyphicon-step-backward"></i>',
+                Yii::t('common/application', 'Previous'), $this->previousOptions);
         }
         if ($type === 'update') {
-            return $this->getDefaultButton('update', '<i class="glyphicon glyphicon-pencil"></i>', 'Edit', $this->updateOptions);
+            return $this->getDefaultButton('update',
+                '<i class="glyphicon glyphicon-pencil"></i>',
+                Yii::t('common/application', 'Edit'), $this->updateOptions);
         }
         if ($type === 'delete') {
-            return $this->getDefaultButton('delete', '<i class="glyphicon glyphicon-trash"></i>', 'Delete', $this->deleteOptions);
+            return $this->getDefaultButton('delete',
+                '<i class="glyphicon glyphicon-trash"></i>',
+                Yii::t('common/application', 'Delete'), $this->deleteOptions);
         }
         if ($type === 'next') {
-            return $this->getDefaultButton('next', '<i class="glyphicon glyphicon-step-forward"></i>', 'Next', $this->nextOptions);
+            return $this->getDefaultButton('next',
+                '<i class="glyphicon glyphicon-step-forward"></i>',
+                Yii::t('common/application', 'Next'), $this->nextOptions);
         }
     }
 }

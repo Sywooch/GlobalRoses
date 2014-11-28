@@ -13,4 +13,5 @@ return [
     'Select Category' => 'Select Category',
     'id_parent' => 'Parent Category',
     'Parent' => 'Parent',
+    'new item' => 'new category'
 ];
