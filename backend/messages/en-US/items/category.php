@@ -1,6 +1,7 @@
 <?php
 return [
     'title' => 'Category',
+    'Add new' => 'Add new Item',
     'menu-title' => 'Item Categories',
     'Create new category' => 'Create new item category',
     'Edit category {category}' => 'Edit item category "{category}"',

@@ -70,14 +70,14 @@ $next = $model->getNext();
                     'attribute' => 'id_category',
                     'format' => 'raw',
                     'value' => $model->idCategory->name,
-                    'inputWidth' => '40%', // control your input size
+                    'inputWidth' => '40%',
                 ],
                 [
                     'attribute' => 'color',
                     'format' => 'raw',
                     'value' => "<span class='badge' style='background-color:{$model->color}'>&nbsp;</span> <code>{$model->color}</code>",
                     'type' => DetailView::INPUT_COLOR,
-                    'inputWidth' => '40%', // control your input size
+                    'inputWidth' => '40%',
                 ],
                 [
                     'attribute' => 'status',

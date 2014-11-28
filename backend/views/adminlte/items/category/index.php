@@ -68,7 +68,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 Html::a('<i class="glyphicon glyphicon-plus"></i>',
                     Url::to('item/create'),
                     [
-                        'title' => Yii::t('kvgrid', 'Add Book'),
+                        'title' => Yii::t('items/category', 'Add new'),
                         'class' => 'btn btn-success',
                         'data-pjax' => 0,
                     ]) . ' ' .
@@ -77,7 +77,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     [
                         'data-pjax' => 0,
                         'class' => 'btn btn-default',
-                        'title' => Yii::t('kvgrid', 'Reset Grid')
+                        'title' => Yii::t('common/application', 'Reset')
                     ])
             ]
         ],

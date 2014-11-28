@@ -102,7 +102,7 @@ $gridColumns = [
         'attribute' => 'color',
         'value' => function ($model, $key, $index, $widget) {
             if ($model->color == '' || empty($model->color)) {
-                return '(not set)';
+                return Yii::t('common/application', '(not set)');
             }
             return "<span class='badge' style='background-color: {$model->color}'> </span>  <code>" .
             $model->color . '</code>';
@@ -189,7 +189,7 @@ echo GridView::widget([
             Html::a('<i class="glyphicon glyphicon-plus"></i>',
                 Url::to('item/create'),
                 [
-                    'title' => Yii::t('kvgrid', 'Add Book'),
+                    'title' => Yii::t('item', 'Add new'),
                     'class' => 'btn btn-success',
                     'data-pjax' => 0,
                 ]) . ' ' .
@@ -198,7 +198,7 @@ echo GridView::widget([
                 [
                     'data-pjax' => 0,
                     'class' => 'btn btn-default',
-                    'title' => Yii::t('kvgrid', 'Reset Grid')
+                    'title' => Yii::t('common/application', 'Reset')
                 ])
         ]
     ],

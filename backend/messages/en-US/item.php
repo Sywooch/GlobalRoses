@@ -4,6 +4,7 @@ return [
     'menu-title' => 'Item List',
     'Select Category' => 'Select Category',
     'Select Color' => 'Select Color',
+    'Add new' => 'Add new Item',
     'Placeholder: Item name ...' => 'Item name ...',
     'Placeholder: Select image ...' => 'Select image ...',
     'Placeholder: Select category ...' => 'Select Category ...',
