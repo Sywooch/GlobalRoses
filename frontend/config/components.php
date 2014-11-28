@@ -1,5 +1,12 @@
 <?php
 return [
+    'view' => [
+        'theme' => [
+            'pathMap' => [
+                '@app/views' => '@frontend/views/ui-krf'
+            ]
+        ]
+    ],
     'request' => [
         'baseUrl' => '',
     ],

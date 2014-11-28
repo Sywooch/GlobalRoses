@@ -13,21 +13,15 @@ use yii\web\AssetBundle;
  * @author Qiang Xue <qiang.xue@gmail.com>
  * @since 2.0
  */
-class AppAsset extends AssetBundle
+class IE9Asset extends AssetBundle
 {
     public $basePath = '@webroot';
     public $baseUrl = '@web';
-    public $css = [
-        'themes/ui-krf/css/bootstrap-theme.css',
-        'themes/ui-krf/css/owl.carousel.css',
-        'css/site.css',
-    ];
+    public $css = [];
     public $js = [
-        'themes/ui-krf/js/owl.carousel.min.js',
-        'themes/ui-krf/js/app.js',
+        'themes/ui-krf/js/vendor/html5shiv.js',
+        'themes/ui-krf/js/respond.min.js',
     ];
-    public $depends = [
-        'yii\web\YiiAsset',
-        'yii\bootstrap\BootstrapAsset',
-    ];
+    public $jsOptions = ['condition' => 'lte IE9'];
+    public $depends = [];
 }
