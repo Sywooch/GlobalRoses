@@ -2,7 +2,7 @@
 /* @var $this \yii\web\View */
 /* @var $content string */
 
-$this->beginContent('//layouts/main'); ?>
+$this->beginContent('@app/views/layouts//main'); ?>
     <div class="well well-sm well-title">
         <strong><?= Yii::t('application', 'Suggested') ?></strong>
     </div>

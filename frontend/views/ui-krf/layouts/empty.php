@@ -2,6 +2,6 @@
 /* @var $this \yii\web\View */
 /* @var $content string */
 
-$this->beginContent('//layouts/main');
+$this->beginContent('@app/views/layouts/main.php');
 echo $content;
 $this->endContent();

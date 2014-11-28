@@ -1,17 +1,20 @@
 <?php
 use yii\helpers\Html;
-use yii\bootstrap\Nav;
-use yii\bootstrap\NavBar;
-use yii\widgets\Breadcrumbs;
 use frontend\assets\AppAsset;
 use frontend\assets\IE9Asset;
-use frontend\widgets\Alert;
+use kartik\widgets\ColorInput;
+use \kartik\select2\Select2;
+use common\models\Item;
+use \common\models\items\Category;
+use \kartik\form\ActiveForm;
 
 /* @var $this \yii\web\View */
 /* @var $content string */
 
 AppAsset::register($this);
 IE9Asset::register($this);
+
+$colors = Item::getUsedColor(5);
 
 ?>
 <?php $this->beginPage() ?>
@@ -96,7 +99,6 @@ IE9Asset::register($this);
                 </div>
             </div>
             <!-- end header -->
-
             <!-- Navigation -->
             <nav class="navbar navbar-default navbar-static">
                 <div class="navbar-header">
@@ -146,92 +148,60 @@ IE9Asset::register($this);
                 </div>
                 <!-- Filters -->
                 <div class="well well-sm">
-                    <form class="form-inline form-grid form-grid-sidebar"
-                          id="form-grid-sidebar-id" role="form" method="post">
-                        <div class="form-group">
-                            <select class="selectpicker selectcolors"
-                                    name="filter-colour-name"
-                                    id="filter-colour-id"
-                                    data-placeholder="<?= Yii::t('application', 'Filters') ?>"
-                                    multiple="">
-                                <option></option>
-                                <option value="2">Red</option>
-                                <option value="3">Blue</option>
-                                <option value="4">Green</option>
-                            </select>
+                    <?php $form = ActiveForm::begin([
+                        'type' => ActiveForm::TYPE_VERTICAL
+                    ]); ?>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <?= ColorInput::widget([
+                                    'name' => 'colors',
+                                    'showDefaultPalette' => false,
+                                    'pluginOptions' => [
+                                        'showPalette' => true,
+                                        'showPaletteOnly' => true,
+                                        'showSelectionPalette' => true,
+                                        'showAlpha' => false,
+                                        'allowEmpty' => true,
+                                        'preferredFormat' => 'name',
+                                        'palette' => $colors
+                                    ],
+                                ]) ?>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <select id="sidebarCat" name="" multiple="">
-                                <optgroup label="Alaskan/Hawaiian Time Zone">
-                                    <option value="AK">Alaska</option>
-                                    <option value="HI">Hawaii</option>
-                                </optgroup>
-                                <optgroup label="Pacific Time Zone">
-                                    <option value="CA">California</option>
-                                    <option value="NV">Nevada</option>
-                                    <option value="OR">Oregon</option>
-                                    <option value="WA">Washington</option>
-                                </optgroup>
-                                <optgroup label="Mountain Time Zone">
-                                    <option value="AZ">Arizona</option>
-                                    <option value="CO">Colorado</option>
-                                    <option value="ID">Idaho</option>
-                                    <option value="MT">Montana</option>
-                                    <option value="NE">Nebraska</option>
-                                    <option value="NM">New Mexico</option>
-                                    <option value="ND">North Dakota</option>
-                                    <option value="UT">Utah</option>
-                                    <option value="WY">Wyoming</option>
-                                </optgroup>
-                                <optgroup label="Central Time Zone">
-                                    <option value="AL">Alabama</option>
-                                    <option value="AR">Arkansas</option>
-                                    <option value="IL">Illinois</option>
-                                    <option value="IA">Iowa</option>
-                                    <option value="KS">Kansas</option>
-                                    <option value="KY">Kentucky</option>
-                                    <option value="LA">Louisiana</option>
-                                    <option value="MN">Minnesota</option>
-                                    <option value="MS">Mississippi</option>
-                                    <option value="MO">Missouri</option>
-                                    <option value="OK">Oklahoma</option>
-                                    <option value="SD">South Dakota</option>
-                                    <option value="TX">Texas</option>
-                                    <option value="TN">Tennessee</option>
-                                    <option value="WI">Wisconsin</option>
-                                </optgroup>
-                                <optgroup label="Eastern Time Zone">
-                                    <option value="CT">Connecticut</option>
-                                    <option value="DE">Delaware</option>
-                                    <option value="FL">Florida</option>
-                                    <option value="GA">Georgia</option>
-                                    <option value="IN">Indiana</option>
-                                    <option value="ME">Maine</option>
-                                    <option value="MD">Maryland</option>
-                                    <option value="MA">Massachusetts</option>
-                                    <option value="MI">Michigan</option>
-                                    <option value="NH">New Hampshire</option>
-                                    <option value="NJ">New Jersey</option>
-                                    <option value="NY">New York</option>
-                                    <option value="NC">North Carolina</option>
-                                    <option value="OH">Ohio</option>
-                                    <option value="PA">Pennsylvania</option>
-                                    <option value="RI">Rhode Island</option>
-                                    <option value="SC">South Carolina</option>
-                                    <option value="VT">Vermont</option>
-                                    <option value="VA">Virginia</option>
-                                    <option value="WV">West Virginia</option>
-                                </optgroup>
-                            </select>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <?php echo '<label class="control-label">Categories</label>'; ?>
+                                <?= Select2::widget([
+                                    'name' => 'category[]',
+                                    'data' => Category::getCategoryGrouped(),
+                                    'language' => Yii::$app->language,
+
+                                    'pluginOptions' => [
+                                        'allowClear' => true,
+                                    ],
+                                    'options' => [
+                                        'multiple' => true,
+                                        'placeholder' => Yii::t('item', 'Placeholder: Select category ...')
+                                    ]
+                                ]) ?>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <button type="submit"
-                                    class="btn btn-primary btn-md btn-cart">
-                                <span
-                                    class="icon glyphicon glyphicon-search"></span> <?= Yii::t('application', 'Find') ?>
-                            </button>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <button type="submit"
+                                        class="btn btn-primary btn-md btn-cart">
+                                    <span
+                                        class="icon glyphicon glyphicon-search"></span> <?= Yii::t('application', 'Find') ?>
+                                </button>
+                            </div>
                         </div>
-                    </form>
+                    </div>
+                    <?php ActiveForm::end(); ?>
                 </div>
                 <!-- /Filters -->
             </div>

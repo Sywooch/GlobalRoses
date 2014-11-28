@@ -35,8 +35,6 @@ $(document).ready(function () {
             $('input[name=' + fieldName + ']').val(0);
         }
     });
-    // Placeholders
-    $('input, textarea').placeholder();
 
     // Remove item  from cart
     $("#cart .actions .btn-danger").on("click", function (e) {
@@ -53,11 +51,11 @@ $(document).ready(function () {
     });
 
     // Selectpicker
-    $('select').select2();
-    $("#sidebarCat").select2({
+    //$('select').select2();
+    /*    $("#sidebarCat").select2({
         placeholder: "Επιλέξτε Κατηγορία",
         allowClear: true
-    });
+     });*/
     // Modal nagiation between products
 
     // $('li img').on('click', function() {

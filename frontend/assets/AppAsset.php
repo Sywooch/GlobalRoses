@@ -23,11 +23,14 @@ class AppAsset extends AssetBundle
         'css/site.css',
     ];
     public $js = [
-        'themes/ui-krf/js/owl.carousel.min.js',
+        'themes/ui-krf/js/vendor/owl.carousel.min.js',
         'themes/ui-krf/js/app.js',
+        'js/app.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',
         'yii\bootstrap\BootstrapAsset',
+        'yii\bootstrap\BootstrapPluginAsset',
+        'kartik\select2\Select2Asset',
     ];
 }

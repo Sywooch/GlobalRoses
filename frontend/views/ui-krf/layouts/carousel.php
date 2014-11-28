@@ -2,16 +2,14 @@
 /* @var $this \yii\web\View */
 /* @var $content string */
 
-$this->beginContent('//layouts/main'); ?>
+$this->beginContent('@app/views/layouts/main.php'); ?>
     <div class="well well-sm carousel-container">
         <div id="carousel">
             <div class="item">
                 <a href="#" title=""><img
                         src="themes/ui-krf/imgs/products/carousel1.jpg" alt=""></a>
-
                 <div class="caption">
                     <p>
-
                     <h3><?= Yii::t('application', '_carousel_title_1_') ?></h3>
                     <?= Yii::t('application', '_carousel_text_1_') ?>
                     </p>
@@ -20,10 +18,8 @@ $this->beginContent('//layouts/main'); ?>
             <div class="item">
                 <a href="#" title=""><img
                         src="themes/ui-krf/imgs/products/carousel2.jpg" alt=""></a>
-
                 <div class="caption">
                     <p>
-
                     <h3><?= Yii::t('application', '_carousel_title_2_') ?></h3>
                     <?= Yii::t('application', '_carousel_text_2_') ?>
                     </p>
@@ -32,10 +28,8 @@ $this->beginContent('//layouts/main'); ?>
             <div class="item">
                 <a href="#" title=""><img
                         src="themes/ui-krf/imgs/products/carousel3.jpg" alt=""></a>
-
                 <div class="caption">
                     <p>
-
                     <h3><?= Yii::t('application', '_carousel_title_3_') ?></h3>
                     <?= Yii::t('application', '_carousel_text_3_') ?>
                     </p>
