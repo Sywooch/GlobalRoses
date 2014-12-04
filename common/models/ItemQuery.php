@@ -14,6 +14,12 @@ class ItemQuery extends ActiveQuery
         return $this;
     }
 
+    public function suggested()
+    {
+        $this->active();
+        return $this;
+    }
+
     public function deleted()
     {
         $this->andWhere('`item`.`deleted`=:default_deleted')

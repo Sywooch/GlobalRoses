@@ -22,7 +22,7 @@ use yii\helpers\Html;
                             ['login'], ['class' => 'login']);
                         echo Html::a(
                             sprintf('<i class="glyphicon glyphicon-user"></i>&nbsp;%s', Yii::t('application', 'Registration')),
-                            ['signUp'], ['class' => 'register']);
+                            ['signup'], ['class' => 'register']);
                         echo Html::a(
                             sprintf('<i class="glyphicon glyphicon-shopping-cart"></i>&nbsp;%s', Yii::t('application', 'Shopping Cart ({items})', ['items' => '<span class="cart-items">3</span>'])),
                             ['cart'], ['class' => 'visible-xs']);

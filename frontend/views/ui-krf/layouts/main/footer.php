@@ -31,7 +31,7 @@ use yii\helpers\Html;
     <div class="row">
         <div class="col-lg-12">
             <ul class="nav nav-pills nav-justified">
-                <li><?= Html::a(Yii::t('application', 'Copyright Project'), '#') ?></li>
+                <li><?= Html::a(Yii::t('application', 'Copyright Project', ['year' => date('Y')]), '#') ?></li>
                 <li><?= Html::a(Yii::t('application', 'Terms and conditions'), '#') ?></li>
                 <li><?= Html::a(Yii::t('application', 'Privacy policy'), '#') ?></li>
             </ul>

@@ -7,6 +7,7 @@ $params = array_merge(
 );
 
 $components = require(__DIR__ . '/components.php');
+$modules = require(__DIR__ . '/modules.php');
 
 return [
     'id' => 'app-frontend',
@@ -16,5 +17,5 @@ return [
     'homeUrl' => '/',
     'components' => $components,
     'params' => $params,
-    'modules' => []
+    'modules' => $modules
 ];

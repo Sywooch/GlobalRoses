@@ -1,51 +1,139 @@
 <?php
+
+use common\components\GridView;
+use \kartik\helpers\Html;
+use \common\models\items\Suggested;
+
 /* @var $this yii\web\View */
+/* @var $model common\models\items\Suggested */
+/* @var $searchModel common\models\items\SuggestedSearch */
+/* @var $dataProvider yii\data\ActiveDataProvider */
+
 $this->title = 'My Yii Application';
 ?>
-<div class="site-index">
+<?php
 
-    <div class="jumbotron">
-        <h1>Congratulations!</h1>
+$gridColumns = [
+    [
+        'class' => \common\components\Column::className(),
+        'attribute' => 'file_name_original',
+        'label' => Yii::t('item', 'Image'),
+        'format' => 'raw',
+        'value' => function ($model, $key, $index, $widget) {
+            /* @var $model Suggested */
+            $image_url = ($model->fileExists())
+                ? $model->getFileUrl()
+                : 'http://placehold.it/150x150';
+            $img = Html::img($image_url);
+            $a = Html::a($img, '#', [
+                'data-id' => 'product-popover',
+                'data-content' => $img,
+                'data-trigger' => 'hover'
+            ]);
+            return $a;
+        },
+        'contentOptions' => [
+            'class' => 'image'
+        ]
+    ],
+    [
+        'class' => \common\components\Column::className(),
+        'attribute' => 'name',
+        'contentOptions' => [
+            'class' => 'name'
+        ]
+    ],
+    [
+        'class' => \common\components\Column::className(),
+        'attribute' => 'id_category',
+        'value' => function ($model, $key, $index, $widget) {
+            /* @var $model Suggested */
+            return sprintf('<strong>%s</strong>%s',
+                Yii::t('application', 'category'), $model->idCategory->name);
+        },
+        'format' => 'raw',
+        'contentOptions' => [
+            'class' => 'category'
+        ]
 
-        <p class="lead">You have successfully created your Yii-powered application.</p>
-
-        <p><a class="btn btn-lg btn-success" href="http://www.yiiframework.com">Get started with Yii</a></p>
-    </div>
-
-    <div class="body-content">
-
-        <div class="row">
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/doc/">Yii Documentation &raquo;</a></p>
-            </div>
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/forum/">Yii Forum &raquo;</a></p>
-            </div>
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/extensions/">Yii Extensions &raquo;</a></p>
-            </div>
-        </div>
-
-    </div>
-</div>
+    ],
+    [
+        'class' => \common\components\Column::className(),
+        'attribute' => 'stock',
+        'value' => function ($model, $key, $index, $widget) {
+            /* @var $model Suggested */
+            return sprintf('<strong>%s</strong>%s',
+                Yii::t('application', 'stock'), $model->stock);
+        },
+        'format' => 'raw',
+        'contentOptions' => [
+            'class' => 'stock'
+        ]
+    ],
+    [
+        'class' => \common\components\Column::className(),
+        'attribute' => 'height',
+        'value' => function ($model, $key, $index, $widget) {
+            /* @var $model Suggested */
+            return sprintf('<strong>%s</strong>%s',
+                Yii::t('application', 'height'), $model->height);
+        },
+        'format' => 'raw',
+        'contentOptions' => [
+            'class' => 'height'
+        ]
+    ],
+    [
+        'class' => \common\components\Column::className(),
+        'attribute' => 'color',
+        'value' => function ($model, $key, $index, $widget) {
+            /* @var $model Suggested */
+            if ($model->color == '' || empty($model->color)) {
+                $col = Yii::t('common/application', '(not set)');
+            } else {
+                $col = "<span class='badge' style='background-color: {$model->color}'>&nbsp;</span>";
+            }
+            return sprintf('<strong>%s</strong>%s',
+                Yii::t('application', 'color'), $col);
+        },
+        'format' => 'raw',
+        'contentOptions' => [
+            'class' => 'color'
+        ]
+    ],
+    [
+        'class' => \common\components\Column::className(),
+        'attribute' => 'quantity',
+        'value' => function ($model, $key, $index, $widget) {
+            /* @var $model Suggested */
+            return sprintf('<strong>%s</strong>%s',
+                Yii::t('application', 'quantity'), $model->quantity);
+        },
+        'format' => 'raw',
+        'contentOptions' => [
+            'class' => 'quantity'
+        ]
+    ],
+    [
+        'class' => \common\components\Column::className(),
+        'attribute' => 'unit_price',
+        'value' => function ($model, $key, $index, $widget) {
+            /* @var $model Suggested */
+            return sprintf('<strong>%s</strong>%s',
+                Yii::t('application', 'unit_price'), $model->unit_price);
+        },
+        'format' => 'raw',
+        'contentOptions' => [
+            'class' => 'price'
+        ]
+    ],
+];
+echo GridView::widget([
+    'id' => 'item-suggested-list',
+    'dataProvider' => $dataProvider,
+    'filterModel' => $searchModel,
+    'columns' => $gridColumns,
+    'showHeader' => false,
+    'layout' => '{items}{pager}',
+]);
+?>

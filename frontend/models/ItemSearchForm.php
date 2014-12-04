@@ -1,7 +1,9 @@
 <?php
 namespace frontend\models;
 
-use common\models\Item;
+use common\models\items\Category;
+use common\models\items\Suggested;
+use common\models\items\SuggestedSearch;
 use yii\base\Model;
 use Yii;
 
@@ -19,20 +21,43 @@ class ItemSearchForm extends Model
     public function rules()
     {
         return [
-            ['color, category', 'integer', 'min' => 0],
+            ['color', 'string'],
+            ['color', 'safe'],
+            ['category', 'categoryExists'],
         ];
     }
 
-    /**
-     * Signs user up.
-     *
-     * @return Item[]|null the search result or null
-     */
-    public function search()
+    public function categoryExists($attribute, $params)
     {
-        if ($this->validate()) {
+        $category = (array)$this->category;
+        if (!empty($category)) {
+            $available = Category::getCategoriesIdList();
+            $diff = array_diff($category, $available);
+            if (count($diff) > 0) {
+                $this->addError($attribute, 'category value error');
+            }
         }
-        return null;
+    }
+
+    public function getSearchModel()
+    {
+        return new SuggestedSearch();
+    }
+    /**
+     * Item Search
+     *
+     * @return Suggested[]|null the search result or null
+     */
+    public function search($params)
+    {
+        $searchModel = $this->getSearchModel();
+        if ($this->validate()) {
+            $dataProvider = $searchModel->search($params);
+        } else {
+            $dataProvider = $searchModel->searchDefault();
+        }
+        return $dataProvider;
+
     }
 
     /**

@@ -532,12 +532,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/kartik-v/yii2-builder.git",
-                "reference": "0bb6e25d8d8ce8139af15e8da85df976aa40ad76"
+                "reference": "041eb3c4840c1d73e1ea574eff3dedd5ed28d4d2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kartik-v/yii2-builder/zipball/0bb6e25d8d8ce8139af15e8da85df976aa40ad76",
-                "reference": "0bb6e25d8d8ce8139af15e8da85df976aa40ad76",
+                "url": "https://api.github.com/repos/kartik-v/yii2-builder/zipball/041eb3c4840c1d73e1ea574eff3dedd5ed28d4d2",
+                "reference": "041eb3c4840c1d73e1ea574eff3dedd5ed28d4d2",
                 "shasum": ""
             },
             "require": {
@@ -571,7 +571,7 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2014-11-14 15:33:49"
+            "time": "2014-11-27 13:24:05"
         },
         {
             "name": "kartik-v/yii2-detail-view",
@@ -765,12 +765,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/kartik-v/yii2-krajee-base.git",
-                "reference": "0c4d3907f9b47036696d22ed8b8b2e0af5e6a2e7"
+                "reference": "40bf7a9628a2820f142e3621eb34f91df1a4f831"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kartik-v/yii2-krajee-base/zipball/0c4d3907f9b47036696d22ed8b8b2e0af5e6a2e7",
-                "reference": "0c4d3907f9b47036696d22ed8b8b2e0af5e6a2e7",
+                "url": "https://api.github.com/repos/kartik-v/yii2-krajee-base/zipball/40bf7a9628a2820f142e3621eb34f91df1a4f831",
+                "reference": "40bf7a9628a2820f142e3621eb34f91df1a4f831",
                 "shasum": ""
             },
             "require": {
@@ -803,7 +803,7 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2014-11-25 07:58:40"
+            "time": "2014-11-28 19:16:36"
         },
         {
             "name": "kartik-v/yii2-money",
@@ -1147,16 +1147,16 @@
         },
         {
             "name": "kartik-v/yii2-widget-datepicker",
-            "version": "v1.0.0",
+            "version": "v1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/kartik-v/yii2-widget-datepicker.git",
-                "reference": "85feee443914c55f82692e4e7bb57e4bdad03491"
+                "reference": "d0115019fab6275a5391cedd28ca53b4609ef8ef"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kartik-v/yii2-widget-datepicker/zipball/85feee443914c55f82692e4e7bb57e4bdad03491",
-                "reference": "85feee443914c55f82692e4e7bb57e4bdad03491",
+                "url": "https://api.github.com/repos/kartik-v/yii2-widget-datepicker/zipball/d0115019fab6275a5391cedd28ca53b4609ef8ef",
+                "reference": "d0115019fab6275a5391cedd28ca53b4609ef8ef",
                 "shasum": ""
             },
             "require": {
@@ -1192,20 +1192,20 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2014-11-08 18:40:45"
+            "time": "2014-11-28 19:18:20"
         },
         {
             "name": "kartik-v/yii2-widget-datetimepicker",
-            "version": "v1.0.0",
+            "version": "v1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/kartik-v/yii2-widget-datetimepicker.git",
-                "reference": "91e43feae986aad654d5efdf4febaa7e1541021f"
+                "reference": "a2860eade35d69642ed60fea83c9a69c03741516"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kartik-v/yii2-widget-datetimepicker/zipball/91e43feae986aad654d5efdf4febaa7e1541021f",
-                "reference": "91e43feae986aad654d5efdf4febaa7e1541021f",
+                "url": "https://api.github.com/repos/kartik-v/yii2-widget-datetimepicker/zipball/a2860eade35d69642ed60fea83c9a69c03741516",
+                "reference": "a2860eade35d69642ed60fea83c9a69c03741516",
                 "shasum": ""
             },
             "require": {
@@ -1228,7 +1228,7 @@
                     "homepage": "http://www.krajee.com/"
                 }
             ],
-            "description": "Enhanced Yii2 wrapper for the bootstrap datetimepicker plugin (sub repo split from yii2-widgets).",
+            "description": "Enhanced Yii2 wrapper for the bootstrap datetimepicker plugin (sub repo split from yii2-widgets)",
             "homepage": "https://github.com/kartik-v/yii2-widget-datetimepicker",
             "keywords": [
                 "datetime",
@@ -1241,7 +1241,7 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2014-11-08 18:48:07"
+            "time": "2014-11-28 19:20:18"
         },
         {
             "name": "kartik-v/yii2-widget-depdrop",

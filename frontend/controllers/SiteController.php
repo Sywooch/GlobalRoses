@@ -71,12 +71,20 @@ class SiteController extends Controller
     public function actionIndex()
     {
         $this->layout = 'carousel';
-        $this->item_search_model = new ItemSearchForm();
-        return $this->render('index');
+        $model = new ItemSearchForm();
+        $model->load(Yii::$app->request->post());
+        $dataProvider = $model->search(Yii::$app->request->queryParams);
+        $this->item_search_model = $model;
+
+        return $this->render('index', [
+            'searchModel' => $this->item_search_model->getSearchModel(),
+            'dataProvider' => $dataProvider
+        ]);
     }
 
     public function actionLogin()
     {
+        $this->layout = 'login';
         if (!\Yii::$app->user->isGuest) {
             return $this->goHome();
         }
@@ -100,6 +108,9 @@ class SiteController extends Controller
 
     public function actionContact()
     {
+        $this->layout = 'empty';
+        $this->item_search_model = new ItemSearchForm();
+
         $model = new ContactForm();
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             if ($model->sendEmail(Yii::$app->params['adminEmail'])) {
@@ -118,11 +129,15 @@ class SiteController extends Controller
 
     public function actionAbout()
     {
+        $this->layout = 'empty';
+        $this->item_search_model = new ItemSearchForm();
         return $this->render('about');
     }
 
     public function actionSignup()
     {
+        $this->layout = 'empty';
+        $this->item_search_model = new ItemSearchForm();
         $model = new SignupForm();
         if ($model->load(Yii::$app->request->post())) {
             if ($user = $model->signup()) {
@@ -139,6 +154,8 @@ class SiteController extends Controller
 
     public function actionRequestPasswordReset()
     {
+        $this->layout = 'empty';
+        $this->item_search_model = new ItemSearchForm();
         $model = new PasswordResetRequestForm();
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             if ($model->sendEmail()) {
@@ -169,6 +186,8 @@ class SiteController extends Controller
             return $this->goHome();
         }
 
+        $this->layout = 'empty';
+        $this->item_search_model = new ItemSearchForm();
         return $this->render('resetPassword', [
             'model' => $model,
         ]);

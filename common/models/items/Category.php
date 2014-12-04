@@ -200,6 +200,18 @@ class Category extends ActiveRecord
         return $list;
     }
 
+    public static function getCategoriesIdList()
+    {
+        $fetch = self::find()->select('id')->addOrderBy(['id' => SORT_DESC])->
+        asArray()->all();
+        $list = [];
+        foreach ($fetch as $f) {
+            $list[] = $f['id'];
+        }
+        return $list;
+
+    }
+
     public function getPrevious()
     {
         $current_id = $this->id;

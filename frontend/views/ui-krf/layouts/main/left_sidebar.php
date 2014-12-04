@@ -4,6 +4,7 @@ use \kartik\select2\Select2;
 use \common\models\items\Category;
 use \common\models\Item;
 use \kartik\form\ActiveForm;
+use yii\helpers\Html;
 
 /* @var $this \yii\web\View */
 /* @var $item_search_model \frontend\models\ItemSearchForm */
@@ -19,7 +20,8 @@ $colors = Item::getUsedColor(5);
     <div class="well well-sm">
         <?php $form = ActiveForm::begin([
             'type' => ActiveForm::TYPE_VERTICAL,
-            'id' => 'form-product-search'
+//            'method' => 'get',
+            'id' => 'product-search-form'
         ]); ?>
         <div class="row">
             <div class="col-sm-12">
@@ -59,11 +61,9 @@ $colors = Item::getUsedColor(5);
         <div class="row">
             <div class="col-sm-12">
                 <div class="form-group">
-                    <button type="submit"
-                            class="btn btn-primary btn-md btn-cart">
-                                    <span
-                                        class="icon glyphicon glyphicon-search"></span> <?= Yii::t('application', 'Find') ?>
-                    </button>
+                    <?= Html::submitButton(
+                        sprintf('<span class="icon glyphicon glyphicon-search"></span>&nbsp;%s', Yii::t('application', 'Find')),
+                        ['class' => 'btn btn-primary btn-md btn-cart']) ?>
                 </div>
             </div>
         </div>
