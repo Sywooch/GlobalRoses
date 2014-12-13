@@ -11,9 +11,7 @@ $this->title = Yii::t('item', 'Items');
 $this->params['breadcrumbs'][] = ['label' => $this->title, 'url' => ['index']];
 $this->params['breadcrumbs'][] = $model->name;
 
-$image_url = ($model->fileExists())
-    ? $model->getFileUrl()
-    : 'http://placehold.it/212x212';
+$image_url = $model->getImageUrl();
 
 $prev = $model->getPrevious();
 $next = $model->getNext();

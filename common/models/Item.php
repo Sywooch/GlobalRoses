@@ -209,6 +209,21 @@ class Item extends ActiveRecord
         return Url::to(sprintf('@web/uploads/image/item/%d/%s', $this->id, $this->file));
     }
 
+    public function getEmptyUrl()
+    {
+        return 'http://placehold.it/150x150';
+    }
+
+    public function getImageUrl()
+    {
+        return ($this->fileExists()) ? $this->getFileUrl() : $this->getEmptyUrl();
+    }
+
+    public function getImageUrlSmall()
+    {
+        return ($this->fileExists()) ? $this->getFileUrl() : 'http://placehold.it/64x64';
+    }
+
     public function fileExists()
     {
         $file = $this->getFilePath();

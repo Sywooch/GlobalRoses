@@ -51,7 +51,7 @@ class ShoppingCartController extends Controller
 
         Yii::$app->response->format = 'json';
         return [
-            'html' => $this->renderPartial('add-item', [
+            'html' => $this->renderAjax('add-item', [
                 'model' => $model,
             ])
         ];

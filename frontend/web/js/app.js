@@ -31,6 +31,9 @@
                     return;
                 }
 
+                settings.relatedTarget = $button;
+                $this.data('modalOptions', settings);
+
                 var $body = $this.find('.modal-body');
                 var contents = null;
                 if (settings.method == 'post') {
@@ -74,6 +77,50 @@
                 $(this).find('.modal-body').empty();
             }
         });
+
+        $modal.on('click', '.navigation [data-display]', function (e) {
+            e.preventDefault() && e.stopPropagation();
+
+            var $nav = $(this);
+            var $modal = $nav.closest('.modal');
+            var direction = $nav.data('display');
+            var options = $modal.data('modalOptions');
+
+            var $relatedTarget = $(options.relatedTarget);
+            var $relatedContainer = $relatedTarget.closest('li[data-key]');
+            var $newRelatedContainer = $();
+            if (direction == 'prev') {
+                $newRelatedContainer = $relatedContainer.prev();
+                if (typeof $newRelatedContainer.get(0) == 'undefined') {
+                    $newRelatedContainer = $relatedContainer.siblings(':last');
+                }
+            } else {
+                $newRelatedContainer = $relatedContainer.next();
+                if (typeof $newRelatedContainer.get(0) == 'undefined') {
+                    $newRelatedContainer = $relatedContainer.siblings(':first');
+                }
+            }
+            $newRelatedContainer.find('[data-modal-options]')
+                .trigger('click').trigger('click');
+        });
+        $modal.on('keyup', function (e) {
+            var $this = $(e.target);
+            if ($this.is('input')) {
+                return false;
+            }
+
+            var $modal = $this;
+            if (!$this.hasClass('.modal')) {
+                $modal = $this.closest('.modal');
+            }
+
+            if (e.which === 39) {
+                $modal.find('[data-display="next"]').trigger('click');
+            } else if (e.which === 37) {
+                $modal.find('[data-display="prev"]').trigger('click');
+            }
+            return true;
+        });
     };
 })(jQuery);
 
@@ -95,4 +142,5 @@ $(document).ready(function () {
     $(".modal[data-modal-type='ajax-modal']").each(function () {
         $(this).modalAjax();
     });
+
 });

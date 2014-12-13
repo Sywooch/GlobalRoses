@@ -10,8 +10,7 @@ use \kartik\widgets\TouchSpin;
 /* @var $searchModel common\models\items\SuggestedSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-?>
-<?php $form = ActiveForm::begin([
+$form = ActiveForm::begin([
     'type' => ActiveForm::TYPE_VERTICAL,
     'id' => 'form-add-item'
 //            'beforeSubmit' => 'submitForm'
@@ -20,7 +19,7 @@ use \kartik\widgets\TouchSpin;
     <li>
         <div class="row">
             <div class="col-sm-4 col-md-4">
-                <img src="<?= $model->getFileUrl() ?>" alt=""
+                <img src="<?= $model->getImageUrl() ?>" alt=""
                      class="img-responsive">
             </div>
             <div class="col-sm-8 col-md-8">
@@ -29,9 +28,8 @@ use \kartik\widgets\TouchSpin;
                     <?php
                     printf('<span class="category"><strong>%s</strong>%s</span>',
                         Yii::t('application', 'Category'), $model->idCategory->name);
-                    printf('<span class="stock"><strong>%s</strong>%d</span>', !@#$%^
-
-                    Yii::t('application', 'Stock'), $model->stock);
+                    printf('<span class="stock"><strong>%s</strong>%d</span>',
+                        Yii::t('application', 'Stock'), $model->stock);
                     printf('<span class="height"><strong>%s</strong>%.2f&nbsp;cm</span>',
                         Yii::t('application', 'Height'), $model->height);
                     printf('<span class="Color"><strong>%s</strong><span class="col-sm-12"><span style="background-color: %s" class="col-sm-1 badge">&nbsp;</span></span></span>',
@@ -45,7 +43,7 @@ use \kartik\widgets\TouchSpin;
                                 'pluginOptions' => [
                                     'initval' => 0,
                                     'min' => 0,
-                                    'max' => 10,
+                                    'max' => $model->stock,
                                     'buttonup_class' => 'btn btn-warning',
                                     'buttondown_class' => 'btn btn-success',
                                     'buttonup_txt' => '<i class="glyphicon glyphicon-plus-sign"></i>',
@@ -63,9 +61,14 @@ use \kartik\widgets\TouchSpin;
     </li>
 </ul>
 <div class="clearfix navigation">
-    <a class="btn btn-primary btnPrevious"><span
-            class="glyphicon glyphicon-chevron-left"></span></a>
-    <a class="btn btn-primary btnNext"><span
-            class="glyphicon glyphicon-chevron-right"></span></a>
+    <?= Html::a('<span class="glyphicon glyphicon-chevron-left"></span>', '#', [
+        'class' => 'btn btn-primary btnPrevious',
+        'data-display' => 'prev',
+    ]); ?>
+    <?= Html::a('<span class="glyphicon glyphicon-chevron-right"></span>', '#', [
+        'class' => 'btn btn-primary btnNext',
+        'data-display' => 'next',
+    ]); ?>
 </div>
-<?php ActiveForm::end(); ?>
+<?php
+ActiveForm::end();

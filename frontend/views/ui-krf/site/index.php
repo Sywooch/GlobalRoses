@@ -23,9 +23,7 @@ $gridColumns = [
         'format' => 'raw',
         'value' => function ($model, $key, $index, $widget) {
             /* @var $model Suggested */
-            $image_url = ($model->fileExists())
-                ? $model->getFileUrl()
-                : 'http://placehold.it/150x150';
+            $image_url = $model->getImageUrl();
             $img = Html::img($image_url);
             $a = Html::a($img, '#', [
                 'data-id' => 'product-popover',

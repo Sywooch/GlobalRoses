@@ -89,3 +89,29 @@ a.desc:after {
     padding: 10px 20px;
     margin: 0 0 15px 0;
 }
+
+.modal-content > .overlay {
+    background: none repeat scroll 0 0 rgba(255, 255, 255, 0.7);
+    z-index: 1010;
+}
+
+.modal-content > .overlay, .modal-content > .loading-img {
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+}
+
+.modal-content > .loading-img {
+    background: url("../img/ajax-loader1.gif") no-repeat scroll 50% 50% transparent;
+    z-index: 1020;
+}
+
+.modal-content > .overlay, .modal-content > .loading-img {
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+}

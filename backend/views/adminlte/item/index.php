@@ -30,9 +30,8 @@ $gridColumns = [
         'vAlign' => 'middle',
         'width' => '70px',
         'value' => function ($model, $key, $index, $widget) {
-            $image_url = ($model->fileExists())
-                ? $model->getFileUrl()
-                : 'http://placehold.it/64x64';
+            /* @var $model common\models\Item */
+            $image_url = $model->getImageUrlSmall();
             return Html::media(
                 '', '', '#',
                 $image_url, [], ['width' => '64px', 'height' => '64px'], [

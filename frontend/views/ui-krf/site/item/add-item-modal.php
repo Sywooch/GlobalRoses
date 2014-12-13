@@ -25,7 +25,5 @@ Modal::begin([
         ])
     ],
     'footer' => $footer
-
 ]);
-
 Modal::end();
