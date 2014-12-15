@@ -5,6 +5,7 @@ $(document).ready(function () {
             if ($form.find('.has-error').length) {
                 return false;
             }
+            console.log($form.serialize());
             $.ajax({
                 url: $form.attr('action'),
                 type: 'post',

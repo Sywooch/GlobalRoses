@@ -51,25 +51,26 @@ $form = ActiveForm::begin([
                             '&euro;');
                         ?>
                         <span class="quanity">
-                        <?= $form->field($model, 'request_quantity')->widget(TouchSpin::classname(), [
-                            'options' => [
-                                'placeholder' => Yii::t('application', 'Placeholder: Set quality ...'),
-                            ],
-                            'pluginOptions' => [
-                                'initval' => 0,
-                                'min' => 0,
-                                'max' => $model->stock,
-                                'buttonup_class' => 'btn btn-warning',
-                                'buttondown_class' => 'btn btn-success',
-                                'buttonup_txt' => '<i class="glyphicon glyphicon-plus-sign"></i>',
-                                'buttondown_txt' => '<i class="glyphicon glyphicon-minus-sign"></i>'
-                            ]
-                        ]);
-                        echo Html::submitButton(
-                            '<span class="icon glyphicon glyphicon-shopping-cart"></span> ' . Yii::t('application', 'add to cart'), [
-                            'class' => "btn btn-primary btn-md btn-cart",
-                        ]) ?>
+                            <?= $form->field($model, 'request_quantity')->widget(TouchSpin::classname(), [
+                                'options' => [
+                                    'placeholder' => Yii::t('application', 'Placeholder: Set quality ...'),
+                                ],
+                                'pluginOptions' => [
+                                    'initval' => 0,
+                                    'min' => 0,
+                                    'max' => $model->stock,
+                                    'buttonup_class' => 'btn btn-warning',
+                                    'buttondown_class' => 'btn btn-success',
+                                    'buttonup_txt' => '<i class="glyphicon glyphicon-plus-sign"></i>',
+                                    'buttondown_txt' => '<i class="glyphicon glyphicon-minus-sign"></i>'
+                                ]
+                            ]);
+                            echo Html::submitButton(
+                                '<span class="icon glyphicon glyphicon-shopping-cart"></span> ' . Yii::t('application', 'add to cart'), [
+                                'class' => "btn btn-primary btn-md btn-cart",
+                            ]) ?>
                         </span>
+                        <?= Html::activeHiddenInput($model, 'id') ?>
                     </div>
                 </div>
             </div>
