@@ -171,7 +171,7 @@ use \common\models\items\Category;
                     'browseLabel' => Yii::t('commons/application', 'Select ...'),
                 ];
                 $image_pluginEvents = [];
-                if (!$model->isNewRecord) {
+                if (!$model->isNewRecord && $model->fileExists()) {
                     $image_pluginOptions['initialPreview'] = [
                         Html::img($model->getFileUrl(),
                             [
@@ -187,7 +187,12 @@ use \common\models\items\Category;
                             var $this = $(this);var $form = $this.closest("form");
                             $form.find("input[name=\'file_cleared\']").val(1);
                             console.log($this);console.log($form);
-                        }'
+                        }',
+                        'fileloaded' => 'function() {
+                            var $this = $(this);var $form = $this.closest("form");
+                            $form.find("input[name=\'file_cleared\']").val(1);
+                            console.log($this);console.log($form);
+                        }',
                     ];
 
                     echo Html::hiddenInput('file_cleared', 0, []);

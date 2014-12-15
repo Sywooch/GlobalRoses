@@ -1,5 +1,6 @@
 <?php
 return [
+    'TITLE' => 'Global Roses',
     'Login' => 'Login',
     'Copyright Project' => '&copy; {year} Global Roses',
     'Registration' => 'Registration',
@@ -40,4 +41,5 @@ return [
     'Continue shopping' => 'Continue shopping',
     'Pay' => 'Pay',
     'add to cart' => 'add to cart',
+    'Search Results' => 'Search Results',
 ];

@@ -12,7 +12,7 @@ use \kartik\widgets\TouchSpin;
 
 $form = ActiveForm::begin([
     'type' => ActiveForm::TYPE_VERTICAL,
-    'id' => 'form-add-item'
+    'id' => 'form-add-item',
 //            'beforeSubmit' => 'submitForm'
 ]); ?>
 <ul class="product-list">

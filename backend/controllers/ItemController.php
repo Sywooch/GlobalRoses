@@ -94,6 +94,9 @@ class ItemController extends Backend
 
         $this->content_header = Yii::t('common/application', 'content_header_' . __FUNCTION__);
         $data = Yii::$app->request->post();
+        if (!array_key_exists('file_cleared', $data)) {
+            $data['file_cleared'] = 1;
+        }
         if ($model->load($data)) {
             if ($data['file_cleared'] == 1) {
                 $model->upload_file = UploadedFile::getInstance($model, 'upload_file');

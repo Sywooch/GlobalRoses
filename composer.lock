@@ -317,16 +317,16 @@
         },
         {
             "name": "kartik-v/bootstrap-fileinput",
-            "version": "v3.0.0",
+            "version": "v4.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/kartik-v/bootstrap-fileinput.git",
-                "reference": "4276dd9137e376f9a24b834d886ebd849be9752e"
+                "reference": "3e5c11bfe6d993658e882b6a0e056aff89211bf3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kartik-v/bootstrap-fileinput/zipball/4276dd9137e376f9a24b834d886ebd849be9752e",
-                "reference": "4276dd9137e376f9a24b834d886ebd849be9752e",
+                "url": "https://api.github.com/repos/kartik-v/bootstrap-fileinput/zipball/3e5c11bfe6d993658e882b6a0e056aff89211bf3",
+                "reference": "3e5c11bfe6d993658e882b6a0e056aff89211bf3",
                 "shasum": ""
             },
             "type": "library",
@@ -358,7 +358,7 @@
                 "preview",
                 "upload"
             ],
-            "time": "2014-12-08 05:12:30"
+            "time": "2014-12-14 21:23:09"
         },
         {
             "name": "kartik-v/bootstrap-popover-x",
@@ -769,12 +769,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/kartik-v/yii2-krajee-base.git",
-                "reference": "d99ad8a0ee6c349922ab68fd9cc7882801e00c25"
+                "reference": "01ae10573ea0aed2dea511439fa4f6ec1ef9f10b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kartik-v/yii2-krajee-base/zipball/d99ad8a0ee6c349922ab68fd9cc7882801e00c25",
-                "reference": "d99ad8a0ee6c349922ab68fd9cc7882801e00c25",
+                "url": "https://api.github.com/repos/kartik-v/yii2-krajee-base/zipball/01ae10573ea0aed2dea511439fa4f6ec1ef9f10b",
+                "reference": "01ae10573ea0aed2dea511439fa4f6ec1ef9f10b",
                 "shasum": ""
             },
             "require": {
@@ -807,7 +807,7 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2014-12-11 17:55:50"
+            "time": "2014-12-13 17:48:51"
         },
         {
             "name": "kartik-v/yii2-money",
@@ -2491,6 +2491,7 @@
         "kartik-v/yii2-helpers": 20
     },
     "prefer-stable": false,
+    "prefer-lowest": false,
     "platform": {
         "php": ">=5.4.0"
     },

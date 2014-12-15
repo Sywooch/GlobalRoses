@@ -74,6 +74,7 @@ class Item extends ActiveRecord
             [['reference'], 'unique'],
             [['upload_file'], 'safe'],
             [['upload_file'], 'file', 'extensions' => 'jpg, gif, png'],
+            ['id_category', 'default', 'value' => Category::DEFAULT_PARENT],
         ];
     }
 
@@ -129,6 +130,9 @@ class Item extends ActiveRecord
      */
     public function getIdCategory()
     {
+        if ($this->id_category == Category::DEFAULT_PARENT) {
+            return new Category();
+        }
         return $this->hasOne(Category::className(), ['id' => 'id_category']);
     }
 
@@ -206,7 +210,12 @@ class Item extends ActiveRecord
 
     public function getFileUrl()
     {
-        return Url::to(sprintf('@web/uploads/image/item/%d/%s', $this->id, $this->file));
+        if ($this->fileExists()) {
+            $to = sprintf('@web/uploads/image/item/%d/%s', $this->id, $this->file);
+        } else {
+            $to = sprintf('@web/uploads/image/item/%d/%s', $this->id, $this->file);
+        }
+        return Url::to($to);
     }
 
     public function getEmptyUrl()

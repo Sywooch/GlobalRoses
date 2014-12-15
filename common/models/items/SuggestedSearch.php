@@ -17,7 +17,7 @@ class SuggestedSearch extends Suggested
     public function rules()
     {
         return [
-            [['id', 'id_category', 'quantity', 'stock', 'available', 'deleted', 'created_at', 'updated_at'], 'integer'],
+            ['id_category', 'validateCategory'],
             [['height', 'weight', 'unit_price'], 'number'],
             [['name', 'reference', 'color', 'status'], 'safe'],
         ];
@@ -30,6 +30,15 @@ class SuggestedSearch extends Suggested
     {
         // bypass scenarios() implementation in the parent class
         return Model::scenarios();
+    }
+
+    public function validateCategory($attribute, $params)
+    {
+        if (!$this->hasErrors()) {
+            if (!is_array($this->$attribute)) {
+                $this->addError($attribute, 'Incorrect category.');
+            }
+        }
     }
 
     /**
@@ -50,7 +59,10 @@ class SuggestedSearch extends Suggested
             ],
         ]);
 
-        if (!($this->load($params) && $this->validate())) {
+        $case_load = $this->load($params);
+        $case_valid = $this->validate();
+        $case = !($this->load($params) && $this->validate());
+        if ($case) {
             return $dataProvider;
         }
 

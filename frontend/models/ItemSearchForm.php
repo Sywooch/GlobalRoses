@@ -36,6 +36,8 @@ class ItemSearchForm extends Model
             if (count($diff) > 0) {
                 $this->addError($attribute, 'category value error');
             }
+        } else {
+            $this->addError($attribute, 'category is empty');
         }
     }
 
@@ -43,16 +45,27 @@ class ItemSearchForm extends Model
     {
         return new SuggestedSearch();
     }
+
     /**
      * Item Search
      *
-     * @return Suggested[]|null the search result or null
+     * @param $params
+     * @return \common\models\items\Suggested[]|null the search result or null
      */
     public function search($params)
     {
         $searchModel = $this->getSearchModel();
-        if ($this->validate()) {
-            $dataProvider = $searchModel->search($params);
+        $category = isset($params['category']) ? (array)$params['category'] : [];
+        $color = isset($params['color']) ? $params['color'] : null;
+
+        $search_params = [$searchModel->formName() => [
+            'id_category' => $category,
+            'color' => $color
+        ]];
+
+        $is_valid = $this->validate();
+        if ($is_valid && (!empty($category) || !is_null($color))) {
+            $dataProvider = $searchModel->search($search_params);
         } else {
             $dataProvider = $searchModel->searchDefault();
         }
