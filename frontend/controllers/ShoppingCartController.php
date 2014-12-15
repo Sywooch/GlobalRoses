@@ -5,7 +5,7 @@ use Yii;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
-use common\models\items\Suggested;
+use frontend\models\cart\Item;
 use yii\web\NotFoundHttpException;
 
 /**
@@ -21,8 +21,13 @@ class ShoppingCartController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['add-item'],
+                'only' => ['load-item', 'add-item'],
                 'rules' => [
+                    [
+                        'actions' => ['load-item'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
                     [
                         'actions' => ['add-item'],
                         'allow' => true,
@@ -33,6 +38,7 @@ class ShoppingCartController extends Controller
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
+                    'load-item' => ['post'],
                     'add-item' => ['post'],
                 ],
             ],
@@ -44,16 +50,25 @@ class ShoppingCartController extends Controller
         return $this->render('index');
     }
 
-    public function actionAddItem($id)
+    public function actionLoadItem($id)
     {
         $model = $this->findModel($id);
         $data = Yii::$app->request->post();
 
         Yii::$app->response->format = 'json';
         return [
-            'html' => $this->renderAjax('add-item', [
+            'html' => $this->renderAjax('load-item', [
                 'model' => $model,
             ])
+        ];
+    }
+
+    public function actionAddItem()
+    {
+        $data = Yii::$app->request->post();
+        Yii::$app->response->format = 'json';
+        return [
+            'html' => ''
         ];
     }
 
@@ -61,12 +76,12 @@ class ShoppingCartController extends Controller
      * Finds the Item model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param string $id
-     * @return Suggested the loaded model
+     * @return Item the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Suggested::findOne($id)) !== null) {
+        if (($model = Item::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested item does not exist.');

@@ -43,5 +43,10 @@ return [
 
             ),
         ]
-    ]
+    ],
+    'formatter' => [
+        'decimalSeparator' => ',',
+        'thousandSeparator' => '.',
+        'currencyCode' => 'EUR',
+    ],
 ];

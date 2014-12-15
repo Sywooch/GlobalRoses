@@ -50,7 +50,7 @@ class ItemSearchForm extends Model
      * Item Search
      *
      * @param $params
-     * @return \common\models\items\Suggested[]|null the search result or null
+     * @return \common\models\items\SuggestedSearch[]|null the search result or null
      */
     public function search($params)
     {

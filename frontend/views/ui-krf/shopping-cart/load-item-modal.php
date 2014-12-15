@@ -1,10 +1,9 @@
 <?php
 use \kartik\helpers\Html;
-use \yii\helpers\Url;
 use \yii\bootstrap\Modal;
+use \yii\helpers\Url;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\items\Suggested */
 
 $footer = Html::a(sprintf('<i class="glyphicon glyphicon-chevron-left"></i> %s', Yii::t('application', 'Continue shopping')), '#', [
     'data-dismiss' => "modal",
@@ -27,3 +26,4 @@ Modal::begin([
     'footer' => $footer
 ]);
 Modal::end();
+$this->registerJsFile(Url::to('@web/js/chart/item.js'), ['depends' => [\frontend\assets\AppAsset::className()]]);

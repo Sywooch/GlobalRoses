@@ -5,7 +5,6 @@ use frontend\assets\IE9Asset;
 
 /* @var $this \yii\web\View */
 /* @var $content string */
-/* @var $item_search_model \frontend\models\ItemSearchForm */
 
 AppAsset::register($this);
 IE9Asset::register($this);

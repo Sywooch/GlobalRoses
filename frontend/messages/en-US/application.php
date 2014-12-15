@@ -42,4 +42,8 @@ return [
     'Pay' => 'Pay',
     'add to cart' => 'add to cart',
     'Search Results' => 'Search Results',
+    'Placeholder: Set quality ...' => 'Select quality ...',
+    'cm' => 'cm',
+    'Price' => 'Price',
+    'Request Quantity' => 'Request Quantity',
 ];

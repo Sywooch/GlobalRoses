@@ -210,12 +210,7 @@ class Item extends ActiveRecord
 
     public function getFileUrl()
     {
-        if ($this->fileExists()) {
-            $to = sprintf('@web/uploads/image/item/%d/%s', $this->id, $this->file);
-        } else {
-            $to = sprintf('@web/uploads/image/item/%d/%s', $this->id, $this->file);
-        }
-        return Url::to($to);
+        return Url::to(sprintf('@web/uploads/image/item/%d/%s', $this->id, $this->file));
     }
 
     public function getEmptyUrl()

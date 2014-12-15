@@ -8,7 +8,6 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 
 /* @var $this \yii\web\View */
-/* @var $item_search_model \frontend\models\ItemSearchForm */
 /* @var $searchData array */
 
 $searchData = Yii::$app->controller->searchData;

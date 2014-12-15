@@ -16,15 +16,13 @@ use frontend\models\ItemSearchForm;
 use \yii\helpers\Url;
 use \yii\helpers\Json;
 use \kartik\helpers\Html;
-use \common\models\items\Suggested;
+use \common\models\Item;
 
 /**
  * Site controller
  */
 class SiteController extends Controller
 {
-    public $item_search_model;
-
     /**
      * @var array
      */
@@ -111,6 +109,11 @@ class SiteController extends Controller
         ]);
     }
 
+    public function loadItemModel()
+    {
+        return $this->renderPartial('/shopping-cart/load-item-modal');
+    }
+
     public function actionLogin()
     {
         $this->layout = $this->$_layout_login;
@@ -138,8 +141,6 @@ class SiteController extends Controller
     public function actionContact()
     {
         $this->layout = $this->_layout_empty;
-        $this->item_search_model = new ItemSearchForm();
-
         $model = new ContactForm();
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             if ($model->sendEmail(Yii::$app->params['adminEmail'])) {
@@ -159,14 +160,12 @@ class SiteController extends Controller
     public function actionAbout()
     {
         $this->layout = $this->_layout_empty;
-        $this->item_search_model = new ItemSearchForm();
         return $this->render('about');
     }
 
     public function actionSignup()
     {
         $this->layout = $this->_layout_empty;
-        $this->item_search_model = new ItemSearchForm();
         $model = new SignupForm();
         if ($model->load(Yii::$app->request->post())) {
             if ($user = $model->signup()) {
@@ -184,7 +183,6 @@ class SiteController extends Controller
     public function actionRequestPasswordReset()
     {
         $this->layout = $this->_layout_empty;
-        $this->item_search_model = new ItemSearchForm();
         $model = new PasswordResetRequestForm();
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             if ($model->sendEmail()) {
@@ -216,7 +214,6 @@ class SiteController extends Controller
         }
 
         $this->layout = $this->_layout_empty;
-        $this->item_search_model = new ItemSearchForm();
         return $this->render('resetPassword', [
             'model' => $model,
         ]);
@@ -231,7 +228,7 @@ class SiteController extends Controller
                 'label' => Yii::t('item', 'Image'),
                 'format' => 'raw',
                 'value' => function ($model, $key, $index, $widget) {
-                    /* @var $model Suggested */
+                    /* @var $model Item */
                     $image_url = $model->getImageUrl();
                     $img = Html::img($image_url);
                     $a = Html::a($img, '#', [
@@ -256,7 +253,7 @@ class SiteController extends Controller
                 'class' => \common\components\Column::className(),
                 'attribute' => 'id_category',
                 'value' => function ($model, $key, $index, $widget) {
-                    /* @var $model Suggested */
+                    /* @var $model Item */
                     return sprintf('<strong>%s</strong>%s',
                         Yii::t('application', 'category'), $model->idCategory->name);
                 },
@@ -270,9 +267,10 @@ class SiteController extends Controller
                 'class' => \common\components\Column::className(),
                 'attribute' => 'stock',
                 'value' => function ($model, $key, $index, $widget) {
-                    /* @var $model Suggested */
+                    /* @var $model Item */
                     return sprintf('<strong>%s</strong>%s',
-                        Yii::t('application', 'stock'), $model->stock);
+                        Yii::t('application', 'stock'),
+                        Yii::$app->formatter->asInteger($model->stock));
                 },
                 'format' => 'raw',
                 'contentOptions' => [
@@ -283,9 +281,11 @@ class SiteController extends Controller
                 'class' => \common\components\Column::className(),
                 'attribute' => 'height',
                 'value' => function ($model, $key, $index, $widget) {
-                    /* @var $model Suggested */
-                    return sprintf('<strong>%s</strong>%s',
-                        Yii::t('application', 'height'), $model->height);
+                    /* @var $model Item */
+                    return sprintf('<strong>%s</strong>%s&nbsp;%s',
+                        Yii::t('application', 'height'),
+                        Yii::$app->formatter->asDecimal($model->height, 2),
+                        Yii::t('application', 'cm'));
                 },
                 'format' => 'raw',
                 'contentOptions' => [
@@ -296,7 +296,7 @@ class SiteController extends Controller
                 'class' => \common\components\Column::className(),
                 'attribute' => 'color',
                 'value' => function ($model, $key, $index, $widget) {
-                    /* @var $model Suggested */
+                    /* @var $model Item */
                     if ($model->color == '' || empty($model->color)) {
                         $col = Yii::t('common/application', '(not set)');
                     } else {
@@ -314,9 +314,10 @@ class SiteController extends Controller
                 'class' => \common\components\Column::className(),
                 'attribute' => 'quantity',
                 'value' => function ($model, $key, $index, $widget) {
-                    /* @var $model Suggested */
+                    /* @var $model Item */
                     return sprintf('<strong>%s</strong>%s (%s)',
-                        Yii::t('application', 'contains'), $model->quantity,
+                        Yii::t('application', 'contains'),
+                        Yii::$app->formatter->asInteger($model->quantity),
                         ($model->quantity > 1)
                             ? Yii::t('application', 'pieces')
                             : Yii::t('application', 'piece'));
@@ -330,9 +331,11 @@ class SiteController extends Controller
                 'class' => \common\components\Column::className(),
                 'attribute' => 'unit_price',
                 'value' => function ($model, $key, $index, $widget) {
-                    /* @var $model Suggested */
-                    return sprintf('<strong>%s</strong>%s',
-                        Yii::t('application', 'unit_price'), $model->unit_price);
+                    /* @var $model Item */
+                    return sprintf('<strong>%s</strong>%s&nbsp;%s',
+                        Yii::t('application', 'unit_price'),
+                        Yii::$app->formatter->asDecimal($model->unit_price, 2),
+                        '&euro;');
                 },
                 'format' => 'raw',
                 'contentOptions' => [
@@ -342,14 +345,14 @@ class SiteController extends Controller
             [
                 'class' => \common\components\Column::className(),
                 'value' => function ($model, $key, $index, $widget) {
-                    /* @var $model Suggested */
+                    /* @var $model Item */
                     return Html::button('<span class="icon glyphicon glyphicon-shopping-cart"></span>' . Yii::t('application', 'unit_price'),
                         [
                             'class' => 'btn btn-primary btn-md btn-cart',
                             'data-target' => '#productModal',
                             'data-toggle' => 'modal',
                             'data-modal-options' => Json::encode([
-                                'request' => Url::to(['shopping-cart/add-item', 'id' => $model->id])
+                                'request' => Url::to(['shopping-cart/load-item', 'id' => $model->id])
                             ])
                         ]);
                 },

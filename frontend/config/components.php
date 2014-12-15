@@ -42,5 +42,10 @@ return [
                 'sourceLanguage'=>''
             ),
         ]
-    ]
+    ],
+    'formatter' => [
+        'decimalSeparator' => ',',
+        'thousandSeparator' => '.',
+        'currencyCode' => 'EUR',
+    ],
 ];
