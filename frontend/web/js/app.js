@@ -143,5 +143,27 @@ $(document).ready(function () {
         $(this).modalAjax();
     });
 
+    var $cart = $("#cart");
+    $cart.on('update', function (e, data) {
+        var $this = $(this);
+        $this.find('#cart-total').empty().html(data.text);
+        $this.data('count', data['count']);
+
+        if (data['count'] > 0) {
+            $this.find('.empty').hide();
+        } else {
+            $this.find('.empty').show();
+        }
+    }).on('init', function () {
+        var $this = $(this);
+        var count = $this.data('count');
+        var text = $this.find('#cart-total').html();
+        $this.trigger('update', [{'count': count, 'text': text}]);
+    });
+    $cart.trigger('init');
+
+    $('body').on('updateCart', function (e, data) {
+        $("#cart").trigger('update', data);
+    });
 
 });

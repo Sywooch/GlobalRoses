@@ -48,4 +48,8 @@ return [
         'thousandSeparator' => '.',
         'currencyCode' => 'EUR',
     ],
+    'cart' => [
+        'class' => 'yz\shoppingcart\ShoppingCart',
+        'cartId' => 'global-roses-shopping-cart',
+    ]
 ];

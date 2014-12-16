@@ -1,6 +1,13 @@
 <?php
 use yii\helpers\Html;
 
+$cart_item_count = Yii::$app->cart->getCount();
+$cart_item_cost = Yii::$app->formatter->asDecimal(($cart_item_count > 0)
+    ? Yii::$app->cart->getCost()
+    : 0, 2);
+$cart_text = Yii::t('application',
+    '{items} items - {price}',
+    ['items' => $cart_item_count, 'price' => $cart_item_cost]);
 ?>
 <header>
     <div class="row">
@@ -72,14 +79,14 @@ use yii\helpers\Html;
 
             <div class="col-sm-3 col-md-3 pull-right">
                 <div class="cart-top pull-right hidden-xs">
-                    <div id="cart" class="">
+                    <div id="cart" class=""
+                         data-count="<?= $cart_item_count ?>">
                         <span
                             class="icon glyphicon glyphicon-shopping-cart"></span>
-
                         <div class="heading">
                             <h4><?= Yii::t('application', 'Shopping Cart') ?></h4>
                             <a><span
-                                    id="cart-total"><?= Yii::t('application', '{items} items - {price}', ['items' => 0, 'price' => '0.00']) ?></span></a>
+                                    id="cart-total"><?= $cart_text ?></span></a>
                         </div>
                         <div class="content">
                             <div class="empty">

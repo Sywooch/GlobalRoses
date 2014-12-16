@@ -5,13 +5,18 @@ $(document).ready(function () {
             if ($form.find('.has-error').length) {
                 return false;
             }
-            console.log($form.serialize());
             $.ajax({
                 url: $form.attr('action'),
                 type: 'post',
                 data: $form.serialize(),
-                success: function (data) {
-                    console.log(arguments);
+                success: function (return_data) {
+                    $form.closest('.modal').modal('hide');
+                    var data = return_data.data.cart;
+                    var cart_data = {
+                        'count': data.count,
+                        'text': data.text
+                    };
+                    $('body').trigger('updateCart', [cart_data]);
                 }
             });
             return false;

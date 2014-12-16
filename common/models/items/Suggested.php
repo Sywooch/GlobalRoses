@@ -3,14 +3,13 @@
 namespace common\models\items;
 
 use Yii;
-use \common\models\Item;
 use \common\models\ItemQuery;
 
 /**
  *
  * @inheritdoc
  */
-class Suggested extends Item
+class Suggested extends Available
 {
 
     public static function find()
