@@ -24,6 +24,7 @@ $cart_text = Yii::t('application',
                     class="col-xs-12 col-sm-6 col-md-6 help text-center">
                     <div class="links">
                         <?php
+
                         echo Html::a(
                             sprintf('<i class="glyphicon glyphicon-circle-arrow-right"></i>&nbsp;%s', Yii::t('application', 'Login')),
                             ['login'], ['class' => 'login']);

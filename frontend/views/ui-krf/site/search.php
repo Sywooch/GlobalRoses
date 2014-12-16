@@ -24,4 +24,4 @@ $gridColumns = SiteController::getGridColumn(); ?>
     'layout' => '{items}{pager}',
 ]);
 
-echo Yii::$app->controller->loadItemModel();
+echo Yii::$app->controller->loadItemModal();

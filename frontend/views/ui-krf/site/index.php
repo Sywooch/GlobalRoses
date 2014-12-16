@@ -22,6 +22,6 @@ echo GridView::widget([
     'layout' => '{items}{pager}',
 ]);
 
-echo Yii::$app->controller->loadItemModel();
+echo Yii::$app->controller->loadItemModal();
 
 ?>

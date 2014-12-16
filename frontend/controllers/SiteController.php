@@ -92,50 +92,16 @@ class SiteController extends Controller
         ]);
     }
 
-    public function actionSearch()
+    public function actionFaq()
     {
         $this->layout = $this->_layout_empty;
-        $model = new ItemSearchForm();
-        $searchData = Yii::$app->request->get();
-        $searchData['category'] = (isset($searchData['category']) ? (array)$searchData['category'] : []);
-        $searchData['color'] = (isset($searchData['color']) ? $searchData['color'] : null);
-        $this->searchData = $searchData;
-        $model->load($this->searchData);
-        $dataProvider = $model->search(Yii::$app->request->queryParams);
-
-        return $this->render('search', [
-            'searchModel' => $model->getSearchModel(),
-            'dataProvider' => $dataProvider
-        ]);
+        return $this->render('faq');
     }
 
-    public function loadItemModel()
+    public function actionPayment()
     {
-        return $this->renderPartial('/shopping-cart/load-item-modal');
-    }
-
-    public function actionLogin()
-    {
-        $this->layout = $this->$_layout_login;
-        if (!\Yii::$app->user->isGuest) {
-            return $this->goHome();
-        }
-
-        $model = new LoginForm();
-        if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
-        } else {
-            return $this->render('login', [
-                'model' => $model,
-            ]);
-        }
-    }
-
-    public function actionLogout()
-    {
-        Yii::$app->user->logout();
-
-        return $this->goHome();
+        $this->layout = $this->_layout_empty;
+        return $this->render('payment');
     }
 
     public function actionContact()
@@ -155,6 +121,47 @@ class SiteController extends Controller
                 'model' => $model,
             ]);
         }
+    }
+
+    public function actionSearch()
+    {
+        $this->layout = $this->_layout_empty;
+        $model = new ItemSearchForm();
+        $searchData = Yii::$app->request->get();
+        $searchData['category'] = (isset($searchData['category']) ? (array)$searchData['category'] : []);
+        $searchData['color'] = (isset($searchData['color']) ? $searchData['color'] : null);
+        $this->searchData = $searchData;
+        $model->load($this->searchData);
+        $dataProvider = $model->search(Yii::$app->request->queryParams);
+
+        return $this->render('search', [
+            'searchModel' => $model->getSearchModel(),
+            'dataProvider' => $dataProvider
+        ]);
+    }
+
+    public function actionLogin()
+    {
+        $this->layout = $this->_layout_login;
+        if (!\Yii::$app->user->isGuest) {
+            return $this->goHome();
+        }
+
+        $model = new LoginForm();
+        if ($model->load(Yii::$app->request->post()) && $model->login()) {
+            return $this->goBack();
+        } else {
+            return $this->render('login', [
+                'model' => $model,
+            ]);
+        }
+    }
+
+    public function actionLogout()
+    {
+        Yii::$app->user->logout();
+
+        return $this->goHome();
     }
 
     public function actionAbout()
@@ -217,6 +224,11 @@ class SiteController extends Controller
         return $this->render('resetPassword', [
             'model' => $model,
         ]);
+    }
+
+    public function loadItemModal()
+    {
+        return $this->renderPartial('/shopping-cart/load-item-modal');
     }
 
     public static function getGridColumn()
