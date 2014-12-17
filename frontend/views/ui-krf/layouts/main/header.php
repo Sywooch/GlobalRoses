@@ -1,5 +1,6 @@
 <?php
-use yii\helpers\Html;
+use \yii\helpers\Html;
+use \yii\helpers\Url;
 
 $cart_item_count = Yii::$app->cart->getCount();
 $cart_item_cost = Yii::$app->formatter->asDecimal(($cart_item_count > 0)
@@ -24,13 +25,21 @@ $cart_text = Yii::t('application',
                     class="col-xs-12 col-sm-6 col-md-6 help text-center">
                     <div class="links">
                         <?php
-
-                        echo Html::a(
-                            sprintf('<i class="glyphicon glyphicon-circle-arrow-right"></i>&nbsp;%s', Yii::t('application', 'Login')),
-                            ['login'], ['class' => 'login']);
-                        echo Html::a(
-                            sprintf('<i class="glyphicon glyphicon-user"></i>&nbsp;%s', Yii::t('application', 'Registration')),
-                            ['signup'], ['class' => 'register']);
+                        if (Yii::$app->user->isGuest) {
+                            echo Html::a(
+                                sprintf('<i class="glyphicon glyphicon-circle-arrow-right"></i>&nbsp;%s', Yii::t('application', 'Login')),
+                                ['site/login'], ['class' => 'login']);
+                            echo Html::a(
+                                sprintf('<i class="glyphicon glyphicon-user"></i>&nbsp;%s', Yii::t('application', 'Registration')),
+                                ['site/signup'], ['class' => 'register']);
+                        } else {
+                            echo Html::a(
+                                sprintf('<i class="glyphicon glyphicon-circle-arrow-right"></i>&nbsp;%s', Yii::$app->user->identity->username),
+                                ['user/index'], ['class' => 'user']);
+                            echo Html::a(
+                                sprintf('<i class="glyphicon glyphicon-circle-arrow-right"></i>&nbsp;%s', Yii::t('application', 'Logout')),
+                                ['site/logout'], ['class' => 'logout', 'data-method' => 'post']);
+                        }
                         echo Html::a(
                             sprintf('<i class="glyphicon glyphicon-shopping-cart"></i>&nbsp;%s', Yii::t('application', 'Shopping Cart ({items})', ['items' => '<span class="cart-items">3</span>'])),
                             ['cart'], ['class' => 'visible-xs']);

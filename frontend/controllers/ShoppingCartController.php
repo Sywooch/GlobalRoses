@@ -2,18 +2,17 @@
 namespace frontend\controllers;
 
 use Yii;
-use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use frontend\models\cart\Item;
 use common\models\items\Available;
 use yii\web\NotFoundHttpException;
-use yz\shoppingcart\ShoppingCart;
+use frontend\models\cart\ItemPosition;
 
 /**
  * ShoppingCart controller
  */
-class ShoppingCartController extends Controller
+class ShoppingCartController extends Frontend
 {
     /**
      * @inheritdoc
@@ -23,8 +22,13 @@ class ShoppingCartController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['load-item', 'add-item'],
+                'only' => ['load-item', 'add-item', 'index'],
                 'rules' => [
+                    [
+                        'actions' => ['index'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
                     [
                         'actions' => ['load-item'],
                         'allow' => true,
@@ -40,6 +44,7 @@ class ShoppingCartController extends Controller
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
+                    'index' => ['get'],
                     'load-item' => ['post'],
                     'add-item' => ['post'],
                 ],
@@ -49,7 +54,35 @@ class ShoppingCartController extends Controller
 
     public function actionIndex()
     {
-        return $this->render('index');
+        $cart_items = Yii::$app->cart->getPositions();
+        $models = [];
+
+        /* @var $ci ItemPosition */
+        foreach ($cart_items as $ci) {
+            $item = $ci->getItem();
+            $row = [];
+            $row['id'] = $ci->getId();
+            $row['quantity'] = $ci->getQuantity();
+            $row['quantity_new'] = $row['quantity'];
+            $row['cost'] = $ci->getCost();
+            $row['item'] = $item;
+            $row['name'] = $item->name;
+            $row['price'] = $item->unit_price;
+            $models[$ci->getId()] = $row;
+        }
+        $dataProvider = new \yii\data\ArrayDataProvider([
+            'allModels' => $models,
+            'sort' => [
+                'attributes' => ['name', 'quantity'],
+            ],
+            'pagination' => [
+                'pageSize' => 10,
+            ],
+        ]);
+
+        return $this->render('index', [
+            'dataProvider' => $dataProvider
+        ]);
     }
 
     /**

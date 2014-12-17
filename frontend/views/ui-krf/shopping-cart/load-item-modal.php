@@ -5,12 +5,17 @@ use \yii\helpers\Url;
 
 /* @var $this yii\web\View */
 
-$footer = Html::a(sprintf('<i class="glyphicon glyphicon-chevron-left"></i> %s', Yii::t('application', 'Continue shopping')), '#', [
+$footer = Html::a(
+    sprintf('<i class="glyphicon glyphicon-chevron-left"></i> %s',
+        Yii::t('application', 'Continue shopping')),
+    '#', [
     'data-dismiss' => "modal",
     'class' => "btn btn-warning pull-left"
 ]);
-$footer .= Html::a(sprintf('%s <i class="glyphicon glyphicon-play"></i>', Yii::t('application', 'Pay')), 'cart.html', [
-    'data-dismiss' => "modal",
+$footer .= Html::a(
+    sprintf('%s <i class="glyphicon glyphicon-play"></i>',
+        Yii::t('application', 'Pay')),
+    Url::to(['shopping-cart/']), [
     'class' => "btn btn-success pull-right"
 ]);
 Modal::begin([

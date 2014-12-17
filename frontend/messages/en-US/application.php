@@ -46,4 +46,6 @@ return [
     'cm' => 'cm',
     'Price' => 'Price',
     'Request Quantity' => 'Request Quantity',
+    'Logout' => 'Logout',
+    'Image' => 'Image',
 ];

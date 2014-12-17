@@ -8,9 +8,11 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 
 /* @var $this \yii\web\View */
+/* @var $controller \frontend\controllers\Frontend */
 /* @var $searchData array */
 
-$searchData = Yii::$app->controller->searchData;
+$controller = Yii::$app->controller;
+$searchData = $controller->searchData;
 $colors = Item::getUsedColor(5);
 ?>
 <div class="col-sm-3 col-md-3 left">

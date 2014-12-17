@@ -8,7 +8,10 @@ class RbacController extends Controller
 {
     public function actionInit()
     {
-//        $auth = Yii::$app->authManager;
+        $auth = Yii::$app->authManager;
+
+        //add "Create order" permission
+        $createOrder = $auth->createPermission('');
 //
 //        $colorIndex = $auth->createPermission('indexColor');
 //        $colorIndex->description = 'Color Index';

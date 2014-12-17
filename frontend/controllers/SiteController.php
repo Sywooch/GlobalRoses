@@ -21,17 +21,8 @@ use \common\models\Item;
 /**
  * Site controller
  */
-class SiteController extends Controller
+class SiteController extends Frontend
 {
-    /**
-     * @var array
-     */
-    public $searchData;
-
-    private $_layout_carousel = 'carousel';
-    private $_layout_login = 'login';
-    private $_layout_empty = 'empty';
-
 
     /**
      * @inheritdoc
