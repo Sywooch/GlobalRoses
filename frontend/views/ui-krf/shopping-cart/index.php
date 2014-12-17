@@ -12,6 +12,16 @@ $gridColumns = [
     [
         'label' => Yii::t('application', 'Product'),
         'attribute' => 'product',
+        'format' => 'raw',
+        'value' => function ($model, $key, $index, $widget) {
+            /* @var $model array */
+            /* @var $item common\models\items\Available */
+            $item = $model['item'];
+            $image_url = $item->getImageUrlSmall();
+            $image = sprintf('<img src="%s" alt="" class="img-responsive" height="80">', $image_url);
+            return sprintf('<div class="row"><div class="col-sm-4">%s</div><div class="col-sm-8">%s</div></div>',
+                $image, $model['name']);
+        },
     ],
     [
         'label' => Yii::t('application', 'Price'),
@@ -41,7 +51,7 @@ $gridColumns = [
     <div class="well well-sm well-title">
         <strong><?= Yii::t('application', 'Cart') ?></strong>
     </div>
-
+<div class="well well-sm">
 <?php echo GridView::widget([
     'id' => 'item-cart-list',
     'dataProvider' => $dataProvider,
@@ -53,5 +63,10 @@ $gridColumns = [
     'responsive' => true,
     'hover' => false,
     'showPageSummary' => true,
+    'tableOptions' => [
+        'id' => 'cart',
+        'class' => 'table table-hover table-condensed',
+    ],
     'layout' => '{items}{pager}',
-]);
+]); ?>
+</div>
