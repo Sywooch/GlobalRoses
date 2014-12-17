@@ -20,7 +20,7 @@ class ShoppingCartController extends Frontend
     public function behaviors()
     {
         return [
-            'access' => [
+            /*'access' => [
                 'class' => AccessControl::className(),
                 'only' => ['load-item', 'add-item', 'index'],
                 'rules' => [
@@ -40,7 +40,7 @@ class ShoppingCartController extends Frontend
                         'roles' => ['@'],
                     ],
                 ],
-            ],
+            ],*/
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
