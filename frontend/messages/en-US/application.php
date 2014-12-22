@@ -48,4 +48,11 @@ return [
     'Request Quantity' => 'Request Quantity',
     'Logout' => 'Logout',
     'Image' => 'Image',
+    'Price {currency}' => 'Price {currency}',
+    'Total price {currency}' => 'Total price {currency}',
+    'Checkout' => 'Checkout',
+    'Continue Shopping' => 'Continue Shopping',
+    'Do you want to delete {item} from shopping cart' => 'Do you want to delete "{item}" from shopping cart?',
+    'delete' => 'delete',
+    'update' => 'update',
 ];

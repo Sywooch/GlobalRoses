@@ -8,6 +8,7 @@ use frontend\models\cart\Item;
 use common\models\items\Available;
 use yii\web\NotFoundHttpException;
 use frontend\models\cart\ItemPosition;
+use yz\shoppingcart\CartPositionInterface;
 
 /**
  * ShoppingCart controller
@@ -20,33 +21,26 @@ class ShoppingCartController extends Frontend
     public function behaviors()
     {
         return [
-            /*'access' => [
+            'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['load-item', 'add-item', 'index'],
+                'only' => ['checkout'],
                 'rules' => [
                     [
-                        'actions' => ['index'],
+                        'actions' => ['checkout'],
                         'allow' => true,
                         'roles' => ['@'],
-                    ],
-                    [
-                        'actions' => ['load-item'],
-                        'allow' => true,
-                        'roles' => ['@'],
-                    ],
-                    [
-                        'actions' => ['add-item'],
-                        'allow' => true,
-                        'roles' => ['@'],
-                    ],
+                    ]
                 ],
-            ],*/
+            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'index' => ['get'],
                     'load-item' => ['post'],
                     'add-item' => ['post'],
+                    'checkout' => ['get'],
+                    'delete' => ['post'],
+                    'update' => ['post'],
                 ],
             ],
         ];
@@ -54,6 +48,7 @@ class ShoppingCartController extends Frontend
 
     public function actionIndex()
     {
+//        Yii::$app->cart->removeAll();
         $cart_items = Yii::$app->cart->getPositions();
         $models = [];
 
@@ -62,8 +57,7 @@ class ShoppingCartController extends Frontend
             $item = $ci->getItem();
             $row = [];
             $row['id'] = $ci->getId();
-            $row['quantity'] = $ci->getQuantity();
-            $row['quantity_new'] = $row['quantity'];
+            $row['requested_quantity'] = $ci->getQuantity();
             $row['cost'] = $ci->getCost();
             $row['item'] = $item;
             $row['name'] = $item->name;
@@ -138,5 +132,73 @@ class ShoppingCartController extends Frontend
                 ]
             ]
         ];
+    }
+
+    public function actionUpdate()
+    {
+        $status = false;
+        $data = Yii::$app->request->post();
+        $model = new Item();
+        $data[$model->formName()]['id'] = $data['id'];
+        $data[$model->formName()]['quantity'] = $data['quantity'];
+
+        $item_cost = 0;
+        if ($model->load($data)) {
+            $c_model = $model->getCartPosition();
+            Yii::$app->cart->update($c_model, $model->quantity);
+            $c_model = Yii::$app->cart->getPositionById($c_model->id);
+            /** @var CartPositionInterface|null $c_model */
+            $item_cost = $c_model->getCost();
+            $status = true;
+
+        }
+        Yii::$app->response->format = 'json';
+        $cart_item_count = Yii::$app->cart->getCount();
+        $cart_item_cost = Yii::$app->formatter->asDecimal(($cart_item_count > 0)
+            ? Yii::$app->cart->getCost()
+            : 0, 2);
+
+        $cart_text = Yii::t('application',
+            '{items} items - {price}',
+            ['items' => $cart_item_count, 'price' => $cart_item_cost]);
+
+        return [
+            'status' => $status,
+            'data' => [
+                'cart' => [
+                    'count' => $cart_item_count,
+                    'text' => $cart_text,
+                    'price' => $cart_item_cost . "&nbsp;&euro;",
+                    'item_price' => $item_cost,
+                ]
+            ]
+        ];
+    }
+
+    /**
+     * Deletes an existing Item from shopping cart.
+     * If deletion is successful, the browser will be redirected to the 'index' page.
+     * @param string $id
+     * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    public function actionDelete($id)
+    {
+        $model = Item::findOne($id);
+        if ($model === null) {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
+        $c_model = Yii::$app->cart->getPositionById($id);
+        if ($c_model === null) {
+            return $this->redirect(['index']);
+        }
+        if (Yii::$app->cart->hasPosition($id)) {
+            Yii::$app->cart->remove($c_model);
+        }
+        return $this->redirect(['index']);
+    }
+
+    public function actionCheckOut()
+    {
     }
 }
