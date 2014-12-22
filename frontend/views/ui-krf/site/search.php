@@ -15,13 +15,16 @@ $gridColumns = SiteController::getGridColumn(); ?>
 <div class="well well-sm well-title">
     <strong><?= Yii::t('application', 'Search Results') ?></strong>
 </div>
-<?php echo GridView::widget([
-    'id' => 'item-suggested-list',
-    'dataProvider' => $dataProvider,
-    'filterModel' => $searchModel,
-    'columns' => $gridColumns,
-    'showHeader' => false,
-    'layout' => '{items}{pager}',
-]);
+<div class="well well-sm">
+    <?php echo GridView::widget([
+        'id' => 'item-suggested-list',
+        'dataProvider' => $dataProvider,
+        'filterModel' => $searchModel,
+        'columns' => $gridColumns,
+        'showHeader' => false,
+        'layout' => '{items}{pager}',
+    ]);
 
-echo Yii::$app->controller->loadItemModal();
+    echo Yii::$app->controller->loadItemModal();
+?>
+</div>

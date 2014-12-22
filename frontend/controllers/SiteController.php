@@ -172,7 +172,6 @@ class SiteController extends Frontend
                 }
             }
         }
-
         return $this->render('signup', [
             'model' => $model,
         ]);

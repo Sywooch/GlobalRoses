@@ -10,9 +10,20 @@ use Yii;
  */
 class SignupForm extends Model
 {
-    public $username;
+    public $name;
+    public $surname;
     public $email;
     public $password;
+    public $password_check;
+
+    public $company;
+    public $vat_id;
+    public $vat_authority;
+    public $city;
+    public $address;
+    public $postal;
+    public $phone;
+    public $mobile;
 
     /**
      * @inheritdoc
@@ -20,18 +31,47 @@ class SignupForm extends Model
     public function rules()
     {
         return [
-            ['username', 'filter', 'filter' => 'trim'],
-            ['username', 'required'],
-            ['username', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This username has already been taken.'],
-            ['username', 'string', 'min' => 2, 'max' => 255],
+            [
+                [
+                    'name',
+                    'surname',
+                    'company',
+                    'vat_authority',
+                    'city',
+                    'address',
+                    'email'
+                ],
+                'filter',
+                'filter' => 'trim'
+            ],
+            [
+                [
+                    'name',
+                    'surname',
+                    'email',
+                    'password',
+                    'city',
+                    'password_check',
+                    'company',
+                    'vat_id',
+                    'vat_authority',
+                    'city',
+                    'address',
+                    'postal',
+                    'phone',
+                ],
+                'required'
+            ],
 
-            ['email', 'filter', 'filter' => 'trim'],
-            ['email', 'required'],
-            ['email', 'email'],
             ['email', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This email address has already been taken.'],
+            ['email', 'email'],
 
-            ['password', 'required'],
             ['password', 'string', 'min' => 6],
+            ['password', 'compare', 'compareAttribute' => 'password_check'],
+
+            ['vat_id', 'unique', 'targetClass' => '\common\models\Company', 'message' => 'This vat_id has already been used.'],
+            ['vat_id', 'string', 'min' => 7, 'max' => 255],
+
         ];
     }
 
@@ -44,11 +84,11 @@ class SignupForm extends Model
     {
         if ($this->validate()) {
             $user = new User();
-            $user->username = $this->username;
-            $user->email = $this->email;
-            $user->setPassword($this->password);
-            $user->generateAuthKey();
-            $user->save();
+//            $user->username = $this->username;
+//            $user->email = $this->email;
+//            $user->setPassword($this->password);
+//            $user->generateAuthKey();
+//            $user->save();
             return $user;
         }
 

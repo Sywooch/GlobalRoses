@@ -9,21 +9,66 @@ use yii\bootstrap\ActiveForm;
 $this->title = 'Signup';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="site-signup">
-    <h1><?= Html::encode($this->title) ?></h1>
+<div class="col-sm-9 col-md-9">
+    <div class="well well-sm well-title">
+        <strong>Open an account</strong>
+    </div>
+    <div class="well well-md">
+        <?php $form = ActiveForm::begin([
+            'id' => 'form-signup',
+            'options' => [
+                'autocomplete' => 'off'
+            ]
 
-    <p>Please fill out the following fields to signup:</p>
-
-    <div class="row">
-        <div class="col-lg-5">
-            <?php $form = ActiveForm::begin(['id' => 'form-signup']); ?>
-                <?= $form->field($model, 'username') ?>
+        ]); ?>
+        <fieldset>
+            <legend>Account</legend>
+            <div class="col-sm-12">
+                <?= $form->field($model, 'name') ?>
+            </div>
+            <div class="col-sm-12">
+                <?= $form->field($model, 'surname') ?>
+            </div>
+            <div class="col-sm-12">
                 <?= $form->field($model, 'email') ?>
+            </div>
+            <div class="col-sm-6">
                 <?= $form->field($model, 'password')->passwordInput() ?>
-                <div class="form-group">
-                    <?= Html::submitButton('Signup', ['class' => 'btn btn-primary', 'name' => 'signup-button']) ?>
-                </div>
-            <?php ActiveForm::end(); ?>
+            </div>
+            <div class="col-sm-6">
+                <?= $form->field($model, 'password_check')->passwordInput() ?>
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend>Company</legend>
+            <div class="col-sm-12">
+                <?= $form->field($model, 'company') ?>
+            </div>
+            <div class="col-sm-6">
+                <?= $form->field($model, 'vat_id') ?>
+            </div>
+            <div class="col-sm-6">
+                <?= $form->field($model, 'vat_authority') ?>
+            </div>
+            <div class="col-sm-12">
+                <?= $form->field($model, 'address') ?>
+            </div>
+            <div class="col-sm-6">
+                <?= $form->field($model, 'postal') ?>
+            </div>
+            <div class="col-sm-6">
+                <?= $form->field($model, 'city') ?>
+            </div>
+            <div class="col-sm-6">
+                <?= $form->field($model, 'phone') ?>
+            </div>
+            <div class="col-sm-6">
+                <?= $form->field($model, 'mobile') ?>
+            </div>
+        </fieldset>
+        <div class="form-group">
+            <?= Html::submitButton('Signup', ['class' => 'btn btn-primary', 'name' => 'signup-button']) ?>
         </div>
+        <?php ActiveForm::end(); ?>
     </div>
 </div>
