@@ -42,10 +42,10 @@ $cart_text = Yii::t('application',
                         }
                         echo Html::a(
                             sprintf('<i class="glyphicon glyphicon-shopping-cart"></i>&nbsp;%s', Yii::t('application', 'Shopping Cart ({items})', ['items' => '<span class="cart-items">3</span>'])),
-                            ['cart'], ['class' => 'visible-xs']);
+                            ['shopping-cart/'], ['class' => 'visible-xs']);
                         echo Html::a(
                             sprintf('<i class="glyphicon glyphicon-phone-alt"></i>&nbsp;%s', Yii::t('application', 'Contact')),
-                            ['contact']);
+                            ['site/contact']);
                         ?>
                     </div>
                 </div>

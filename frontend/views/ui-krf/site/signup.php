@@ -16,19 +16,13 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="well well-md">
         <?php $form = ActiveForm::begin([
             'id' => 'form-signup',
+            'enableAjaxValidation' => true,
             'options' => [
                 'autocomplete' => 'off'
             ]
-
         ]); ?>
         <fieldset>
             <legend>Account</legend>
-            <div class="col-sm-12">
-                <?= $form->field($model, 'name') ?>
-            </div>
-            <div class="col-sm-12">
-                <?= $form->field($model, 'surname') ?>
-            </div>
             <div class="col-sm-12">
                 <?= $form->field($model, 'email') ?>
             </div>
@@ -39,33 +33,33 @@ $this->params['breadcrumbs'][] = $this->title;
                 <?= $form->field($model, 'password_check')->passwordInput() ?>
             </div>
         </fieldset>
-        <fieldset>
+        <!--<fieldset>
             <legend>Company</legend>
             <div class="col-sm-12">
-                <?= $form->field($model, 'company') ?>
+                <? /*= $form->field($model, 'company') */ ?>
             </div>
             <div class="col-sm-6">
-                <?= $form->field($model, 'vat_id') ?>
+                <? /*= $form->field($model, 'vat_id') */ ?>
             </div>
             <div class="col-sm-6">
-                <?= $form->field($model, 'vat_authority') ?>
+                <? /*= $form->field($model, 'vat_authority') */ ?>
             </div>
             <div class="col-sm-12">
-                <?= $form->field($model, 'address') ?>
+                <? /*= $form->field($model, 'address') */ ?>
             </div>
             <div class="col-sm-6">
-                <?= $form->field($model, 'postal') ?>
+                <? /*= $form->field($model, 'postal') */ ?>
             </div>
             <div class="col-sm-6">
-                <?= $form->field($model, 'city') ?>
+                <? /*= $form->field($model, 'city') */ ?>
             </div>
             <div class="col-sm-6">
-                <?= $form->field($model, 'phone') ?>
+                <? /*= $form->field($model, 'phone') */ ?>
             </div>
             <div class="col-sm-6">
-                <?= $form->field($model, 'mobile') ?>
+                <? /*= $form->field($model, 'mobile') */ ?>
             </div>
-        </fieldset>
+        </fieldset>-->
         <div class="form-group">
             <?= Html::submitButton('Signup', ['class' => 'btn btn-primary', 'name' => 'signup-button']) ?>
         </div>

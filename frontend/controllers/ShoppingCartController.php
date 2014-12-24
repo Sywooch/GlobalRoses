@@ -198,7 +198,9 @@ class ShoppingCartController extends Frontend
         return $this->redirect(['index']);
     }
 
-    public function actionCheckOut()
+    public function actionCheckout()
     {
+        $this->layout = $this->_layout_empty;
+        return $this->render('checkout');
     }
 }

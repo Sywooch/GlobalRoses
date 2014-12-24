@@ -58,12 +58,12 @@ class SignupForm extends Model
                     'city',
                     'address',
                     'postal',
-                    'phone',
+                    'phone'
                 ],
                 'required'
             ],
 
-            ['email', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This email address has already been taken.'],
+            ['email', 'unique', 'targetClass' => User::className(), 'message' => 'This email address has already been taken.'],
             ['email', 'email'],
 
             ['password', 'string', 'min' => 6],

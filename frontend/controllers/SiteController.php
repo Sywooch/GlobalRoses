@@ -8,6 +8,7 @@ use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 use frontend\models\ContactForm;
 use yii\base\InvalidParamException;
+use yii\bootstrap\ActiveForm;
 use yii\web\BadRequestHttpException;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
@@ -17,6 +18,7 @@ use \yii\helpers\Url;
 use \yii\helpers\Json;
 use \kartik\helpers\Html;
 use \common\models\Item;
+use yii\web\Response;
 
 /**
  * Site controller
@@ -165,6 +167,11 @@ class SiteController extends Frontend
     {
         $this->layout = $this->_layout_empty;
         $model = new SignupForm();
+
+        if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
+            Yii::$app->response->format = Response::FORMAT_JSON;
+            return ActiveForm::validate($model);
+        }
         if ($model->load(Yii::$app->request->post())) {
             if ($user = $model->signup()) {
                 if (Yii::$app->getUser()->login($user)) {
