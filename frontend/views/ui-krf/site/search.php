@@ -22,7 +22,7 @@ $gridColumns = SiteController::getGridColumn(); ?>
         'filterModel' => $searchModel,
         'columns' => $gridColumns,
         'showHeader' => false,
-        'layout' => '{items}{pager}',
+        'layout' => '{items}<div class="text-center">{pager}</div>',
     ]);
 
     echo Yii::$app->controller->loadItemModal();

@@ -46,9 +46,9 @@
 
                 contents
                     .done(function (data) {
+                        var $body = $this.find('.modal-body');
                         $body.empty().append(data.html);
-                        var $model_content = $this.find('.modal-content');
-                        $model_content.find('.overlay, .loading-img').hide();
+                        //$this.trigger('loader.stop');
                     })
                     .fail(function (data) {
 
@@ -56,20 +56,7 @@
             },
             'show.bs.modal': function (e) {
                 var $this = $(this);
-                var $mcontent = $this.find('.modal-content');
-                var $overlay = $mcontent.find('.overlay');
-                var $spinner = $mcontent.find('.loading-img');
-
-                if ($overlay.size() == 0) {
-                    $mcontent.append($('<div class="overlay">'));
-                } else {
-                    $overlay.show();
-                }
-                if ($spinner.size() == 0) {
-                    $mcontent.append($('<div class="loading-img">'));
-                } else {
-                    $spinner.show();
-                }
+                //$this.trigger('loader.start');
             },
             'hide.bs.modal': function (e) {
             },
@@ -78,6 +65,30 @@
             }
         });
 
+        $modal.on({
+            'loader.start': function () {
+                var $this = $(this);
+                var $m_content = $this.find('.modal-content');
+                var $overlay = $m_content.find('.overlay');
+                var $spinner = $m_content.find('.loading-img');
+
+                if ($overlay.size() == 0) {
+                    $m_content.append($('<div class="overlay">'));
+                } else {
+                    $overlay.show();
+                }
+                if ($spinner.size() == 0) {
+                    $m_content.append($('<div class="loading-img">'));
+                } else {
+                    $spinner.show();
+                }
+            },
+            'loader.stop': function () {
+                var $this = $(this);
+                var $model_content = $this.find('.modal-content');
+                $model_content.find('.overlay, .loading-img').hide();
+            }
+        });
         $modal.on('click', '.navigation [data-display]', function (e) {
             e.preventDefault() && e.stopPropagation();
 

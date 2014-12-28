@@ -154,6 +154,6 @@ $gridColumns = [
         'data-type' => 'cart',
         'class' => 'grid-view',
     ],
-    'layout' => '{items}{pager}',
+    'layout' => '{items}<div class="text-center">{pager}</div>',
 ]); ?>
 </div>

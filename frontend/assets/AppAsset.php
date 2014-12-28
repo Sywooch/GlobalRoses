@@ -21,6 +21,7 @@ class AppAsset extends AssetBundle
         'themes/ui-krf/css/bootstrap-theme.css',
         'themes/ui-krf/css/owl.carousel.css',
         'css/site.css',
+
     ];
     public $js = [
         'themes/ui-krf/js/vendor/owl.carousel.min.js',

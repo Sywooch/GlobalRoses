@@ -94,8 +94,10 @@ $cart_text = Yii::t('application',
                         <span
                             class="icon glyphicon glyphicon-shopping-cart"></span>
                         <div class="heading">
-                            <h4><?= Yii::t('application', 'Shopping Cart') ?></h4>
-                            <a><span
+                            <a href="<?= Url::to(['shopping-cart/index']); ?>">
+                                <h4><?= Yii::t('application', 'Shopping Cart') ?></h4>
+                            </a>
+                            <a href="<?= Url::to(['shopping-cart/index']); ?>"><span
                                     id="cart-total"><?= $cart_text ?></span></a>
                         </div>
                         <div class="content">
