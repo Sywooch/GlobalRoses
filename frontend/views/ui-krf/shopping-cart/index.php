@@ -72,7 +72,7 @@ $gridColumns = [
             $refresh = Html::button('<i class="glyphicon glyphicon-refresh"></i>',
                 [
                     'class' => 'btn btn-info btn-sm',
-                    'title' => Yii::t('application', 'delete'),
+                    'title' => Yii::t('application', 'update'),
                     'data' => [
                         'action' => Url::to(['update']),
                         'type' => 'update'

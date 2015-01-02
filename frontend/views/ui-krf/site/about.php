@@ -5,10 +5,10 @@ use yii\helpers\Html;
 $this->title = Yii::t('application', 'About');
 ?>
 <div class="well well-sm well-title">
-    <strong>About us</strong>
+    <strong><?= Yii::t('application', 'About') ?></strong>
 </div>
 <div class="well well-sm">
-    <div class="panel-group" id="accordion">
+    <div class="panel-group">
         <h1>h1. Bootstrap heading</h1>
 
         <h2>h2. Bootstrap heading</h2>

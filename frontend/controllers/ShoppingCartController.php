@@ -48,7 +48,6 @@ class ShoppingCartController extends Frontend
 
     public function actionIndex()
     {
-//        Yii::$app->cart->removeAll();
         $cart_items = Yii::$app->cart->getPositions();
         $models = [];
 
@@ -200,7 +199,33 @@ class ShoppingCartController extends Frontend
 
     public function actionCheckout()
     {
-        $this->layout = $this->_layout_empty;
-        return $this->render('checkout');
+        $cart_items = Yii::$app->cart->getPositions();
+        $models = [];
+
+        /* @var $ci ItemPosition */
+        foreach ($cart_items as $ci) {
+            $item = $ci->getItem();
+            $row = [];
+            $row['id'] = $ci->getId();
+            $row['requested_quantity'] = $ci->getQuantity();
+            $row['cost'] = $ci->getCost();
+            $row['item'] = $item;
+            $row['name'] = $item->name;
+            $row['price'] = $item->unit_price;
+            $models[$ci->getId()] = $row;
+        }
+        $dataProvider = new \yii\data\ArrayDataProvider([
+            'allModels' => $models,
+            'sort' => [
+                'attributes' => ['name', 'quantity'],
+            ],
+            'pagination' => [
+                'pageSize' => 10,
+            ],
+        ]);
+
+        return $this->render('checkout', [
+            'dataProvider' => $dataProvider
+        ]);
     }
 }

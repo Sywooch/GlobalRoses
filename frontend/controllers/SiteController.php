@@ -101,8 +101,8 @@ class SiteController extends Frontend
     {
         $this->layout = $this->_layout_empty;
         $model = new ContactForm();
-//        Yii::$app->session->removeFlash('success');
-//        Yii::$app->session->removeFlash('error');
+        Yii::$app->session->removeFlash('success');
+        Yii::$app->session->removeFlash('error');
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             $contact_email = Yii::$app->params['adminEmail'];
             $send = $model->sendEmail($contact_email);
@@ -114,6 +114,9 @@ class SiteController extends Frontend
 
             return $this->refresh();
         } else {
+            if (!Yii::$app->user->isGuest) {
+                $model->email = Yii::$app->user->identity->email;
+            }
             return $this->render('contact', [
                 'model' => $model,
             ]);

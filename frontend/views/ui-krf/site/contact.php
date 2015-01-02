@@ -20,10 +20,11 @@ if (Yii::$app->session->hasFlash('success')) {
     <strong><?= Yii::t('application', 'Contact Form') ?></strong>
 </div>
 <div class="well well-sm">
-    <p><?= Yii::t('application', 'contact_form_paragraph') ?></p>
+    <div class="panel-group">
+        <p class="lead"><?= Yii::t('application', 'contact_form_paragraph') ?></p>
 
-    <p><?= $flash ?></p>
-
+        <p class="lead"><?= $flash ?></p>
+    </div>
     <div class="row">
         <div class="col-lg-5">
             <?php $form = ActiveForm::begin(['id' => 'contact-form']); ?>
