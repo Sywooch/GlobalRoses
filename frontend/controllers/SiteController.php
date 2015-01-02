@@ -101,11 +101,15 @@ class SiteController extends Frontend
     {
         $this->layout = $this->_layout_empty;
         $model = new ContactForm();
+//        Yii::$app->session->removeFlash('success');
+//        Yii::$app->session->removeFlash('error');
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-            if ($model->sendEmail(Yii::$app->params['adminEmail'])) {
-                Yii::$app->session->setFlash('success', 'Thank you for contacting us. We will respond to you as soon as possible.');
+            $contact_email = Yii::$app->params['adminEmail'];
+            $send = $model->sendEmail($contact_email);
+            if ($send == true) {
+                Yii::$app->session->setFlash('success', Yii::t('application', 'Thank you for contacting us. We will respond to you as soon as possible'));
             } else {
-                Yii::$app->session->setFlash('error', 'There was an error sending email.');
+                Yii::$app->session->setFlash('error', Yii::t('application', 'There was an error sending email'));
             }
 
             return $this->refresh();

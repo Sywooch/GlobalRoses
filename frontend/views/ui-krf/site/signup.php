@@ -6,8 +6,7 @@ use yii\bootstrap\ActiveForm;
 /* @var $form yii\bootstrap\ActiveForm */
 /* @var $model \frontend\models\SignupForm */
 
-$this->title = 'Signup';
-$this->params['breadcrumbs'][] = $this->title;
+$this->title = Yii::t('application', 'Signup');
 ?>
 <div class="col-sm-9 col-md-9">
     <div class="well well-sm well-title">

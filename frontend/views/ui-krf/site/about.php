@@ -2,7 +2,7 @@
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-$this->title = 'About';
+$this->title = Yii::t('application', 'About');
 ?>
 <div class="well well-sm well-title">
     <strong>About us</strong>

@@ -261,12 +261,12 @@ footer h4 {
  * Modal cart default
  */
 
-.modal {
-    top: 10%;
-}
+/*.modal {*/
+/*top: 10%;*/
+/*}*/
 .modal-dialog {
     width: 800px;
-    margin: 0 auto;
+    margin: 50px auto;
 }
 .modal-dialog .navigation .btn-primary {
     background-color: #b2006c;
@@ -478,6 +478,10 @@ footer h4 {
 .product-list.product-item li {
     width: 100%;
 }
+
+.modal-product .col-md-4 img {
+    margin-left: 15px;
+}
 .modal-product .product-list .quanity input,
 .product-item .quanity input {
     width: auto;
@@ -492,7 +496,7 @@ footer h4 {
 }
 .modal-product .navigation {
     position: absolute;
-    bottom: 40%;
+    bottom: 50%;
     left: 0;
     right: 0;
 }
@@ -630,6 +634,42 @@ footer a {
 
 }
 
+.select2-container .select2-choices .select2-search-field input, .select2-container .select2-choice, .select2-container .select2-choices {
+    border-radius: 0;
+}
+
+.select2-results .select2-highlighted {
+    background: #7f265d !important;
+    color: #fff !important;
+}
+
+#product-search-form .btn-cart {
+    display: block;
+    width: 100%;
+}
+
+.bootstrap-touchspin .bootstrap-touchspin-down {
+    float: left;
+}
+
+.bootstrap-touchspin .input-group-btn {
+    width: 50px;
+    padding-bottom: 0;
+    margin-top: -1px;
+}
+
+.bootstrap-touchspin #item-quantity {
+    width: 100px;
+    float: none;
+    display: inline-block !important;
+}
+
+.modal-product .btn-cart {
+    position: absolute;
+    right: 100px;
+    top: 106px;
+}
+
 
 /*
  * Media Queries
@@ -639,6 +679,36 @@ footer a {
 
     .form-grid .grid-form {
         margin: 0 5px;
+    }
+
+}
+
+@media (min-width: 981px) {
+    .kv-grid-table .input-group.bootstrap-touchspin {
+        width: 150px;
+    }
+
+    .kv-grid-table.table-bordered > tbody > tr > td, .kv-grid-table.table-bordered > tfoot > tr > td,
+    .kv-grid-table.table-bordered > tfoot > tr > th {
+        border: 0;
+    }
+
+    .kv-grid-table.table-bordered > tfoot > tr > th {
+        border-top: 1px solid #ddd;
+        border-bottom: 0;
+    }
+
+    .kv-grid-table.table-bordered > thead > tr > th {
+        border-left: 0;
+        border-right: 0;
+    }
+
+    .kv-grid-table .input-group .form-control {
+        border-color: #ccc;
+    }
+
+    .kv-grid-table {
+        border-bottom: 0;
     }
 
 }
@@ -681,6 +751,26 @@ footer a {
     }
     .navbar-toggle {
         display: none;
+    }
+
+    .modal-product .btn-cart {
+        position: relative;
+        right: 0;
+        top: 0;
+    }
+
+    .modal-product .col-md-4 {
+        text-align: center;
+    }
+
+    .modal-product .col-md-4 img {
+        margin: 0;
+        width: 100%;
+    }
+
+    .btn-cart {
+        width: 100%;
+        display: block;
     }
 
 }
@@ -771,8 +861,13 @@ footer a {
     }
 
     table#cart tbody td .form-control {
-        width: 20%;
+        /*width: 20%;*/
         display: inline !important;
+    }
+
+    .kv-grid-table.table-responsive > .table-bordered > tfoot > tr > td {
+        display: block;
+        width: 100%;
     }
 
     .actions .btn {
@@ -794,7 +889,6 @@ footer a {
 
     table#cart tbody td {
         display: block;
-        padding: .6rem;
         min-width: 320px;
     }
 
@@ -810,11 +904,11 @@ footer a {
         width: 8rem;
     }
 
-    table#cart tfoot td {
+    table#cart tfoot th {
         display: block;
     }
 
-    table#cart tfoot td .btn {
+    table#cart tfoot th .btn {
         display: block;
     }
 }

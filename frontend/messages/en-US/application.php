@@ -55,4 +55,10 @@ return [
     'Do you want to delete {item} from shopping cart' => 'Do you want to delete "{item}" from shopping cart?',
     'delete' => 'delete',
     'update' => 'update',
+    'About' => 'About',
+    'Signup' => 'Signup',
+    'Contact Form' => 'Contact Form',
+    'contact_form_paragraph' => 'If you have business inquiries or other questions, please fill out the following form to contact us. Thank you.',
+    'Thank you for contacting us. We will respond to you as soon as possible' => 'Thank you for contacting us. We will respond to you as soon as possible.',
+    'There was an error sending email' => 'There was an error sending email.',
 ];

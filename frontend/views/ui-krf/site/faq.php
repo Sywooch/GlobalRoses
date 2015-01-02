@@ -7,7 +7,7 @@ use yii\helpers\Html;
 $this->title = Yii::t('application', 'FAQ');
 ?>
 <div class="well well-sm well-title">
-    <strong>Answers</strong>
+    <strong><?= Yii::t('application', 'FAQ') ?></strong>
 </div>
 <div class="well well-sm">
     <div class="panel-group" id="accordion">

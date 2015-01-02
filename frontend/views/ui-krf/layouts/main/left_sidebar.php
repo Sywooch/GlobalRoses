@@ -23,54 +23,49 @@ $colors = Item::getUsedColor(5);
     <div class="well well-sm">
         <form id="product-search-form" class="form-vertical" method="get"
               action="<?= Url::to(['site/search']) ?>">
-            <div class="col-sm-12">
-                <div class="row">
-                    <div class="col-sm-12">
-                        <div class="form-group field-search-color">
-                            <?php
-                            printf('<label for="search-color" class="control-label">%s</label>',
-                                Yii::t('application', 'Color'));
-                            echo ColorInput::widget([
-                                'name' => 'color',
-                                'value' => $searchData['color'],
-                                'id' => 'search-color',
-                                'showDefaultPalette' => false,
-                                'options' => [
-                                    'placeholder' => Yii::t('application', 'Placeholder: Select color ...'),
-                                ],
-                                'pluginOptions' => [
-                                    'showPalette' => true,
-                                    'showPaletteOnly' => true,
-                                    'showSelectionPalette' => true,
-                                    'showAlpha' => false,
-                                    'allowEmpty' => true,
-                                    'preferredFormat' => 'hex',
-                                    'palette' => $colors,
-                                ],
-                            ]);
-                            ?>
-                        </div>
-                        <div class="form-group field-search-category">
-                            <?php
-                            printf('<label for="search-category" class="control-label">%s</label>',
-                                Yii::t('application', 'Category'));
-                            echo Select2::widget([
-                                'name' => 'category',
-                                'value' => $searchData['category'],
-                                'data' => Category::getCategoryGrouped(),
-                                'language' => Yii::$app->language,
-                                'pluginOptions' => [
-                                    'allowClear' => true,
-                                ],
-                                'options' => [
-                                    'multiple' => true,
-                                    'placeholder' => Yii::t('application', 'Placeholder: Select category ...')
-                                ]
-                            ]);
-                            ?>
-                        </div>
-                    </div>
-                </div>
+
+            <div class="form-group field-search-color">
+                <?php
+                printf('<label for="search-color" class="control-label">%s</label>',
+                    Yii::t('application', 'Color'));
+                echo ColorInput::widget([
+                    'name' => 'color',
+                    'value' => $searchData['color'],
+                    'id' => 'search-color',
+                    'showDefaultPalette' => false,
+                    'options' => [
+                        'placeholder' => Yii::t('application', 'Placeholder: Select color ...'),
+                    ],
+                    'pluginOptions' => [
+                        'showPalette' => true,
+                        'showPaletteOnly' => true,
+                        'showSelectionPalette' => true,
+                        'showAlpha' => false,
+                        'allowEmpty' => true,
+                        'preferredFormat' => 'hex',
+                        'palette' => $colors,
+                    ],
+                ]);
+                ?>
+            </div>
+            <div class="form-group field-search-category">
+                <?php
+                printf('<label for="search-category" class="control-label">%s</label>',
+                    Yii::t('application', 'Category'));
+                echo Select2::widget([
+                    'name' => 'category',
+                    'value' => $searchData['category'],
+                    'data' => Category::getCategoryGrouped(),
+                    'language' => Yii::$app->language,
+                    'pluginOptions' => [
+                        'allowClear' => true,
+                    ],
+                    'options' => [
+                        'multiple' => true,
+                        'placeholder' => Yii::t('application', 'Placeholder: Select category ...')
+                    ]
+                ]);
+                ?>
             </div>
             <div class="row">
                 <div class="col-sm-12">
