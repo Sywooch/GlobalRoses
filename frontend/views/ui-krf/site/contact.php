@@ -19,14 +19,14 @@ if (Yii::$app->session->hasFlash('success')) {
 <div class="well well-sm well-title">
     <strong><?= Yii::t('application', 'Contact Form') ?></strong>
 </div>
-<div class="well well-sm">
+<div class="well well-md">
     <div class="panel-group">
         <p class="lead"><?= Yii::t('application', 'contact_form_paragraph') ?></p>
 
         <p class="lead"><?= $flash ?></p>
     </div>
     <div class="row">
-        <div class="col-lg-5">
+        <div class="col-md-5 col-md-offset-3">
             <?php $form = ActiveForm::begin(['id' => 'contact-form']); ?>
             <?= $form->field($model, 'name') ?>
             <?= $form->field($model, 'email') ?>

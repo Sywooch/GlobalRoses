@@ -120,7 +120,7 @@ use yii\helpers\Url;
             <li class="dropdown user user-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                     <i class="glyphicon glyphicon-user"></i>
-                    <span><?= Yii::t('application', 'username', ['username' => Yii::$app->user->identity->username]) ?>
+                    <span><?= Yii::t('application', 'username', ['username' => Yii::$app->user->identity->email]) ?>
                         <i class="caret"></i></span>
                 </a>
                 <ul class="dropdown-menu">
@@ -134,7 +134,7 @@ use yii\helpers\Url;
                         ?>
                         <p>
                             <?= Yii::t('application', 'username - position', [
-                                'username' => Yii::$app->user->identity->username,
+                                'username' => Yii::$app->user->identity->email,
                                 'position' => Yii::t('user', 'administrator_position')
                             ]) ?>
                             <small></small>

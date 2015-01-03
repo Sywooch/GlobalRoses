@@ -142,7 +142,7 @@ class SiteController extends Frontend
 
     public function actionLogin()
     {
-        $this->layout = $this->_layout_login;
+        $this->layout = $this->_layout_empty;
         if (!\Yii::$app->user->isGuest) {
             return $this->goHome();
         }

@@ -21,45 +21,22 @@ $this->title = Yii::t('application', 'Signup');
     ]); ?>
     <fieldset>
         <legend>Account</legend>
-        <div class="col-sm-12">
-            <?= $form->field($model, 'email') ?>
-        </div>
-        <div class="col-sm-6">
-            <?= $form->field($model, 'password')->passwordInput() ?>
-        </div>
-        <div class="col-sm-6">
-            <?= $form->field($model, 'password_check')->passwordInput() ?>
+        <div class="row-fluid">
+            <div class="col-sm-12">
+                <?= $form->field($model, 'email') ?>
+            </div>
+            <div class="col-sm-6">
+                <?= $form->field($model, 'password')->passwordInput() ?>
+            </div>
+            <div class="col-sm-6">
+                <?= $form->field($model, 'password_check')->passwordInput() ?>
+            </div>
+            <div class="col-md-12">
+                <div class="form-group">
+                    <?= Html::submitButton('Signup', ['class' => 'btn btn-primary', 'name' => 'signup-button']) ?>
+                </div>
+            </div>
         </div>
     </fieldset>
-    <!--<fieldset>
-        <legend>Company</legend>
-        <div class="col-sm-12">
-            <? /*= $form->field($model, 'company') */ ?>
-        </div>
-        <div class="col-sm-6">
-            <? /*= $form->field($model, 'vat_id') */ ?>
-        </div>
-        <div class="col-sm-6">
-            <? /*= $form->field($model, 'vat_authority') */ ?>
-        </div>
-        <div class="col-sm-12">
-            <? /*= $form->field($model, 'address') */ ?>
-        </div>
-        <div class="col-sm-6">
-            <? /*= $form->field($model, 'postal') */ ?>
-        </div>
-        <div class="col-sm-6">
-            <? /*= $form->field($model, 'city') */ ?>
-        </div>
-        <div class="col-sm-6">
-            <? /*= $form->field($model, 'phone') */ ?>
-        </div>
-        <div class="col-sm-6">
-            <? /*= $form->field($model, 'mobile') */ ?>
-        </div>
-    </fieldset>-->
-    <div class="form-group">
-        <?= Html::submitButton('Signup', ['class' => 'btn btn-primary', 'name' => 'signup-button']) ?>
-    </div>
     <?php ActiveForm::end(); ?>
 </div>

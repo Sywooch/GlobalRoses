@@ -19,7 +19,7 @@ use yii\helpers\Url;
             ?>
         </div>
         <div class="pull-left info">
-            <p><?= Yii::t('application', 'Hello, username', ['username' => Yii::$app->user->identity->username]) ?></p>
+            <p><?= Yii::t('application', 'Hello, username', ['username' => Yii::$app->user->identity->email]) ?></p>
             <a href="#"><i
                     class="fa fa-circle text-success"></i> <?= Yii::t('application', 'Online') ?>
             </a>

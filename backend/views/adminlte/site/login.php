@@ -14,7 +14,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="header">Sign In</div>
     <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>
     <div class="body bg-gray">
-        <?= $form->field($model, 'username')->textInput(array('placeholder'=>\Yii::t('login','username'))) ?>
+        <?= $form->field($model, 'email')->textInput(array('placeholder' => \Yii::t('login', 'username'))) ?>
         <?= $form->field($model, 'password')->passwordInput()->passwordInput(array('placeholder'=>\Yii::t('login','password'))) ?>
         <?= $form->field($model, 'rememberMe')->checkbox() ?>
     </div>

@@ -9,7 +9,7 @@ use yii\helpers\Url;
 
 $this->title = Yii::t('user', 'Users');
 $this->params['breadcrumbs'][] = $this->title;
-$this->params['breadcrumbs'][] = $model->username;
+$this->params['breadcrumbs'][] = $model->email;
 ?>
 <div class="row">
     <div class="col-sm-12">
@@ -22,18 +22,15 @@ $this->params['breadcrumbs'][] = $model->username;
             'mode' => DetailView::MODE_VIEW,
             'panel' => [
                 'heading' => '<i class="fa fa-ellipsis-v"></i>&nbsp;<span>' .
-                    Yii::t('user', 'View user {username}', ['item' => $model->username]) . '</span>',
+                    Yii::t('user', 'View user {username}', ['item' => $model->email]) . '</span>',
                 'type' => DetailView::TYPE_DEFAULT,
             ],
             'attributes' => [
                 [
-                    'attribute' => 'username',
-                    'format' => 'raw',
-                    'value' => '<kbd>' . $model->username . '</kbd>',
-                    'displayOnly' => true
-                ],
-                [
                     'attribute' => 'email',
+                    'format' => 'raw',
+                    'value' => '<kbd>' . $model->email . '</kbd>',
+                    'displayOnly' => true
                 ],
                 [
                     'attribute' => 'role',

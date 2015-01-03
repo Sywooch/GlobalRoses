@@ -9,12 +9,12 @@ use yii\bootstrap\ActiveForm;
 <div class="well well-sm well-title">
     <strong><?= Yii::t('application', 'Request password reset') ?></strong>
 </div>
-<div class="well well-sm">
+<div class="well well-md">
     <div class="panel-group">
-        <p class="lead"><?= Yii::t('application', 'Please fill out your email. A link to reset password will be sent there') ?></p>
+        <p class="lead text-center"><?= Yii::t('application', 'Please fill out your email. A link to reset password will be sent there') ?></p>
     </div>
     <div class="row">
-        <div class="col-lg-5">
+        <div class="col-md-5 col-md-offset-3">
             <?php $form = ActiveForm::begin(['id' => 'request-password-reset-form']); ?>
             <?= $form->field($model, 'email') ?>
             <div class="form-group">

@@ -478,7 +478,6 @@ footer h4 {
 .product-list.product-item li {
     width: 100%;
 }
-
 .modal-product .col-md-4 img {
     margin-left: 15px;
 }
@@ -534,6 +533,8 @@ input.qtyminus {
     padding-right: 0;
     padding-bottom: 0;
     vertical-align: middle;
+    width: 40px;
+    margin-left: -8px;
 }
 
 .modal .product-details .Color span.col-sm-12 {
@@ -557,6 +558,10 @@ input.qtyminus {
 .form-group label.error {
     color: #a94442;
     padding: 10px 0;
+}
+
+.lead {
+    font-size: 16px;
 }
 
 
@@ -633,7 +638,6 @@ footer a {
     border: 1px solid #95025c;
 
 }
-
 .select2-container .select2-choices .select2-search-field input, .select2-container .select2-choice, .select2-container .select2-choices {
     border-radius: 0;
 }
@@ -642,12 +646,10 @@ footer a {
     background: #7f265d !important;
     color: #fff !important;
 }
-
 #product-search-form .btn-cart {
     display: block;
     width: 100%;
 }
-
 .bootstrap-touchspin .bootstrap-touchspin-down {
     float: left;
 }
@@ -657,13 +659,11 @@ footer a {
     padding-bottom: 0;
     margin-top: -1px;
 }
-
 .bootstrap-touchspin #item-quantity {
     width: 100px;
     float: none;
     display: inline-block !important;
 }
-
 .modal-product .btn-cart {
     position: absolute;
     right: 100px;
@@ -702,13 +702,25 @@ footer a {
         border-left: 0;
         border-right: 0;
     }
-
     .kv-grid-table .input-group .form-control {
         border-color: #ccc;
     }
-
     .kv-grid-table {
         border-bottom: 0;
+    }
+
+    .product-list img {
+        height: 100px;
+    }
+
+    .login-wp .checkbox {
+        display: inline-block;
+        float: left;
+    }
+
+    .login-wp a {
+        float: right;
+        margin-top: -10px;
     }
 
 }
@@ -752,22 +764,18 @@ footer a {
     .navbar-toggle {
         display: none;
     }
-
     .modal-product .btn-cart {
         position: relative;
         right: 0;
         top: 0;
     }
-
     .modal-product .col-md-4 {
         text-align: center;
     }
-
     .modal-product .col-md-4 img {
         margin: 0;
         width: 100%;
     }
-
     .btn-cart {
         width: 100%;
         display: block;

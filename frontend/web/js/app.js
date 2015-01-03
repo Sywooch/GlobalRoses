@@ -48,7 +48,7 @@
                     .done(function (data) {
                         var $body = $this.find('.modal-body');
                         $body.empty().append(data.html);
-                        //$this.trigger('loader.stop');
+                        $this.trigger('loader.stop');
                     })
                     .fail(function (data) {
 
@@ -56,7 +56,7 @@
             },
             'show.bs.modal': function (e) {
                 var $this = $(this);
-                //$this.trigger('loader.start');
+                $this.trigger('loader.start');
             },
             'hide.bs.modal': function (e) {
             },
@@ -67,6 +67,7 @@
 
         $modal.on({
             'loader.start': function () {
+                return;
                 var $this = $(this);
                 var $m_content = $this.find('.modal-content');
                 var $overlay = $m_content.find('.overlay');
@@ -84,6 +85,7 @@
                 }
             },
             'loader.stop': function () {
+                return;
                 var $this = $(this);
                 var $model_content = $this.find('.modal-content');
                 $model_content.find('.overlay, .loading-img').hide();

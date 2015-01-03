@@ -65,4 +65,10 @@ return [
     'Reset password' => 'Reset password',
     'Please choose your new password' => 'Please choose your new password:',
     'Finish' => 'Finish',
+    'Sign in' => 'Sign in',
+    'This email address has already been taken.' => 'This email address has already been taken.',
+    'This vat_id has already been used.' => 'This vat_id has already been used.',
+    'There is no user with such email.' => 'There is no user with such email.',
+    'Activation-email-body' => 'Activation email body',
+    'Activation-email-subject' => 'Activation email subject',
 ];

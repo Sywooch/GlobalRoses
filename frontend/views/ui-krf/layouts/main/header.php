@@ -34,7 +34,7 @@ $cart_text = Yii::t('application',
                                 ['site/signup'], ['class' => 'register']);
                         } else {
                             echo Html::a(
-                                sprintf('<i class="glyphicon glyphicon-circle-arrow-right"></i>&nbsp;%s', Yii::$app->user->identity->username),
+                                sprintf('<i class="glyphicon glyphicon-circle-arrow-right"></i>&nbsp;%s', Yii::$app->user->identity->email),
                                 ['user/index'], ['class' => 'user']);
                             echo Html::a(
                                 sprintf('<i class="glyphicon glyphicon-circle-arrow-right"></i>&nbsp;%s', Yii::t('application', 'Logout')),
