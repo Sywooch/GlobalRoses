@@ -69,6 +69,10 @@ return [
     'This email address has already been taken.' => 'This email address has already been taken.',
     'This vat_id has already been used.' => 'This vat_id has already been used.',
     'There is no user with such email.' => 'There is no user with such email.',
-    'Activation-email-body' => 'Activation email body',
+    'Activation-email-body' => 'Dear Customer,<br/><br/>
+You are receiving this email because you have request an account on GlobalRoses.<br/><br/>
+Your account has been created, please click here <a href="{url}" target="_blank">{url}</a> to activate it. You have 72 hours to activate your account using this link.<br/><br/>
+This message comes from an unmonitored mailbox. Please do not reply to this message.<br/>',
     'Activation-email-subject' => 'Activation email subject',
+    'Account Activation' => 'Account Activation',
 ];

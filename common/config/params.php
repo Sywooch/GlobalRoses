@@ -5,4 +5,5 @@ return [
     'supportEmail' => 'support@globalroses.gr',
     'emailName' => 'GlobalRoses',
     'user.passwordResetTokenExpire' => 3600,
+    'user.activationTokenExpire' => 3600,
 ];

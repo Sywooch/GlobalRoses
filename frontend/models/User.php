@@ -5,6 +5,7 @@ use Yii;
 use yii\base\NotSupportedException;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
+use yii\helpers\Url;
 use yii\web\IdentityInterface;
 use \common\models\User as CUser;
 
@@ -24,18 +25,7 @@ use \common\models\User as CUser;
  */
 class User extends CUser
 {
-    const ROLE_USER = 11;
     public $passwd;
-
-    /**
-     * @inheritdoc
-     */
-    public function behaviors()
-    {
-        return [
-            TimestampBehavior::className(),
-        ];
-    }
 
     public function beforeSave($insert)
     {
@@ -51,20 +41,6 @@ class User extends CUser
     /**
      * @inheritdoc
      */
-    public function rules()
-    {
-        return [
-            ['status', 'default', 'value' => self::STATUS_ACTIVE],
-            ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_DELETED]],
-
-            ['role', 'default', 'value' => self::ROLE_USER],
-            ['role', 'in', 'range' => [self::ROLE_USER]],
-        ];
-    }
-
-    /**
-     * @inheritdoc
-     */
     public function attributeLabels()
     {
         return [
@@ -75,16 +51,22 @@ class User extends CUser
 
     public function sendActivationEmail()
     {
+        $this->generateActivationToken();
         $from = Yii::$app->params['noReplyEmail'];
         $fromName = Yii::$app->params['emailName'];
         $subject = Yii::t('application', 'Activation-email-subject');
-        $body = Yii::t('application', 'Activation-email-body');
-        $r = '';
+        $body = Yii::t('application',
+            'Activation-email-body', [
+                'url' => Url::toRoute([
+                    'site/account-activate',
+                    'token' => $this->activation_token
+                ], true)]);
+
         return Yii::$app->mailer->compose()
             ->setTo($this->email)
             ->setFrom([$from => $fromName])
             ->setSubject($subject)
-            ->setTextBody($body)
+            ->setHtmlBody($body)
             ->send();
     }
 }

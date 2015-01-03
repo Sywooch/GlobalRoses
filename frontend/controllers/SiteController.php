@@ -18,6 +18,7 @@ use \yii\helpers\Url;
 use \yii\helpers\Json;
 use \kartik\helpers\Html;
 use \common\models\Item;
+use \common\models\User;
 use yii\web\Response;
 
 /**
@@ -187,6 +188,39 @@ class SiteController extends Frontend
             }
         }
         return $this->render('signup', [
+            'model' => $model,
+        ]);
+    }
+
+    /**
+     * SiteController::actionAccountActivate()
+     *
+     * @author: Andreas Kondylis
+     * @version: 0.1
+     * @param $token
+     * @return string|Response
+     * @throws BadRequestHttpException
+     */
+    public function actionAccountActivate($token)
+    {
+        try {
+
+            if (empty($token) || !is_string($token)) {
+                throw new InvalidParamException('activation token cannot be blank.');
+            }
+            $model = User::findByActivationToken($token);
+            if (!$model) {
+                throw new InvalidParamException('Wrong activation token.');
+            }
+        } catch (InvalidParamException $e) {
+            throw new BadRequestHttpException($e->getMessage());
+        }
+        /* @var User $model */
+        $model->removeActivationToken();
+//        $model->save();
+
+        $this->layout = $this->_layout_empty;
+        return $this->render('activate-account', [
             'model' => $model,
         ]);
     }
