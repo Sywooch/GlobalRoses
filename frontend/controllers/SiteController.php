@@ -217,7 +217,12 @@ class SiteController extends Frontend
         }
         /* @var User $model */
         $model->removeActivationToken();
-//        $model->save();
+        if ($model->save()) {
+            if (Yii::$app->getUser()->login($model)) {
+//                return $this->goHome();
+            }
+        }
+        $model->save();
 
         $this->layout = $this->_layout_empty;
         return $this->render('activate-account', [

@@ -75,4 +75,6 @@ Your account has been created, please click here <a href="{url}" target="_blank"
 This message comes from an unmonitored mailbox. Please do not reply to this message.<br/>',
     'Activation-email-subject' => 'Activation email subject',
     'Account Activation' => 'Account Activation',
+    'Activation' => 'Activation',
+    'activation-text' => 'Your account has been successfully activated',
 ];
