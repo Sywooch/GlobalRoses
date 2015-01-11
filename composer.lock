@@ -102,16 +102,16 @@
         },
         {
             "name": "bower-asset/jquery.inputmask",
-            "version": "3.1.49",
+            "version": "3.1.52",
             "source": {
                 "type": "git",
                 "url": "https://github.com/RobinHerbots/jquery.inputmask.git",
-                "reference": "4a0bda47031b9d2074b0c77c3b447df71ed1ca95"
+                "reference": "6afe1c66735b96dd45303b67152917cbbfa4d087"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/RobinHerbots/jquery.inputmask/zipball/4a0bda47031b9d2074b0c77c3b447df71ed1ca95",
-                "reference": "4a0bda47031b9d2074b0c77c3b447df71ed1ca95",
+                "url": "https://api.github.com/repos/RobinHerbots/jquery.inputmask/zipball/6afe1c66735b96dd45303b67152917cbbfa4d087",
+                "reference": "6afe1c66735b96dd45303b67152917cbbfa4d087",
                 "shasum": ""
             },
             "require": {
@@ -772,12 +772,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/kartik-v/yii2-krajee-base.git",
-                "reference": "2842f5dcdb4897e336e8cb1aa0585e0a0d39e3f3"
+                "reference": "db53a6bbc01f63ffb674a0df4192463999e6383f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kartik-v/yii2-krajee-base/zipball/2842f5dcdb4897e336e8cb1aa0585e0a0d39e3f3",
-                "reference": "2842f5dcdb4897e336e8cb1aa0585e0a0d39e3f3",
+                "url": "https://api.github.com/repos/kartik-v/yii2-krajee-base/zipball/db53a6bbc01f63ffb674a0df4192463999e6383f",
+                "reference": "db53a6bbc01f63ffb674a0df4192463999e6383f",
                 "shasum": ""
             },
             "require": {
@@ -810,7 +810,7 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2014-12-18 09:48:37"
+            "time": "2015-01-05 14:29:45"
         },
         {
             "name": "kartik-v/yii2-money",

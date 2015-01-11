@@ -45,12 +45,7 @@ IE9Asset::register($this);
 <div class="container">
     <?php include('main/header.php'); ?>
     <main class="row">
-        <!-- Left sidebar -->
-        <?php include('login/left_sidebar.php'); ?>
-        <!-- / Left sidebar -->
-        <div class="col-sm-9 col-md-9">
-            <?= $content ?>
-        </div>
+        <?= $content ?>
     </main>
     <!-- Footer -->
     <?php include('main/footer.php'); ?>

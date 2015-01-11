@@ -3,6 +3,8 @@
 use kartik\grid\GridView;
 use \yii\helpers\Url;
 use \yii\helpers\Html;
+use \kartik\widgets\SwitchInput;
+use \kartik\widgets\Select2;
 
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ArrayDataProvider */
@@ -20,7 +22,7 @@ $gridColumns = [
             /* @var $item common\models\items\Available */
             $item = $model['item'];
             $image_url = $item->getImageUrlSmall();
-            $image = sprintf('<img src="%s" alt="" class="img-responsive" height="80">', $image_url);
+            $image = sprintf('<img src="%s" alt="" class="img-responsive product" height="80">', $image_url);
             return sprintf('<div class="row"><div class="col-sm-4">%s</div><div class="col-sm-8">%s</div></div>',
                 $image, $model['name']);
         },
@@ -67,7 +69,7 @@ $gridColumns = [
         'responsive' => true,
         'hover' => false,
         'showPageSummary' => false,
-        'showFooter' => true,
+        'showFooter' => false,
         'footerRowOptions' => [],
         'afterFooter' => [
             [
@@ -97,8 +99,8 @@ $gridColumns = [
             ]
         ],
         'tableOptions' => [
-            'id' => 'cart',
-            'class' => 'table table-hover table-condensed',
+            'id' => 'checkout-cart',
+            'class' => 'table table-hover table-condensed cart-product-list',
         ],
         'rowOptions' => [
             'data-row' => 'product'
@@ -107,6 +109,296 @@ $gridColumns = [
             'data-type' => 'cart',
             'class' => 'grid-view',
         ],
-        'layout' => '{items}<div class="text-center">{pager}</div>',
+        'layout' => '{items}',
     ]); ?>
+
+    <div class="address-info">
+        <div class="row">
+            <div class="col-sm-6">
+                <fieldset>
+                    <legend><?= Yii::t('application', 'Delivery Address') ?></legend>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <?php
+                            printf('<label class="control-label">%s</label>', Yii::t('application', 'use from profile'));
+                            echo SwitchInput::widget(
+                                [
+                                    'name' => 'status_1',
+                                    'value' => true,
+                                    'pluginOptions' => [
+                                        'size' => 'mini',
+                                        'onText' => Yii::t('application', 'yes'),
+                                        'offText' => Yii::t('application', 'no'),
+                                    ],
+                                    'labelOptions' => ['style' => 'font-size: 10px'],
+                                ]
+                            );
+                            ?>
+                        </div>
+                        <div class="col-sm-6">
+                            <?php
+                            printf('<label class="control-label">%s</label>', Yii::t('application', 'address'));
+                            echo Select2::widget([
+                                'name' => 'id-profile-address',
+                                'data' => [],
+                                'size' => Select2::SMALL,
+                                'options' => [],
+                                'pluginOptions' => [
+                                    'allowClear' => false
+                                ],
+                            ])
+                            ?>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <label>Company name</label>
+                                    <input type="text">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <label>First name</label>
+                                    <input type="text">
+                                </div>
+                                <div class="col-sm-6">
+                                    <label>Surname name</label>
+                                    <input type="text">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <label>Vat ID</label>
+                                    <input type="text">
+                                </div>
+                                <div class="col-sm-6">
+                                    <label>Vat Authority</label>
+                                    <input type="text">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <label>Address 1</label>
+                                    <input type="text">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <label>Address 2</label>
+                                    <input type="text">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <label>City</label>
+                                    <input type="text">
+                                </div>
+                                <div class="col-sm-6">
+                                    <label>Postal</label>
+                                    <input type="text">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <label>Phone</label>
+                                    <input type="text">
+                                </div>
+                                <div class="col-sm-6">
+                                    <label>Mobile</label>
+                                    <input type="text">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+            <div class="col-sm-6">
+                <fieldset>
+                    <legend><?= Yii::t('application', 'Shipping Address') ?></legend>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <?php
+                            printf('<label class="control-label">%s</label>', Yii::t('application', 'use the delivery address'));
+                            echo SwitchInput::widget(
+                                [
+                                    'name' => 'status_1',
+                                    'value' => true,
+                                    'pluginOptions' => [
+                                        'size' => 'mini',
+                                        'onText' => Yii::t('application', 'yes'),
+                                        'offText' => Yii::t('application', 'no'),
+                                    ],
+                                    'labelOptions' => ['style' => 'font-size: 10px'],
+                                ]
+                            );
+                            ?>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <?php
+                            printf('<label class="control-label">%s</label>', Yii::t('application', 'use from profile'));
+                            echo SwitchInput::widget(
+                                [
+                                    'name' => 'status_1',
+                                    'value' => true,
+                                    'pluginOptions' => [
+                                        'size' => 'mini',
+                                        'onText' => Yii::t('application', 'yes'),
+                                        'offText' => Yii::t('application', 'no'),
+                                    ],
+                                    'labelOptions' => ['style' => 'font-size: 10px'],
+                                ]
+                            );
+                            ?>
+                        </div>
+                        <div class="col-sm-6">
+                            <?php
+                            printf('<label class="control-label">%s</label>', Yii::t('application', 'address'));
+                            echo Select2::widget([
+                                'name' => 'id-profile-address',
+                                'data' => [],
+                                'size' => Select2::SMALL,
+                                'options' => [],
+                                'pluginOptions' => [
+                                    'allowClear' => false
+                                ],
+                            ])
+                            ?>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <label>Company name</label>
+                                    <input type="text">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <label>First name</label>
+                                    <input type="text">
+                                </div>
+                                <div class="col-sm-6">
+                                    <label>Surname name</label>
+                                    <input type="text">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <label>Vat ID</label>
+                                    <input type="text">
+                                </div>
+                                <div class="col-sm-6">
+                                    <label>Vat Authority</label>
+                                    <input type="text">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <label>Address 1</label>
+                                    <input type="text">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <label>Address 2</label>
+                                    <input type="text">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <label>City</label>
+                                    <input type="text">
+                                </div>
+                                <div class="col-sm-6">
+                                    <label>Postal</label>
+                                    <input type="text">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <label>Phone</label>
+                                    <input type="text">
+                                </div>
+                                <div class="col-sm-6">
+                                    <label>Mobile</label>
+                                    <input type="text">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+    </div>
+    <div class="pricing-info">
+        <div class="row">
+            <div class="col-sm-12">
+                <fieldset>
+                    <legend><?= Yii::t('application', 'Pricing Info') ?></legend>
+                    <table>
+                        <tbody>
+                        <tr>
+                            <td><?= Yii::t('application', 'Product price (without tax)') ?></td>
+                            <td><?= Yii::t('application', '{price} {currency}', [
+                                    'price' => Yii::$app->formatter->asDecimal(Yii::$app->cart->getCost(), 2),
+                                    'currency' => '&euro;',
+                                ]) ?></td>
+                        </tr>
+                        <tr>
+                            <td><?= Yii::t('application', 'Tax price ({percentage}%)', [
+                                    'percentage' => Yii::$app->formatter->asDecimal(23, 2)
+                                ]) ?></td>
+                            <td><?= Yii::t('application', '{price} {currency}', [
+                                    'price' => Yii::$app->formatter->asDecimal(Yii::$app->cart->getCost(), 2),
+                                    'currency' => '&euro;',
+                                ]) ?></td>
+                        </tr>
+                        <tr>
+                            <td><?= Yii::t('application', 'Price (with tax)') ?></td>
+                            <td><?= Yii::t('application', '{price} {currency}', [
+                                    'price' => Yii::$app->formatter->asDecimal(Yii::$app->cart->getCost(), 2),
+                                    'currency' => '&euro;',
+                                ]) ?></td>
+                        </tr>
+                        <tr>
+                            <td><?= Yii::t('application', 'Delivery price') ?></td>
+                            <td><?= Yii::t('application', '{price} {currency}', [
+                                    'price' => Yii::$app->formatter->asDecimal(Yii::$app->cart->getCost(), 2),
+                                    'currency' => '&euro;',
+                                ]) ?></td>
+                        </tr>
+                        </tbody>
+                        <tfoot>
+                        <tr>
+                            <td><?= Yii::t('application', 'Final Price') ?></td>
+                            <td><?= Yii::t('application', '{price} {currency}', [
+                                    'price' => Yii::$app->formatter->asDecimal(Yii::$app->cart->getCost(), 2),
+                                    'currency' => '&euro;',
+                                ]) ?></td>
+                        </tr>
+                        </tfoot>
+                    </table>
+                </fieldset>
+            </div>
+        </div>
+    </div>
+    <div class="payment-info">
+        <div class="row">
+            <div class="col-sm-12">
+                <fieldset>
+                    <legend><?= Yii::t('application', 'Payment Info') ?></legend>
+                    <div class="row">
+                        <div class="col-sm-12">
+
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+    </div>
 </div>

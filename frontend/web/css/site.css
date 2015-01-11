@@ -115,3 +115,7 @@ a.desc:after {
     top: 0;
     width: 100%;
 }
+
+.cart-product-list td img.product {
+    width: 100px;
+}

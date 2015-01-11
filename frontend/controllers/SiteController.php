@@ -10,7 +10,6 @@ use frontend\models\ContactForm;
 use yii\base\InvalidParamException;
 use yii\bootstrap\ActiveForm;
 use yii\web\BadRequestHttpException;
-use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use frontend\models\ItemSearchForm;
@@ -289,7 +288,8 @@ class SiteController extends Frontend
                     $a = Html::a($img, '#', [
                         'data-id' => 'product-popover',
                         'data-content' => $img,
-                        'data-trigger' => 'hover'
+                        'data-trigger' => 'hover',
+                        'rel' => 'popover',
                     ]);
                     return $a;
                 },

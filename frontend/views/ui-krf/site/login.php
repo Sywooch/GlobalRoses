@@ -19,11 +19,15 @@ $this->title = Yii::t('application', 'Sign in');
             <?= $form->field($model, 'password')->passwordInput() ?>
             <div class="clearfix">
                 <?= $form->field($model, 'rememberMe')->checkbox() ?>
-                <?= Html::a('Forgot password?', ['site/request-password-reset']) ?>
+                <?= Html::a(Yii::t('application', 'Forgot password?'), ['site/request-password-reset']) ?>
             </div>
             <div class="row-fluid">
-                <?= Html::submitButton('Login', ['class' => 'btn btn-primary col-md-6', 'name' => 'login-button']) ?>
-                <?= Html::button('Create account', ['class' => 'btn btn-success col-md-6', 'name' => 'create-account-button']) ?>
+                <?= Html::submitButton(Yii::t('application', 'Login'), ['class' => 'btn btn-primary col-md-6', 'name' => 'login-button']) ?>
+                <?= Html::a(
+                    Yii::t('application', 'Create account'),
+                    ['site/signup'],
+                    ['class' => 'btn btn-success col-md-6', 'name' => 'create-account-button']
+                ) ?>
             </div>
         </div>
     </div>

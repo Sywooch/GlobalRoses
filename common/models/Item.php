@@ -215,7 +215,7 @@ class Item extends ActiveRecord
 
     public function getEmptyUrl()
     {
-        return 'http://placehold.it/150x150';
+        return Url::to('@web/img/no-image.jpg');
     }
 
     public function getImageUrl()

@@ -220,7 +220,7 @@ class ShoppingCartController extends Frontend
                 'attributes' => ['name', 'quantity'],
             ],
             'pagination' => [
-                'pageSize' => 10,
+                'pageSize' => 100,
             ],
         ]);
 

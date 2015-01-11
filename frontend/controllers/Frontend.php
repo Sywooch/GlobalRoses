@@ -18,5 +18,6 @@ abstract class Frontend extends Controller
     protected $_layout_carousel = 'carousel';
     protected $_layout_login = 'login';
     protected $_layout_empty = 'empty';
+    protected $_layout_wide = 'wide';
 
 }
